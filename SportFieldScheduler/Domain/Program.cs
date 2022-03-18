@@ -1,10 +1,14 @@
-﻿namespace SportFieldScheduler.Domain
+﻿using SportFieldScheduler.Repositories;
+
+namespace SportFieldScheduler.Domain
 {
     public class Program
     {
-       static List<User> users=new List<User>();
-       static List<SportField> gyms;
-       static List<Appointment> appointments;
+        static List<User> users=new List<User>();
+        static UserRepository userRepository = new UserRepository();
+        static List<SportField> gyms;
+        static List<Appointment> appointments;
+        
         private void CreateNewAppointment(User u1,Appointment a1)
         {
             
@@ -49,7 +53,13 @@
                             Console.WriteLine("Username:");
                             password = Console.ReadLine();
                             User u1 = new(name, email, username, password, id);
-                            users.Add(u1);
+                            //users.Add(u1);
+
+                            userRepository.AddUser(u1);
+                            userRepository.AddUser(u1);
+                            userRepository.AddUser(u1);
+
+
                             break;
                         }
 
