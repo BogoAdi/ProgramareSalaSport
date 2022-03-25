@@ -1,14 +1,18 @@
-﻿namespace SportFieldScheduler.Domain
+﻿
+using SportFieldScheduler.Repositories;
+
+
+namespace SportFieldScheduler.Domain
 {
     public class Program
     {
-       static List<User> users=new List<User>();
-       static List<SportField> gyms=new List<SportField>();
-       static List<Appointment> appointments= new List<Appointment>();
-        
+
+        static UserRepository r1=new UserRepository();
+        static SportFieldRepository r2=new SportFieldRepository();
+        static AppointmentRepository r3=new AppointmentRepository();
         public  static void Main(string[] args)
         {   int i = 1;
-            string name, username, password, email,Cname;
+            string name, username, password, email,Cname, fieldName;
             string cateogry, address, city,phoneNumber;
             double pricePerHour,totalPrice;
             int hours;
@@ -45,7 +49,7 @@
                             Console.WriteLine("Password:");
                             password = Console.ReadLine();
                             User u1 = new User(name, email, username, password, Guid.NewGuid());
-                            users.Add(u1);
+                            r1.AddUser(u1);
                             break;
                         }
 
@@ -62,7 +66,7 @@
                             Console.WriteLine("City");
                             city = Console.ReadLine();
                             SportField sp = new SportField(name,address, city, pricePerHour, cateogry, "ok", Guid.NewGuid());
-                            gyms.Add(sp);
+                            r2.AddSportField(sp);
                             break;
                         }
 
@@ -71,10 +75,11 @@
                         {
                             Console.WriteLine("Enter your username:");
                             name = Console.ReadLine();
-                            var queryUser = users.Where(user => user.Username == name);
-                            User u1=queryUser.FirstOrDefault();
+                            User selectedUser = r1.GetUser(name);
+                            if (selectedUser == null) break;
+                            Console.WriteLine(selectedUser.ToString());
                             Console.WriteLine("Choose a sport field!");
-                            name=Console.ReadLine();
+                            fieldName=Console.ReadLine();
                             Console.WriteLine(" When you wish to rent the sport field and starting from what hour?");
                             Console.WriteLine("Format answer:MM dd yyyy H:mm:ss");
                             password =Console.ReadLine();
@@ -88,30 +93,26 @@
                             Cname = Console.ReadLine();
                             Console.WriteLine("PhoneNumber");
                             phoneNumber = Console.ReadLine();
-                            var queryField = gyms.Where(field=>field.Name == name);
-                            SportField s1 = queryField.FirstOrDefault();
-                            totalPrice = s1.PricePerHour * hours;
-                            Appointment a1 = new Appointment(dt,hours, totalPrice, Cname,phoneNumber,s1.Id,Guid.NewGuid());
-                            appointments.Add(a1);
-                            s1.Appointments.Add(a1);
-                            u1.Appointments.Add(a1);
+                            var selectedField = r2.GetSportField(fieldName);
+                            totalPrice = selectedField.PricePerHour * hours;
+                            Appointment a1 = new Appointment(dt,hours, totalPrice, Cname,phoneNumber, selectedField.Id,Guid.NewGuid());
+                            r3.AddAppointment(a1);
+                            r1.AddAppointment(a1,selectedUser);
+                            r2.AddAppointment(a1, selectedField);
                             break;
 
                         }
                     case 4:
                         {
-                            foreach(var field in gyms)
-                            {
-                                Console.WriteLine(field.Address +" "+field.City+" "+field.Category+" "+field.PricePerHour);
-                            }
+                            r2.ShowAll();
                             break;
                         }
                     case 5:
                         {
                             Console.Write("Please enter a username: ");
                             name = Console.ReadLine();
-                            var queryUser = users.Where(user => user.Username == name);
-                            User u1=queryUser.FirstOrDefault();
+                            User u1 = r1.GetUser( name);
+                           
                             Console.WriteLine(u1);
                             foreach(var appointment in u1.Appointments)
                             {
@@ -121,18 +122,15 @@
                         }
                     case 6:
                         {
-                            foreach(var user in users)
-                            {
-                                Console.WriteLine(user.ToString());
-                            }
+                            r1.ShowAll();
                             break;
                         }
                     case 7:
                         {
                             Console.Write("Please enter the name of the  sportfield: ");
                             name = Console.ReadLine();
-                            var queryField = gyms.Where(field => field.Name == name);
-                            SportField s1 = queryField.FirstOrDefault();
+
+                            SportField s1 = r2.GetSportField(name);
                             Console.WriteLine(s1);
                             foreach (var appointment in s1.Appointments)
                             {

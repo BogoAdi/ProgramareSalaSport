@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace SportFieldScheduler.Domain
 {
@@ -13,9 +9,10 @@ namespace SportFieldScheduler.Domain
         public string Email { get; set; }
         public string Password { get; set; }
         public string Username { get; set; }
-        public List<Appointment> Appointments { get; set; }
+        public List<Appointment> Appointments { get;  }
        public User(string name, string email,string username,string password, Guid id ) : base ( id )
-        {
+        {   
+            Appointments = new List<Appointment> ();
             Name = name;
             Email = email;
             Username = username;

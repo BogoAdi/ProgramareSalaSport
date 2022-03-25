@@ -17,6 +17,7 @@ namespace SportFieldScheduler.Domain
         public List<Appointment> Appointments { get; set; }
         public SportField( string name ,string address, string city, double pricePerHour, string category,string? description, Guid id) :base( id )
         {
+            Appointments= new List<Appointment>();
             Name = name;
             Address = address;
             City = city;
