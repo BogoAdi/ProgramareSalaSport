@@ -9,22 +9,21 @@ namespace SportFieldScheduler.Domain
     public class User : Entity
     {
   
-        public string Name { get; set; }
+        public string Name { get;  set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string Username { get; set; }
         public List<Appointment> Appointments { get; set; }
-       public User(string name, string email,string username,string password, int id ) : base ( id )
+       public User(string name, string email,string username,string password, Guid id ) : base ( id )
         {
             Name = name;
             Email = email;
             Username = username;
             Password = password;
         }
-        public void AddAppointment(Appointment at)
+        public override string ToString()
         {
-            Appointments.Add(at);
-            //Console.WriteLine("");
+            return Name +" "+ Email+ " "+ Username+ " ID "+Id;
         }
 
 

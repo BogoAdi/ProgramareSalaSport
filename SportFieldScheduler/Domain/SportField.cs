@@ -8,29 +8,26 @@ namespace SportFieldScheduler.Domain
 {
     public class SportField : Entity
     {
-        
-        public float Length { get; set; }
-        public float Width { get; set; }
+        public string Name { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public float PricePerHour { get; set; }
+        public double PricePerHour { get; set; }
         public string Category { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public List<Appointment> Appointments { get; set; }
-        public SportField(float length,float width, string address, string city, float pricePerHour, string category,string description,int id) :base( id )
+        public SportField( string name ,string address, string city, double pricePerHour, string category,string? description, Guid id) :base( id )
         {
-            Length = length;
-            Width = width;
+            Name = name;
             Address = address;
             City = city;
             PricePerHour = pricePerHour;
             Category = category;
             Description = description;
         }
-        public void AddAppointment(Appointment at)
+        public override string ToString()
         {
-            appointments.Add(at);
-
+            return Address + " " + City + " " + PricePerHour + " " + Category+ " "+Id;
         }
+
     }
 }

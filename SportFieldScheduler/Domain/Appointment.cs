@@ -9,13 +9,13 @@ namespace SportFieldScheduler.Domain
     public class Appointment : Entity
     {
        // public Guid IdField { get; set; }
-        public int IdField { get; set; }
+        public Guid IdField { get; set; }
         public DateTime Date { get; set; }
         public int Hours { get; set; }
-        public float TotalPrice { get; set; }
+        public double TotalPrice { get; set; }
         public string ClientName { get; set; }
         public string PhoneNumber { get; set; }
-        public Appointment(DateTime date,int hours, float totalPrice, string clientName, string phoneNumber, int idField, int id) :base(id)
+        public Appointment(DateTime date,int hours, double totalPrice, string clientName, string phoneNumber, Guid idField, Guid id) :base(id)
         { 
             Date = date;
             Hours = hours;
@@ -24,9 +24,9 @@ namespace SportFieldScheduler.Domain
             PhoneNumber = phoneNumber;
             IdField = idField;
         }
-        public string toString()
+        public override string ToString()
         {
-            return "The Assignment with the id " + Id + " was created succesfully!";
+            return "The appointment with the ID: "+Id + "for the date: " + Date + " for " + Hours + " hours " + ClientName+ " FieldID "+IdField;
         }
     }
 }
