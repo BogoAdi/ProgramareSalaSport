@@ -1,8 +1,8 @@
 ﻿
 using SportFieldScheduler.Repositories;
+using SportFieldScheduler.Domain;
 
-
-namespace SportFieldScheduler.Domain
+namespace SportFieldScheduler
 {
     public class Program
     {
@@ -48,7 +48,7 @@ namespace SportFieldScheduler.Domain
                             username = Console.ReadLine();
                             Console.WriteLine("Password:");
                             password = Console.ReadLine();
-                            User u1 = new User(name, email, username, password, Guid.NewGuid());
+                            User u1 = new User { Name=name, Email= email, Username= username, Password =password, Id=Guid.NewGuid() };
                             r1.AddUser(u1);
                             break;
                         }
@@ -65,7 +65,7 @@ namespace SportFieldScheduler.Domain
                             address = Console.ReadLine();
                             Console.WriteLine("City");
                             city = Console.ReadLine();
-                            SportField sp = new SportField(name,address, city, pricePerHour, cateogry, "ok", Guid.NewGuid());
+                            SportField sp = new SportField { Name=name,Address= address,City= city,PricePerHour= pricePerHour,Category= cateogry,Description= "ok",Id= Guid.NewGuid() };
                             r2.AddSportField(sp);
                             break;
                         }
@@ -95,7 +95,7 @@ namespace SportFieldScheduler.Domain
                             phoneNumber = Console.ReadLine();
                             var selectedField = r2.GetSportField(fieldName);
                             totalPrice = selectedField.PricePerHour * hours;
-                            Appointment a1 = new Appointment(dt,hours, totalPrice, Cname,phoneNumber, selectedField.Id,Guid.NewGuid());
+                            Appointment a1 = new Appointment {Date= dt, Hours= hours, TotalPrice= totalPrice,ClientName= Cname,PhoneNumber= phoneNumber,IdField= selectedField.Id, Id= Guid.NewGuid() };
                             r3.AddAppointment(a1);
                             r1.AddAppointment(a1,selectedUser);
                             r2.AddAppointment(a1, selectedField);

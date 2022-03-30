@@ -15,15 +15,10 @@ namespace SportFieldScheduler.Domain
         public string Category { get; set; }
         public string? Description { get; set; }
         public List<Appointment> Appointments { get; set; }
-        public SportField( string name ,string address, string city, double pricePerHour, string category,string? description, Guid id) :base( id )
+        public SportField()
         {
             Appointments= new List<Appointment>();
-            Name = name;
-            Address = address;
-            City = city;
-            PricePerHour = pricePerHour;
-            Category = category;
-            Description = description;
+        
         }
         public override string ToString()
         {
