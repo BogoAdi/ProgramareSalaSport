@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportFieldScheduler", "SportFieldScheduler\SportFieldScheduler.csproj", "{93ED15B3-C50A-4CC5-986E-433D2B9C94F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldScheduler", "SportFieldScheduler\SportFieldScheduler.csproj", "{93ED15B3-C50A-4CC5-986E-433D2B9C94F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldScheduler.Infrastructure", "SportFieldScheduler.Infrastructure\SportFieldScheduler.Infrastructure.csproj", "{11D41CC3-36C7-4CA7-9514-97C928B11033}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportFieldSchedulerAPI1", "SportFieldSchedulerAPI1\SportFieldSchedulerAPI1.csproj", "{ABEF8FFD-7883-4C24-AEF3-29CB659387B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{93ED15B3-C50A-4CC5-986E-433D2B9C94F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93ED15B3-C50A-4CC5-986E-433D2B9C94F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93ED15B3-C50A-4CC5-986E-433D2B9C94F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11D41CC3-36C7-4CA7-9514-97C928B11033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11D41CC3-36C7-4CA7-9514-97C928B11033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11D41CC3-36C7-4CA7-9514-97C928B11033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11D41CC3-36C7-4CA7-9514-97C928B11033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABEF8FFD-7883-4C24-AEF3-29CB659387B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABEF8FFD-7883-4C24-AEF3-29CB659387B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABEF8FFD-7883-4C24-AEF3-29CB659387B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABEF8FFD-7883-4C24-AEF3-29CB659387B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

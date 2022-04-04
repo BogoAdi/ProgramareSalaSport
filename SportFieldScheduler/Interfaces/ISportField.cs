@@ -8,7 +8,7 @@ namespace SportFieldScheduler.Interfaces
         void ShowAll();
         void DeleteSportField(SportField sportField);
         void ShowAllAppointments(SportField s1);
-        SportField GetSportField(string sportField);
+        SportField GetSportField(string sportFieldName);
         void AddAppointment(Appointment appointment,SportField sportField);
     }
 }
