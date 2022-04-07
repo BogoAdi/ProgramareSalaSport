@@ -1,6 +1,6 @@
 ﻿
 
-namespace SportFieldScheduler.Domain
+namespace SportFieldScheduler.Core.Domain
 {
     public class User : Entity
     {

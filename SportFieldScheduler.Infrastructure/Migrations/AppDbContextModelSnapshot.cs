@@ -60,7 +60,7 @@ namespace SportFieldScheduler.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Appointments", (string)null);
                 });
 
             modelBuilder.Entity("SportFieldScheduler.Domain.SportField", b =>
@@ -93,7 +93,7 @@ namespace SportFieldScheduler.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SportFields");
+                    b.ToTable("SportFields", (string)null);
                 });
 
             modelBuilder.Entity("SportFieldScheduler.Domain.User", b =>
@@ -120,7 +120,7 @@ namespace SportFieldScheduler.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("SportFieldScheduler.Domain.Appointment", b =>

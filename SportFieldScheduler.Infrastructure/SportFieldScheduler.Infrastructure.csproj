@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SportFieldScheduler.Core\SportFieldScheduler.Core.csproj" />
     <ProjectReference Include="..\SportFieldScheduler\SportFieldScheduler.csproj" />
   </ItemGroup>
 

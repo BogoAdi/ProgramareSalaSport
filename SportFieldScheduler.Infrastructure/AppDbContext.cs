@@ -1,7 +1,7 @@
 ﻿
 
 using Microsoft.EntityFrameworkCore;
-using SportFieldScheduler.Domain;
+using SportFieldScheduler.Core.Domain;
 
 namespace SportFieldScheduler.Infrastructure
 {

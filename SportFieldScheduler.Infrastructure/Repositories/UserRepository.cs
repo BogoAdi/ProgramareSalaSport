@@ -1,9 +1,9 @@
-﻿using SportFieldScheduler.Domain;
-using SportFieldScheduler.Interfaces;
+﻿using SportFieldScheduler.Core.Domain;
+using SportFieldScheduler.Core.Interfaces;
 
 namespace SportFieldScheduler.Repositories
 {
-    internal class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private List<User> users = new List<User>();
 

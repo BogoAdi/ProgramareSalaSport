@@ -1,17 +1,16 @@
 ﻿
-using SportFieldScheduler.Repositories;
-using SportFieldScheduler.Domain;
 
 namespace SportFieldScheduler
 {
     public class Program
     {
-
+        /*
         static UserRepository r1=new UserRepository();
         static SportFieldRepository r2=new SportFieldRepository();
         static AppointmentRepository r3=new AppointmentRepository();
+        */
         public  static void Main(string[] args)
-        {   int i = 1;
+        {   /*int i = 1;
             string name, username, password, email,Cname, fieldName;
             string cateogry, address, city,phoneNumber;
             double pricePerHour,totalPrice;
@@ -155,8 +154,9 @@ namespace SportFieldScheduler
                 }
 
             }
-           
+           */
         }
+        
 
     }
 }

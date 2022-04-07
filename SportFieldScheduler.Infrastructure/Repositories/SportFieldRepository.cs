@@ -1,9 +1,9 @@
-﻿using SportFieldScheduler.Domain;
-using SportFieldScheduler.Interfaces;
+﻿using SportFieldScheduler.Core.Domain;
+using SportFieldScheduler.Core.Interfaces;
 
-namespace SportFieldScheduler.Repositories
+namespace SportFieldScheduler.Infrastructure.Repositories
 {
-    internal class SportFieldRepository : ISportField
+    public class SportFieldRepository : ISportField
     {   
         private List<SportField> _fields = new List<SportField>();
 
