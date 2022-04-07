@@ -17,10 +17,6 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Profile 1": {
-      "commandName": "Executable",
-      "executablePath": "D:\\Facultate\\Internship\\Proiect\\Attempt1\\SportFieldScheduler\\ProgramareSalaSport\\SportFieldSchedulerAPI1\\Probe.cs"
-    },
     "SportFieldSchedulerAPI1": {
       "commandName": "Project",
       "launchBrowser": true,

@@ -1,9 +1,11 @@
-﻿using MediatR;
+﻿
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using SportFieldScheduler.Core.Interfaces;
 using SportFieldScheduler.Infrastructure.Repositories;
 using SportFieldSchedulerAPI1.Appointments.Commands;
 
-namespace SportSchedulerAPI1
+namespace probe
 {
     public class Probe
     {
@@ -18,7 +20,10 @@ namespace SportSchedulerAPI1
 
             var appointmentId1 = await _mediator.Send(new CreateAppointmentCommand
             {
-                ClientName = "Radu"
+                Id= Guid.NewGuid(),
+                ClientName = "Radu",
+                IdUser= Guid.NewGuid(),
+                Date = DateTime.Now
 
             });
 
@@ -27,7 +32,11 @@ namespace SportSchedulerAPI1
                 ClientName = "Ovi"
             });
 
-            Console.WriteLine($"Appointment created with {appointmentId1.ToString()}");
+            Console.WriteLine("Hello");
+            Console.WriteLine($"Appointment created with {appointmentId1}");
+
+            Console.WriteLine("Hello");
+
         }
     }
 }
