@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SportFieldScheduler.Core.Domain
 {
-    public class Entity
+    public abstract class Entity
     {
         public Guid Id { get; set; }
 

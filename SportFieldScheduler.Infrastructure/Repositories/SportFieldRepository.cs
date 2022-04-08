@@ -3,50 +3,32 @@ using SportFieldScheduler.Core.Interfaces;
 
 namespace SportFieldScheduler.Infrastructure.Repositories
 {
-    public class SportFieldRepository : ISportField
+    public class SportFieldRepository : ISportFieldRepository
     {   
         private List<SportField> _fields = new List<SportField>();
 
-        public void AddAppointment(Appointment appointment, SportField sportField)
+    //  public void AddAppointment(Appointment appointment, SportField sportField)
+    //  {
+    //     sportField.Appointments.Add(appointment);
+    //  }
+        public async Task RemoveSportFieldAsync(Guid id)
         {
-           sportField.Appointments.Add(appointment);
+            _fields.Remove(_fields.FirstOrDefault(x => x.Id == id));
         }
 
-        public void AddSportField(SportField sportField)
+        public  async Task AddSportFieldAsync(SportField sportField)
         {
             _fields.Add(sportField);
         }
 
-        public void DeleteSportField(SportField sportField)
+        public async  Task<List<SportField>> GetAllSportFieldAsync()
         {
-           _fields.Remove(sportField);
+            return _fields;
         }
 
-        public SportField GetSportField(string sportFieldName)
+        public async Task<SportField> GetSportFieldById(Guid id)
         {
-            var found = _fields.Find(field =>field.Name==sportFieldName);
-            if (found!=null)
-                return found;
-            return null;
-        }
-
-        public void ShowAll()
-        {
-            foreach (var sportField in _fields)
-            {
-                Console.WriteLine(sportField.ToString());
-            }
-            Console.WriteLine();
-        }
-
-        public void ShowAllAppointments(SportField s1)
-        {
-            var allAppointments = _fields.Where(field => field.Name==s1.Name);
-            foreach (var appointment in allAppointments)
-            {
-                Console.WriteLine(appointment.ToString());
-            }
-            Console.WriteLine();
+            return _fields.FirstOrDefault(x => x.Id == id);
         }
     }
 }

@@ -4,7 +4,7 @@ using SportFieldScheduler.Core.Interfaces;
 
 namespace SportFieldSchedulerAPI1.Appointments.Commands
 {
-    public class CreateAppointmentCommandHandler : Entity, IRequestHandler<CreateAppointmentCommand, Guid>
+    public class CreateAppointmentCommandHandler :  IRequestHandler<CreateAppointmentCommand, Guid>
     {
         private IAppointmentRepository _repository;
 

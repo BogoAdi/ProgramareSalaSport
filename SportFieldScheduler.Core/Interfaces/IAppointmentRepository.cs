@@ -4,9 +4,9 @@ namespace SportFieldScheduler.Core.Interfaces
 {
     public interface IAppointmentRepository
     {
-        public Task AddAppointmentAsync(Appointment appointment);
-        void RemoveAppointment(Appointment appointment);
-        void ShowAll();
-        public  Task<Appointment> GetAppointmentByIdAsync(Appointment appointment);
+        Task AddAppointmentAsync(Appointment appointment);
+        Task RemoveAppointmentAsync(Guid id);
+        Task<List<Appointment>> GetAllAppointmentsAsync();
+        Task<Appointment> GetAppointmentByIdAsync(Guid id);
     }
 }

@@ -4,11 +4,12 @@ namespace SportFieldScheduler.Core.Interfaces
 {
     public interface IUserRepository
     {
-        void AddUser(User user);
-        void RemoveUser(User user);
-        void ShowAll();
-        User GetUser(string user);
-        void AddAppointment(Appointment appointment,User user);
-       
+         Task AddUserAsync(User user);
+         Task RemoveUserAsync(Guid id);
+         Task<List<User>> GetAllUsersAsync();
+         Task<User> GetUserByIdAsync(Guid id);
+
+        //public Task AddApointmentToUser(Appointment appointment);
+
     }
 }

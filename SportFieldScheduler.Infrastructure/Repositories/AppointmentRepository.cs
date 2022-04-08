@@ -13,25 +13,22 @@ namespace SportFieldScheduler.Infrastructure.Repositories
             appointments.Add(appointment);
         }
 
-        public async Task<Appointment> GetAppointmentByIdAsync(Appointment appointment)
+        public async Task RemoveAppointmentAsync(Guid id)
         {
-            return appointments.First(x => x.Id == appointment.Id);
+            appointments.Remove(appointments.FirstOrDefault(x=>x.Id == id));
         }
 
-        public void RemoveAppointment(Appointment appointment)
+        public async Task<List<Appointment>> GetAllAppointmentsAsync()
         {
-            appointments.Remove(appointment);
+            return appointments;
         }
 
-        public void ShowAll()
+        public async Task<Appointment> GetAppointmentByIdAsync(Guid id)
         {
-            foreach(Appointment appointment in appointments)
-            {
-                if(appointment != null)
-                    Console.WriteLine(appointment); 
-            }
-            Console.WriteLine();
+            return appointments.First(x => x.Id ==id);
         }
+
+    
       
     }
 }
