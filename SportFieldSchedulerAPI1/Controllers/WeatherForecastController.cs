@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace SportFieldSchedulerAPI1.Controllers
+namespace SportFieldScheduler.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

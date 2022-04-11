@@ -1,11 +1,11 @@
 ﻿
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using SportFieldScheduler.Application;
+using SportFieldScheduler.Application.Commands.Appointments;
+using SportFieldScheduler.Application.Commands.Users;
 using SportFieldScheduler.Core.Interfaces;
 using SportFieldScheduler.Infrastructure.Repositories;
-using SportFieldScheduler.Repositories;
-using SportFieldSchedulerAPI1.Appointments.Commands;
-using SportFieldSchedulerAPI1.Users.Commands;
 
 namespace probe
 {
@@ -14,7 +14,7 @@ namespace probe
         static async Task Main(string[] args)
         {
             var _diContainer = new ServiceCollection()
-               .AddMediatR(typeof(CreateAppointmentCommand))
+               .AddMediatR(typeof(Marker))
                .AddScoped<IAppointmentRepository, AppointmentRepository>()
                .AddScoped<IUserRepository, UserRepository>()
                .AddScoped<ISportFieldRepository, SportFieldRepository>()

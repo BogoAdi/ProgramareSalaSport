@@ -1,4 +1,4 @@
-namespace SportFieldSchedulerAPI1
+namespace SportFieldScheduler.API
 {
     public class WeatherForecast
     {

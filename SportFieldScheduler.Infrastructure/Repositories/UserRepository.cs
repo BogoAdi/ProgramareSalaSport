@@ -1,7 +1,7 @@
 ﻿using SportFieldScheduler.Core.Domain;
 using SportFieldScheduler.Core.Interfaces;
 
-namespace SportFieldScheduler.Repositories
+namespace SportFieldScheduler.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
@@ -21,9 +21,9 @@ namespace SportFieldScheduler.Repositories
             return users;
         }
 
-        public  async Task<User> GetUserByIdAsync(Guid id)
+        public async Task<User> GetUserByIdAsync(Guid id)
         {
-           return users.FirstOrDefault(x => x.Id == id);
+            return users.FirstOrDefault(x => x.Id == id);
         }
 
     }

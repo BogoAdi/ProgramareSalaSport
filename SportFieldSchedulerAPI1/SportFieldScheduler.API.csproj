@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Appointments\**" />
+    <Compile Remove="SportFields\**" />
+    <Compile Remove="Users\**" />
+    <Content Remove="Appointments\**" />
+    <Content Remove="SportFields\**" />
+    <Content Remove="Users\**" />
+    <EmbeddedResource Remove="Appointments\**" />
+    <EmbeddedResource Remove="SportFields\**" />
+    <EmbeddedResource Remove="Users\**" />
+    <None Remove="Appointments\**" />
+    <None Remove="SportFields\**" />
+    <None Remove="Users\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SportFieldScheduler.Application\SportFieldScheduler.Application.csproj" />
+    <ProjectReference Include="..\SportFieldScheduler.Infrastructure\SportFieldScheduler.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

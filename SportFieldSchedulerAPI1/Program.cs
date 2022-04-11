@@ -1,7 +1,9 @@
-
-
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using SportFieldScheduler.Application;
+using SportFieldScheduler.Core.Interfaces;
 using SportFieldScheduler.Infrastructure;
+using SportFieldScheduler.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,10 +13,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMediatR(typeof(Marker));
 
 var cs = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(cs));
 
+builder.Services.AddScoped<IUserRepository,UserRepository>();
+builder.Services.AddScoped<ISportFieldRepository, SportFieldRepository>();
+builder.Services.AddScoped<IAppointmentRepository,AppointmentRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

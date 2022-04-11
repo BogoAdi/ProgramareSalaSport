@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldScheduler", "Spor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldScheduler.Infrastructure", "SportFieldScheduler.Infrastructure\SportFieldScheduler.Infrastructure.csproj", "{11D41CC3-36C7-4CA7-9514-97C928B11033}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldSchedulerAPI1", "SportFieldSchedulerAPI1\SportFieldSchedulerAPI1.csproj", "{ABEF8FFD-7883-4C24-AEF3-29CB659387B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldScheduler.API", "SportFieldSchedulerAPI1\SportFieldScheduler.API.csproj", "{ABEF8FFD-7883-4C24-AEF3-29CB659387B3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldScheduler.Core", "SportFieldScheduler.Core\SportFieldScheduler.Core.csproj", "{6204BF1A-E7D9-4B18-A810-DDF74F125757}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "probe", "probe\probe.csproj", "{4BCB181E-1EBF-4B6B-BBE1-E676BEF1BD07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "probe", "probe\probe.csproj", "{4BCB181E-1EBF-4B6B-BBE1-E676BEF1BD07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportFieldScheduler.Application", "SportFieldScheduler.Application\SportFieldScheduler.Application.csproj", "{706319C4-74AE-4335-98C5-D662C2FD3620}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4BCB181E-1EBF-4B6B-BBE1-E676BEF1BD07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BCB181E-1EBF-4B6B-BBE1-E676BEF1BD07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BCB181E-1EBF-4B6B-BBE1-E676BEF1BD07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{706319C4-74AE-4335-98C5-D662C2FD3620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{706319C4-74AE-4335-98C5-D662C2FD3620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{706319C4-74AE-4335-98C5-D662C2FD3620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{706319C4-74AE-4335-98C5-D662C2FD3620}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
