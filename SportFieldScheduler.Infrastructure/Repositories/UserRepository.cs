@@ -19,6 +19,13 @@ namespace SportFieldScheduler.Infrastructure.Repositories
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
         }
+      /*  public async Task AddAppointmentAsync(User user, Appointment appointment)
+        {
+
+            user.Appointments.Add(appointment);
+            await _context.SaveChangesAsync();
+        }
+      */
         public async Task RemoveUserAsync(Guid id)
         {
             var user = _context.Users.FirstOrDefault(x => x.Id == id);

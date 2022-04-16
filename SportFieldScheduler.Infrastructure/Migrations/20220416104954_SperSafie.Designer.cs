@@ -12,8 +12,8 @@ using SportFieldScheduler.Infrastructure;
 namespace SportFieldScheduler.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220404055038_FirstMigration1")]
-    partial class FirstMigration1
+    [Migration("20220416104954_SperSafie")]
+    partial class SperSafie
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace SportFieldScheduler.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("SportFieldScheduler.Domain.Appointment", b =>
+            modelBuilder.Entity("SportFieldScheduler.Core.Domain.Appointment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,20 +40,17 @@ namespace SportFieldScheduler.Infrastructure.Migrations
                     b.Property<int>("Hours")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("IdField")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("SportFieldId")
+                    b.Property<Guid>("SportFieldId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -65,7 +62,7 @@ namespace SportFieldScheduler.Infrastructure.Migrations
                     b.ToTable("Appointments");
                 });
 
-            modelBuilder.Entity("SportFieldScheduler.Domain.SportField", b =>
+            modelBuilder.Entity("SportFieldScheduler.Core.Domain.SportField", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,10 +83,6 @@ namespace SportFieldScheduler.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("PricePerHour")
                         .HasColumnType("float");
 
@@ -98,7 +91,7 @@ namespace SportFieldScheduler.Infrastructure.Migrations
                     b.ToTable("SportFields");
                 });
 
-            modelBuilder.Entity("SportFieldScheduler.Domain.User", b =>
+            modelBuilder.Entity("SportFieldScheduler.Core.Domain.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -125,23 +118,27 @@ namespace SportFieldScheduler.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("SportFieldScheduler.Domain.Appointment", b =>
+            modelBuilder.Entity("SportFieldScheduler.Core.Domain.Appointment", b =>
                 {
-                    b.HasOne("SportFieldScheduler.Domain.SportField", null)
+                    b.HasOne("SportFieldScheduler.Core.Domain.SportField", null)
                         .WithMany("Appointments")
-                        .HasForeignKey("SportFieldId");
+                        .HasForeignKey("SportFieldId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("SportFieldScheduler.Domain.User", null)
+                    b.HasOne("SportFieldScheduler.Core.Domain.User", null)
                         .WithMany("Appointments")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("SportFieldScheduler.Domain.SportField", b =>
+            modelBuilder.Entity("SportFieldScheduler.Core.Domain.SportField", b =>
                 {
                     b.Navigation("Appointments");
                 });
 
-            modelBuilder.Entity("SportFieldScheduler.Domain.User", b =>
+            modelBuilder.Entity("SportFieldScheduler.Core.Domain.User", b =>
                 {
                     b.Navigation("Appointments");
                 });

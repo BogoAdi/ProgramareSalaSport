@@ -9,8 +9,8 @@ namespace SportFieldScheduler.Core.Interfaces
 
         public Task RemoveSportFieldAsync(Guid id);
         public Task<List<SportField>> GetAllSportFieldAsync();
-        public Task<SportField> GetSportFieldById(Guid id); 
-
+        public Task<SportField> GetSportFieldById(Guid id);
+        Task AddAppointmentAsync(SportField sportField, Appointment appointment);
         //public Task AddApointmentToSportField(Appointment appointment);
     }
 }

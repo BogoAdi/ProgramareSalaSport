@@ -22,7 +22,12 @@ namespace SportFieldScheduler.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
-
+        public async Task AddAppointmentAsync(SportField sportField, Appointment appointment)
+        {
+            sportField.Appointments.Add(appointment);
+            await _context.SaveChangesAsync();
+        }
+       
         public  async Task AddSportFieldAsync(SportField sportField)
         {
             _context.SportFields.Add(sportField);
@@ -36,7 +41,12 @@ namespace SportFieldScheduler.Infrastructure.Repositories
 
         public async Task<SportField> GetSportFieldById(Guid id)
         {
-            return  _context.SportFields.FirstOrDefault(x => x.Id == id);
+            var sportfield= await _context.SportFields.Include(x =>x.Appointments).FirstOrDefaultAsync(x => x.Id == id);
+            if(sportfield == null)
+            {
+                throw new InvalidOperationException();
+            }
+            return sportfield;
         }
     }
 }

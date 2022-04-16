@@ -22,8 +22,13 @@ namespace SportFieldScheduler.Infrastructure.Repositories
 
         public async Task RemoveAppointmentAsync(Guid id)
         {
-            _context.Appointments.Remove(_context.Appointments.FirstOrDefault(x=>x.Id == id));
-            await _context.SaveChangesAsync();
+           var appointment= _context.Appointments.FirstOrDefault(x=>x.Id == id);
+            if (appointment != null)
+            {
+                _context.Appointments.Remove(appointment);
+                await _context.SaveChangesAsync();
+            }
+
         }
 
         public async Task<List<Appointment>> GetAllAppointmentsAsync()

@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+
 using SportFieldScheduler.Application;
 using SportFieldScheduler.Core.Interfaces;
 using SportFieldScheduler.Infrastructure;
@@ -14,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(typeof(Marker));
+builder.Services.AddAutoMapper(typeof(Marker));
 
 var cs = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(cs));

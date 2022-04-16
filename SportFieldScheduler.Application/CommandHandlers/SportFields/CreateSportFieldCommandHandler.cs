@@ -5,7 +5,7 @@ using SportFieldScheduler.Core.Interfaces;
 
 namespace SportFieldScheduler.Application.ComamandHandlers.SportFields
 {
-    public class CreateSportFieldCommandHandler : Entity,IRequestHandler<CreateSportFieldCommand, SportField>
+    public class CreateSportFieldCommandHandler : IRequestHandler<CreateSportFieldCommand, SportField>
     {
         private ISportFieldRepository _repository;
 
@@ -18,13 +18,13 @@ namespace SportFieldScheduler.Application.ComamandHandlers.SportFields
             var sportField = new SportField
             {
                 Id = command.Id,
-                Name = command.Name,
                 Address= command.Address,
-                PricePerHour=command.PricePerHour,
+                City = command.City,
+                PricePerHour =command.PricePerHour,
                 Category=command.Category,
                 Description= command.Description,
-                Appointments=command.Appointments,
-                City=command.City
+                Appointments=new List<Appointment>()
+
             };
             await _repository.AddSportFieldAsync(sportField);
             return await Task.FromResult(sportField);
