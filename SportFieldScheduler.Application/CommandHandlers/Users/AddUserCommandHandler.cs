@@ -5,7 +5,7 @@ using SportFieldScheduler.Core.Interfaces;
 
 namespace SportFieldScheduler.Application.ComamandHandlers.Users
 {
-    public class AddUserCommandHandler : IRequestHandler<AddUserCommand, Guid>
+    public class AddUserCommandHandler : IRequestHandler<AddUserCommand, User>
     {
          private IUserRepository _users;
 
@@ -13,7 +13,7 @@ namespace SportFieldScheduler.Application.ComamandHandlers.Users
         {
             _users = users;
         }
-        public async  Task<Guid> Handle(AddUserCommand command, CancellationToken cancellationToken)
+        public async  Task<User> Handle(AddUserCommand command, CancellationToken cancellationToken)
         {
             var user = new User
             {
@@ -26,7 +26,7 @@ namespace SportFieldScheduler.Application.ComamandHandlers.Users
 
             };
             await _users.AddUserAsync(user);
-            return await Task.FromResult(user.Id);
+            return await Task.FromResult(user);
         }
     }
 }

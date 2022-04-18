@@ -49,6 +49,20 @@ namespace SportFieldScheduler.Api.Controllers
             var mappedResult = _mapper.Map<SportField, SportFieldGetDto>(result);
             return Ok(mappedResult);
         }
-       
+
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteSportField(Guid id)
+        {
+            var command = new DeleteSportFieldCommand { Id = id };
+            var result = await _mediator.Send(command);
+
+            if (result == null)
+                return NotFound();
+
+            return NoContent();
+        }
+
     }
 }

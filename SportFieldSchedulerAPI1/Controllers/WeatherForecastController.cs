@@ -47,7 +47,7 @@ namespace SportFieldScheduler.Api.Controllers
             {
                 Id=Guid.NewGuid(),
                 IdField= SportFiled1.Id,
-                IdUser= userId2,
+                IdUser= userId2.Id,
                 Hours=2,
                 ClientName="Grigorescu Mihai",
                 Date=DateTime.Now,

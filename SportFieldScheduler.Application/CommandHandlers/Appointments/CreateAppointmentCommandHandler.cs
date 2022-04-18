@@ -5,7 +5,7 @@ using SportFieldScheduler.Core.Interfaces;
 
 namespace SportFieldScheduler.Application.ComamandHandlers.Appointments
 {
-    public class CreateAppointmentCommandHandler :  IRequestHandler<CreateAppointmentCommand, Guid>
+    public class CreateAppointmentCommandHandler :  IRequestHandler<CreateAppointmentCommand, Appointment>
     {
         private IAppointmentRepository _repository;
         private ISportFieldRepository _sportFieldRepository;
@@ -16,7 +16,7 @@ namespace SportFieldScheduler.Application.ComamandHandlers.Appointments
             _sportFieldRepository = sportFieldRepository;
         }
 
-        public async Task<Guid> Handle(CreateAppointmentCommand command, CancellationToken cancellationToken)
+        public async Task<Appointment> Handle(CreateAppointmentCommand command, CancellationToken cancellationToken)
         {
             var sportfield = await _sportFieldRepository.GetSportFieldById(command.IdField);
             
@@ -26,7 +26,7 @@ namespace SportFieldScheduler.Application.ComamandHandlers.Appointments
             }
             var appointment = new Appointment
             {
-                Id = command.Id,
+                Id = Guid.NewGuid(), // nu sunt sigur de asta
                 SportFieldId = command.IdField,
                 UserId = command.IdUser,
                 ClientName = command.ClientName,
@@ -35,11 +35,13 @@ namespace SportFieldScheduler.Application.ComamandHandlers.Appointments
                 Hours = command.Hours,
                 TotalPrice = sportfield.PricePerHour * command.Hours
             };
+
            //   sportfield.Appointments.Add(appointment);
           //  await _sportFieldRepository.AddAppointmentAsync(sportfield,appointment);
 
             await _repository.AddAppointmentAsync(appointment);
-            return await Task.FromResult(appointment.Id);
+            //Mapper
+            return await Task.FromResult(appointment);
         }
     }
 }

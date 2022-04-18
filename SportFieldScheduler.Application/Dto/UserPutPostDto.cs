@@ -7,7 +7,7 @@ namespace SportFieldScheduler.Application.Dto
         [Required]
         [MaxLength(30)]
         [MinLength(5)]
-        public string  FullName{ get; set; }
+        public string  Name{ get; set; }
         [Required]
         [MaxLength(16)]
         [MinLength(8)]
@@ -23,7 +23,7 @@ namespace SportFieldScheduler.Application.Dto
         [MinLength(5)]
         public string Username { get; set; }
 
-        public Guid Id { get; set; }
+      //  public Guid Id { get; set; }
 
     }
 }

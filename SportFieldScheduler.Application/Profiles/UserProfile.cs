@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SportFieldScheduler.Application.Commands.Users;
 using SportFieldScheduler.Application.Dto;
 using SportFieldScheduler.Core.Domain;
 
@@ -9,7 +10,7 @@ namespace SportFieldScheduler.Application.Profiles
 
             public UserProfile()
             {
-               // CreateMap<UserPutPostDto, AddUser>();
+                CreateMap<UserPutPostDto, AddUserCommand>();
                 CreateMap<User, UserGetDto>();
               //  CreateMap<Appointment, UserAppointmentDto>();
 

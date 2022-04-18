@@ -3,7 +3,7 @@ using SportFieldScheduler.Core.Domain;
 
 namespace SportFieldScheduler.Application.Commands.Users
 {
-    public class AddUserCommand :  IRequest<Guid>
+    public class AddUserCommand :  IRequest<User>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

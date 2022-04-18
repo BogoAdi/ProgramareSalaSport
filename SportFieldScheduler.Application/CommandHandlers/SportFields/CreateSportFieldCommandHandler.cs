@@ -17,7 +17,7 @@ namespace SportFieldScheduler.Application.ComamandHandlers.SportFields
         {
             var sportField = new SportField
             {
-                Id = command.Id,
+                Id = Guid.NewGuid(),
                 Address= command.Address,
                 City = command.City,
                 PricePerHour =command.PricePerHour,

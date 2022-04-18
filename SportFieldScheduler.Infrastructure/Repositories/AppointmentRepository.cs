@@ -38,7 +38,8 @@ namespace SportFieldScheduler.Infrastructure.Repositories
 
         public async Task<Appointment> GetAppointmentByIdAsync(Guid id)
         {
-            return await _context.Appointments.FirstOrDefaultAsync(x => x.Id ==id);
+            var found = _context.Appointments.FirstOrDefaultAsync(x => x.Id == id);
+            return await found;
         }
 
     

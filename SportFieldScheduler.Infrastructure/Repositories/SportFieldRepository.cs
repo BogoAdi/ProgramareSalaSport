@@ -6,7 +6,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
 {
     public class SportFieldRepository : ISportFieldRepository
     {   
-        //private List<SportField> _fields = new List<SportField>();
+        
         private readonly AppDbContext _context;
         public SportFieldRepository(AppDbContext context)
         {
@@ -44,7 +44,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
             var sportfield= await _context.SportFields.Include(x =>x.Appointments).FirstOrDefaultAsync(x => x.Id == id);
             if(sportfield == null)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("SportField not Found");
             }
             return sportfield;
         }

@@ -17,7 +17,7 @@ namespace SportFieldScheduler.Application.QueryHandlers.SportFields
         }
         public async Task<SportField> Handle(GetSportFieldByIdQuery query, CancellationToken cancellationToken)
         {
-            var result= await _repository.GetSportFieldById(query.Id); ;
+            var result= await _repository.GetSportFieldById(query.Id); 
             return result;
         }
     }

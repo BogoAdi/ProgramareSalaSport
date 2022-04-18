@@ -3,7 +3,7 @@ using SportFieldScheduler.Core.Domain;
 
 namespace SportFieldScheduler.Application.Commands.Appointments
 {
-    public class CreateAppointmentCommand : IRequest<Guid>
+    public class CreateAppointmentCommand : IRequest<Appointment>
         {
             public Guid Id { get; set; }
             public Guid IdField { get; set; }
