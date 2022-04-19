@@ -1,4 +1,6 @@
 ﻿
+using SportFieldScheduler.Core.Domain;
+
 namespace SportFieldScheduler.Application.Dto
 {
     public class UserGetDto
@@ -8,6 +10,7 @@ namespace SportFieldScheduler.Application.Dto
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public List<Appointment> Appointments { get; set; }
 
     }
 }

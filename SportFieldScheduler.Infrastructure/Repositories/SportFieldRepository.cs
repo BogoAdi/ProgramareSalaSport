@@ -36,7 +36,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
 
         public async  Task<List<SportField>> GetAllSportFieldAsync()
         {
-            return await _context.SportFields.ToListAsync();
+            return await _context.SportFields.Include(x => x.Appointments).ToListAsync();
         }
 
         public async Task<SportField> GetSportFieldById(Guid id)
@@ -47,6 +47,26 @@ namespace SportFieldScheduler.Infrastructure.Repositories
                 throw new InvalidOperationException("SportField not Found");
             }
             return sportfield;
+        }
+        public async Task UpdateSportFieldAsync(Guid id, SportField sportField)
+        {
+            var found = await _context.SportFields.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (found != null)
+            {
+                found.Address = sportField.Address;
+                found.City = sportField.City;
+                found.Category = sportField.Category;
+                found.PricePerHour = sportField.PricePerHour;
+                found.Description = sportField.Description;
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public Task UpdateAppointmentAsync(SportField sportField, Appointment appointment)
+        {
+            throw new NotImplementedException();
         }
     }
 }
