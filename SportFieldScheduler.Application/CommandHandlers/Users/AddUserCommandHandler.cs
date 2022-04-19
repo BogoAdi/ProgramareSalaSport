@@ -25,8 +25,8 @@ namespace SportFieldScheduler.Application.ComamandHandlers.Users
                Appointments=command.Appointments,
 
             };
-            await _users.AddUserAsync(user);
-            return await Task.FromResult(user);
+            var result = await _users.AddUserAsync(user);
+            return await Task.FromResult(result);
         }
     }
 }

@@ -27,17 +27,12 @@ namespace SportFieldScheduler.Application.CommandHandlers.Appointments
             var appointment = new Appointment
             {
                 Id = command.Id,
-                SportFieldId = command.IdField,
-                UserId = command.IdUser,
                 ClientName = command.ClientName,
                 PhoneNumber = command.PhoneNumber,
-                Date = command.Date,
-                Hours = command.Hours,
-                TotalPrice = sportfield.PricePerHour * command.Hours
             };
-            await _repository.UpdateAppointment(command.Id,appointment);
+          var updated=  await _repository.UpdateAppointment(command.Id,appointment);
             //Mapper
-            return await Task.FromResult(appointment);
+            return await Task.FromResult(updated);
         }
     }
 }

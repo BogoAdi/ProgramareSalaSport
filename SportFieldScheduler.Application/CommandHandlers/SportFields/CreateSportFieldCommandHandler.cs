@@ -26,8 +26,8 @@ namespace SportFieldScheduler.Application.ComamandHandlers.SportFields
                 Appointments=new List<Appointment>()
 
             };
-            await _repository.AddSportFieldAsync(sportField);
-            return await Task.FromResult(sportField);
+           var result= await _repository.AddSportFieldAsync(sportField);
+            return await Task.FromResult(result);
         }
     }
 }

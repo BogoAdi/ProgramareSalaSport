@@ -27,6 +27,7 @@ namespace SportFieldScheduler.Api.Controllers
         {
             var command = _mapper.Map<AppointmentPostDto, CreateAppointmentCommand>(appointment);
             var created = await _mediator.Send(command);
+            if (created == null) return BadRequest();
             var dto = _mapper.Map<Appointment, AppointmentGetDto>(created);
             return CreatedAtAction(nameof(GetAppointmentById), new { id = created.Id }, dto);
         }

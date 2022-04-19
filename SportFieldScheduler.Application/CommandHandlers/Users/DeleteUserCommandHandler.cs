@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using SportFieldScheduler.Application.Commands.Users;
+using SportFieldScheduler.Core.Domain;
 using SportFieldScheduler.Core.Interfaces;
 
 namespace SportFieldScheduler.Application.ComamandHandlers.Users
 {
-    public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Guid>
+    public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, User>
     {
         private IUserRepository _users;
 
@@ -12,11 +13,11 @@ namespace SportFieldScheduler.Application.ComamandHandlers.Users
         {
             _users = users;
         }
-        public async Task<Guid> Handle(DeleteUserCommand command, CancellationToken cancellationToken)
+        public async Task<User> Handle(DeleteUserCommand command, CancellationToken cancellationToken)
         {
-            await _users.RemoveUserAsync(command.Id);
+            var result = await _users.RemoveUserAsync(command.Id);
             
-            return await Task.FromResult(command.Id);
+            return await Task.FromResult(result);
         }
     }
 }

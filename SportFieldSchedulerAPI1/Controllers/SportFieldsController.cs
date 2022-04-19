@@ -63,6 +63,21 @@ namespace SportFieldScheduler.Api.Controllers
 
             return NoContent();
         }
+        /*
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateSportField(Guid id, SportField sportfield)
+        {
+            var query = new UpdateSportFieldCommand { Id = id ,};
+            var result = await _mediator.Send(query);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            var mappedResult = _mapper.Map<SportField, SportFieldGetDto>(result);
+            return Ok(mappedResult);
+        }
+        */
 
     }
 }

@@ -31,9 +31,9 @@ namespace SportFieldScheduler.Application.ComamandHandlers.Appointments
                 Hours = command.Hours,
                 TotalPrice = sportfield.PricePerHour * command.Hours
             };
-            await _repository.AddAppointmentAsync(appointment);
+            var result= await _repository.AddAppointmentAsync(appointment);
             //Mapper
-            return await Task.FromResult(appointment);
+            return await Task.FromResult(result);
         }
     }
 }

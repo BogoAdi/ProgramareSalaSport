@@ -14,7 +14,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task AddAppointmentAsync(Appointment appointment)
+        public async Task<Appointment> AddAppointmentAsync(Appointment appointment)
         {
             //logic for allowing free dates
             bool freeSlot = true;
@@ -46,10 +46,13 @@ namespace SportFieldScheduler.Infrastructure.Repositories
          // Console.WriteLine();
             if (freeSlot)
             {
-                _context.Appointments.Add(appointment);
+             var res = _context.Appointments.Add(appointment);
                 await _context.SaveChangesAsync();
+                
             }
-          //  return null;
+            var isAdded = await _context.Appointments.FirstOrDefaultAsync(x => x.Id == appointment.Id);
+            return isAdded;
+       
         }
 
         public async Task<Appointment> RemoveAppointmentAsync(Guid id)
@@ -79,13 +82,13 @@ namespace SportFieldScheduler.Infrastructure.Repositories
             return  found;
         }
 
-        public async Task UpdateAppointment(Guid id, Appointment appointment)
+        public async Task<Appointment> UpdateAppointment(Guid id, Appointment appointment)
         {
             var found = await _context.Appointments.FirstOrDefaultAsync(x => x.Id == id);
             if(found != null)
             {
                      found.PhoneNumber = appointment.PhoneNumber;
-                     found.Hours = appointment.Hours;
+                  /*   found.Hours = appointment.Hours;
 
                          //Verification for Date...
 
@@ -112,10 +115,12 @@ namespace SportFieldScheduler.Infrastructure.Repositories
                  }
                  if (freeSlot)
                      found.Date = appointment.Date;
+                  */
                  found.ClientName = appointment.ClientName;
                  await _context.SaveChangesAsync();
-
+                
             }
+            return found;
         }
     }
 }

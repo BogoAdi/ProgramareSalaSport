@@ -13,7 +13,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task RemoveSportFieldAsync(Guid id)
+        public async Task<SportField> RemoveSportFieldAsync(Guid id)
         {
             var sportfield = _context.SportFields.FirstOrDefault(x => x.Id == id);
             if (sportfield != null)
@@ -21,17 +21,14 @@ namespace SportFieldScheduler.Infrastructure.Repositories
                 _context.SportFields.Remove(sportfield);
                 await _context.SaveChangesAsync();
             }
-        }
-        public async Task AddAppointmentAsync(SportField sportField, Appointment appointment)
-        {
-            sportField.Appointments.Add(appointment);
-            await _context.SaveChangesAsync();
+            return sportfield;
         }
        
-        public  async Task AddSportFieldAsync(SportField sportField)
+        public  async Task<SportField> AddSportFieldAsync(SportField sportField)
         {
             _context.SportFields.Add(sportField);
             await _context.SaveChangesAsync();
+            return sportField;
         }
 
         public async  Task<List<SportField>> GetAllSportFieldAsync()
@@ -42,13 +39,13 @@ namespace SportFieldScheduler.Infrastructure.Repositories
         public async Task<SportField> GetSportFieldById(Guid id)
         {
             var sportfield= await _context.SportFields.Include(x =>x.Appointments).FirstOrDefaultAsync(x => x.Id == id);
-            if(sportfield == null)
-            {
-                throw new InvalidOperationException("SportField not Found");
-            }
+         //   if(sportfield == null)
+         //   {
+         //       throw new InvalidOperationException("SportField not Found");
+         //   }
             return sportfield;
         }
-        public async Task UpdateSportFieldAsync(Guid id, SportField sportField)
+        public async Task<SportField> UpdateSportFieldAsync(Guid id, SportField sportField)
         {
             var found = await _context.SportFields.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -62,11 +59,9 @@ namespace SportFieldScheduler.Infrastructure.Repositories
 
                 await _context.SaveChangesAsync();
             }
+            return found;
         }
 
-        public Task UpdateAppointmentAsync(SportField sportField, Appointment appointment)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

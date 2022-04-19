@@ -13,13 +13,15 @@ namespace SportFieldScheduler.Infrastructure.Repositories
             _context= context;
         }
 
-        public async Task AddUserAsync(User user)
+        public async Task<User> AddUserAsync(User user)
         {
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
+            return user;
+
         }
 
-        public async Task RemoveUserAsync(Guid id)
+        public async Task<User> RemoveUserAsync(Guid id)
         {
             var user = _context.Users.FirstOrDefault(x => x.Id == id);
             if (user != null)
@@ -27,6 +29,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
                 _context.Users.Remove(user);
                 await _context.SaveChangesAsync();
             }
+            return user;
         }
 
         public async Task<List<User>> GetAllUsersAsync()
@@ -37,14 +40,14 @@ namespace SportFieldScheduler.Infrastructure.Repositories
         public async Task<User> GetUserByIdAsync(Guid id)
         {
             var user= await _context.Users.Include(x => x.Appointments).FirstOrDefaultAsync(x => x.Id == id);
-            if (user == null)
-            {
-                throw new InvalidOperationException("User not Found");
-            }
+       //   if (user == null)
+       //   {
+       //       throw new InvalidOperationException("User not Found");
+       //   }
             return user;
         }
 
-        public async Task UpdateUser(Guid id, User user)
+        public async Task<User> UpdateUser(Guid id, User user)
         {
             var found = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -57,8 +60,9 @@ namespace SportFieldScheduler.Infrastructure.Repositories
 
                 await _context.SaveChangesAsync();
             }
+            return found;
         }
-        public async Task UpdateAppointment(Guid idAppointment, Guid idUser, Appointment appointment)
+        /*public async Task<User> UpdateAppointment(Guid idAppointment, Guid idUser, Appointment appointment)
         {
             var found = await _context.Users.FirstOrDefaultAsync(x => x.Id == idUser);
             if(found != null)
@@ -67,7 +71,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
                 if(appointment1 != null)
                 {
                     appointment1.PhoneNumber = appointment.PhoneNumber;
-                    appointment1.Hours = appointment.Hours;
+                   /* appointment1.Hours = appointment.Hours;
 
                     //Verification for Date...
 
@@ -96,14 +100,15 @@ namespace SportFieldScheduler.Infrastructure.Repositories
                     }
                     if(freeSlot )
                         appointment1.Date = appointment.Date;
-
+                   
                     appointment1.ClientName = appointment.ClientName;
 
                     await _context.SaveChangesAsync();
                 }
 
             }
-
+            return found;
         }
+        */
     }
 }
