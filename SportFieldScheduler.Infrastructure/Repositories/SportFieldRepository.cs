@@ -39,10 +39,10 @@ namespace SportFieldScheduler.Infrastructure.Repositories
         public async Task<SportField> GetSportFieldById(Guid id)
         {
             var sportfield= await _context.SportFields.Include(x =>x.Appointments).FirstOrDefaultAsync(x => x.Id == id);
-         //   if(sportfield == null)
-         //   {
-         //       throw new InvalidOperationException("SportField not Found");
-         //   }
+            if(sportfield == null)
+            {
+                throw new InvalidOperationException("SportField not Found");
+            }
             return sportfield;
         }
         public async Task<SportField> UpdateSportFieldAsync(Guid id, SportField sportField)

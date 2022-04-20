@@ -8,6 +8,5 @@ namespace SportFieldScheduler.Core.Interfaces
         Task <Appointment> RemoveAppointmentAsync(Guid id);
         Task<List<Appointment>> GetAllAppointmentsAsync();
         Task<Appointment> GetAppointmentByIdAsync(Guid id);
-        Task<Appointment> UpdateAppointment(Guid id,Appointment appointment);
     }
 }

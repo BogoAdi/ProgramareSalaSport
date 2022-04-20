@@ -17,7 +17,7 @@ namespace SportFieldScheduler.Application.ComamandHandlers.Users
         {
             var user = new User
             {
-                Id = command.Id,
+                Id = Guid.NewGuid(),
                Email = command.Email,
                Password = command.Password,
                Username = command.Username,

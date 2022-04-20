@@ -63,5 +63,25 @@ namespace SportFieldScheduler.Api.Controllers
 
             return NoContent();
         }
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UserPutPostDto user)
+        {
+            var command = new UpdateUserCommand
+            {
+                Id = id,
+               Username = user.Username,
+               Password = user.Password,
+               Name = user.Name,
+               Email = user.Email
+            };
+            var result = await _mediator.Send(command);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            var mappedResult = _mapper.Map<User, UserGetDto>(result);
+            return Ok(mappedResult);
+        }
     }
 }

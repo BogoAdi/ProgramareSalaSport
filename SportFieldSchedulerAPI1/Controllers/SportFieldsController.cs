@@ -41,7 +41,12 @@ namespace SportFieldScheduler.Api.Controllers
         public async Task<IActionResult> GetSportFieldById(Guid id)
         {
             var query = new GetSportFieldByIdQuery { Id = id };
-            var result = await _mediator.Send(query);
+            SportField result;
+            try
+            {
+                 result = await _mediator.Send(query);
+            }catch (Exception ex) { return BadRequest("Sport Fieldul nu este prezent"); }
+             result = await _mediator.Send(query);
             if (result == null)
             {
                 return NotFound();
@@ -63,13 +68,19 @@ namespace SportFieldScheduler.Api.Controllers
 
             return NoContent();
         }
-        /*
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> UpdateSportField(Guid id, SportField sportfield)
+        public async Task<IActionResult> UpdateSportField(Guid id, [FromBody]  SportFieldPostDto sportfield)
         {
-            var query = new UpdateSportFieldCommand { Id = id ,};
-            var result = await _mediator.Send(query);
+            var command = new UpdateSportFieldCommand {
+                Id = id,
+                Address= sportfield.Address,
+                Category= sportfield.Category,
+                City= sportfield.City,
+                Description= sportfield.Description,
+                PricePerHour= sportfield.PricePerHour
+                };
+            var result = await _mediator.Send(command);
             if (result == null)
             {
                 return NotFound();
@@ -77,7 +88,6 @@ namespace SportFieldScheduler.Api.Controllers
             var mappedResult = _mapper.Map<SportField, SportFieldGetDto>(result);
             return Ok(mappedResult);
         }
-        */
 
     }
 }

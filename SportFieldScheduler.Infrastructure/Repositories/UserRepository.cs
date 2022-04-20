@@ -62,53 +62,6 @@ namespace SportFieldScheduler.Infrastructure.Repositories
             }
             return found;
         }
-        /*public async Task<User> UpdateAppointment(Guid idAppointment, Guid idUser, Appointment appointment)
-        {
-            var found = await _context.Users.FirstOrDefaultAsync(x => x.Id == idUser);
-            if(found != null)
-            {
-                var appointment1 = found.Appointments.Find(x => x.Id == idAppointment);
-                if(appointment1 != null)
-                {
-                    appointment1.PhoneNumber = appointment.PhoneNumber;
-                   /* appointment1.Hours = appointment.Hours;
-
-                    //Verification for Date...
-
-                    bool freeSlot = true;
-                    foreach (Appointment appointmentIn in _context.Appointments)
-                    {
-                        if (appointment.SportFieldId == appointment1.SportFieldId)
-                        {
-                            if (appointment.Date >= appointment1.Date &&
-                                appointment1.Date.AddHours(Convert.ToDouble(appointment1.Hours))
-                                > appointment.Date)
-                            {
-                                freeSlot = false;
-                                break;
-                            }
-                            if (appointment.Date < appointment1.Date &&
-                               appointment.Date.AddHours(Convert.ToDouble(appointment1.Hours))
-                               > appointment1.Date)
-                            {
-                                freeSlot = false;
-                                break;
-                            }
-
-                        }
-
-                    }
-                    if(freeSlot )
-                        appointment1.Date = appointment.Date;
-                   
-                    appointment1.ClientName = appointment.ClientName;
-
-                    await _context.SaveChangesAsync();
-                }
-
-            }
-            return found;
-        }
-        */
+      
     }
 }

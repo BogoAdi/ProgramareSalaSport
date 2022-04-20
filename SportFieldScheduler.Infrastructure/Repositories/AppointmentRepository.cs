@@ -82,45 +82,6 @@ namespace SportFieldScheduler.Infrastructure.Repositories
             return  found;
         }
 
-        public async Task<Appointment> UpdateAppointment(Guid id, Appointment appointment)
-        {
-            var found = await _context.Appointments.FirstOrDefaultAsync(x => x.Id == id);
-            if(found != null)
-            {
-                     found.PhoneNumber = appointment.PhoneNumber;
-                  /*   found.Hours = appointment.Hours;
-
-                         //Verification for Date...
-
-                 bool freeSlot = true;
-                 foreach (Appointment appointmentIn in _context.Appointments)
-                 {
-                       if (appointment.SportFieldId == found.SportFieldId)
-                       {
-                           if (appointment.Date >= found.Date &&
-                               found.Date.AddHours(Convert.ToDouble(found.Hours))
-                               > appointment.Date)
-                           {
-                               freeSlot = false;
-                               break;
-                           }
-                           if (appointment.Date < found.Date &&
-                              appointment.Date.AddHours(Convert.ToDouble(found.Hours))
-                              > found.Date)
-                           {
-                               freeSlot = false;
-                               break;
-                           }
-                       }
-                 }
-                 if (freeSlot)
-                     found.Date = appointment.Date;
-                  */
-                 found.ClientName = appointment.ClientName;
-                 await _context.SaveChangesAsync();
-                
-            }
-            return found;
-        }
+       
     }
 }
