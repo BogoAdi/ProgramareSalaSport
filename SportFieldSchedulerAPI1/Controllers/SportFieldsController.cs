@@ -16,7 +16,7 @@ namespace SportFieldScheduler.Api.Controllers
 
         public readonly IMapper _mapper;
         public readonly IMediator _mediator;
-        public SportFieldsController(IMapper mapper, IMediator mediator)
+        public SportFieldsController( IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
