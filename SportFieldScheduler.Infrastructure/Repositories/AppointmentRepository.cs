@@ -46,7 +46,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
          // Console.WriteLine();
             if (freeSlot)
             {
-             var res = _context.Appointments.Add(appointment);
+              var res = _context.Appointments.Add(appointment);
                 await _context.SaveChangesAsync();
                 
             }
@@ -57,7 +57,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
 
         public async Task<Appointment> RemoveAppointmentAsync(Guid id)
         {
-           var appointment= _context.Appointments.FirstOrDefault(x=>x.Id == id);
+           var appointment = await _context.Appointments.FirstOrDefaultAsync(x => x.Id == id);
             if (appointment != null)
             {
                 _context.Appointments.Remove(appointment);

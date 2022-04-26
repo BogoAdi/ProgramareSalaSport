@@ -45,12 +45,12 @@ namespace SportFieldScheduler.Api.Controllers
             try
             {
                  result = await _mediator.Send(query);
-            }catch (Exception ex) { return BadRequest("Sport Fieldul nu este prezent"); }
-             result = await _mediator.Send(query);
-            if (result == null)
-            {
-                return NotFound();
-            }
+            }catch (InvalidOperationException ex) { return NotFound("Sport Fieldul nu este prezent"); }
+
+          //  if (result == null)
+          //  {
+          //      return NotFound();
+          //  }
             var mappedResult = _mapper.Map<SportField, SportFieldGetDto>(result);
             return Ok(mappedResult);
         }
