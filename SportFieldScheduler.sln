@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldScheduler", "SportFieldScheduler\SportFieldScheduler.csproj", "{93ED15B3-C50A-4CC5-986E-433D2B9C94F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldScheduler.zConsoleApp", "SportFieldScheduler\SportFieldScheduler.zConsoleApp.csproj", "{93ED15B3-C50A-4CC5-986E-433D2B9C94F4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldScheduler.Infrastructure", "SportFieldScheduler.Infrastructure\SportFieldScheduler.Infrastructure.csproj", "{11D41CC3-36C7-4CA7-9514-97C928B11033}"
 EndProject
@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldScheduler.Applica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldScheduler.Test", "SportFieldScheduler.Test\SportFieldScheduler.Test.csproj", "{C5014146-638E-4850-B0D5-58950F6E33FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportFieldScheduler.Client", "SportFieldScheduler.Client\SportFieldScheduler.Client.csproj", "{109BBB7F-A88A-407F-9C5D-FB10E0651FE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportFieldScheduler.Client", "SportFieldScheduler.Client\SportFieldScheduler.Client.csproj", "{109BBB7F-A88A-407F-9C5D-FB10E0651FE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

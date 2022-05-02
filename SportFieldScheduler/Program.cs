@@ -1,6 +1,6 @@
 ﻿
 
-namespace SportFieldScheduler
+namespace SportFieldScheduler.zConsoleApp
 {
     public class Program
     {
