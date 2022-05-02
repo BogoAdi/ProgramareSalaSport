@@ -36,6 +36,7 @@ namespace SportFieldScheduler.Application.Dto
         [MaxLength(300)]
         [MinLength(5)]
         public string? Description { get; set; }
+        public string Img { get; set; }
 
     }
 }

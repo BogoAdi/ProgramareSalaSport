@@ -28,7 +28,7 @@ namespace SportFieldScheduler.Api.Controllers
         {
             var userId2 = await _mediator.Send(new AddUserCommand
             {
-                Id = Guid.NewGuid(),
+                // Id = Guid.NewGuid(),
                 Name = "Dan Diaconescu",
                 Username = "user12",
                 Email ="asdfcadsf@asdd",

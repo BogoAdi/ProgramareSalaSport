@@ -47,7 +47,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
             return user;
         }
 
-        public async Task<User> UpdateUser(Guid id, User user)
+        public async Task<User> UpdateUserAsync(Guid id, User user)
         {
             var found = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
 

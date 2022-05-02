@@ -12,8 +12,8 @@ using SportFieldScheduler.Infrastructure;
 namespace SportFieldScheduler.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220416104954_SperSafie")]
-    partial class SperSafie
+    [Migration("20220502060400_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,19 +30,11 @@ namespace SportFieldScheduler.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ClientName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Hours")
                         .HasColumnType("int");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("SportFieldId")
                         .HasColumnType("uniqueidentifier");
@@ -83,6 +75,14 @@ namespace SportFieldScheduler.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Img")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("PricePerHour")
                         .HasColumnType("float");
 
@@ -109,6 +109,13 @@ namespace SportFieldScheduler.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -120,17 +127,21 @@ namespace SportFieldScheduler.Infrastructure.Migrations
 
             modelBuilder.Entity("SportFieldScheduler.Core.Domain.Appointment", b =>
                 {
-                    b.HasOne("SportFieldScheduler.Core.Domain.SportField", null)
+                    b.HasOne("SportFieldScheduler.Core.Domain.SportField", "SportField")
                         .WithMany("Appointments")
                         .HasForeignKey("SportFieldId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SportFieldScheduler.Core.Domain.User", null)
+                    b.HasOne("SportFieldScheduler.Core.Domain.User", "User")
                         .WithMany("Appointments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("SportField");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SportFieldScheduler.Core.Domain.SportField", b =>

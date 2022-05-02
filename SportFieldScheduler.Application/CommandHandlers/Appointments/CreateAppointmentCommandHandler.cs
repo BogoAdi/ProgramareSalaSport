@@ -18,15 +18,15 @@ namespace SportFieldScheduler.Application.ComamandHandlers.Appointments
 
         public async Task<Appointment> Handle(CreateAppointmentCommand command, CancellationToken cancellationToken)
         {
-            var sportfield = await _sportFieldRepository.GetSportFieldById(command.IdField);
+            var sportfield = await _sportFieldRepository.GetSportFieldByIdAsync(command.IdField);
 
             var appointment = new Appointment
             {
                 Id = Guid.NewGuid(),
                 SportFieldId = command.IdField,
                 UserId = command.IdUser,
-                ClientName = command.ClientName,
-                PhoneNumber = command.PhoneNumber,
+                // ClientName = command.ClientName,
+                // PhoneNumber = command.PhoneNumber,
                 Date = command.Date,
                 Hours = command.Hours,
                 TotalPrice = sportfield.PricePerHour * command.Hours

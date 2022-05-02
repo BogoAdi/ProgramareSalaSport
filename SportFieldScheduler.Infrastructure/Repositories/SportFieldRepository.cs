@@ -36,7 +36,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
             return await _context.SportFields.Include(x => x.Appointments).ToListAsync();
         }
 
-        public async Task<SportField> GetSportFieldById(Guid id)
+        public async Task<SportField> GetSportFieldByIdAsync(Guid id)
         {
             var sportfield= await _context.SportFields.Include(x =>x.Appointments).FirstOrDefaultAsync(x => x.Id == id);
             if(sportfield == null)
@@ -56,6 +56,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
                 found.Category = sportField.Category;
                 found.PricePerHour = sportField.PricePerHour;
                 found.Description = sportField.Description;
+                found.Img = sportField.Img;
 
                 await _context.SaveChangesAsync();
             }

@@ -23,6 +23,8 @@ namespace SportFieldScheduler.Application.ComamandHandlers.Users
                Username = command.Username,
                Name = command.Name,
                Appointments=command.Appointments,
+               Role = command.Role,
+               PhoneNumber = command.PhoneNumber
 
             };
             var result = await _users.AddUserAsync(user);

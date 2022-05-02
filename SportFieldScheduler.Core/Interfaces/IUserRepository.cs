@@ -8,7 +8,7 @@ namespace SportFieldScheduler.Core.Interfaces
          Task<User> RemoveUserAsync(Guid id);
          Task<List<User>> GetAllUsersAsync();
          Task<User> GetUserByIdAsync(Guid id);
-         Task<User> UpdateUser(Guid id, User user);
+         Task<User> UpdateUserAsync(Guid id, User user);
 
     }
 }

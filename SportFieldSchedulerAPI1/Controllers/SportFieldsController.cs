@@ -74,11 +74,12 @@ namespace SportFieldScheduler.Api.Controllers
         {
             var command = new UpdateSportFieldCommand {
                 Id = id,
-                Address= sportfield.Address,
-                Category= sportfield.Category,
-                City= sportfield.City,
-                Description= sportfield.Description,
-                PricePerHour= sportfield.PricePerHour
+                Address = sportfield.Address,
+                Category = sportfield.Category,
+                City = sportfield.City,
+                Description = sportfield.Description,
+                PricePerHour = sportfield.PricePerHour,
+                Img = sportfield.Img
                 };
             var result = await _mediator.Send(command);
             if (result == null)

@@ -76,11 +76,11 @@ namespace SportFieldScheduler.Test
                             {
                                 new Appointment
                                 {
-                                    ClientName = "George Groza",
+                                    //ClientName = "George Groza",
                                     SportFieldId = id,
                                     Date = DateTime.Now,
                                     Hours = 3,
-                                    PhoneNumber = "0765431221",
+                                   // PhoneNumber = "0765431221",
                                     TotalPrice = 0,
                                     UserId = Guid.NewGuid(),
                                     Id = Guid.NewGuid()
