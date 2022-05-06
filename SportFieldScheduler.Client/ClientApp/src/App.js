@@ -6,7 +6,7 @@ import { FetchData } from './components/FetchData';
 import { Counter } from './components/Counter';
 import Login2 from './components/Login2';
 import { SignUp } from './components/SignUp';
-import { SportFields } from './components/SportFields';
+import  SportFields  from './components/SportFields';
 
 import './custom.css'
 import Test from './components/Test';

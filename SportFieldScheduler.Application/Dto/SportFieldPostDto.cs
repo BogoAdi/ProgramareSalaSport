@@ -12,8 +12,7 @@ namespace SportFieldScheduler.Application.Dto
     public class SportFieldPostDto
     {   
         
-        [Required]
-        public Guid Id { get; set; }
+       
 
         [Required]
         [MinLength (4)]

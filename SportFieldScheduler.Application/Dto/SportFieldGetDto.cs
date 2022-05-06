@@ -5,7 +5,7 @@ namespace SportFieldScheduler.Application.Dto
     public class SportFieldGetDto
     {
         public Guid Id { get; set; }
-      //  public string Name { get; set; }
+        public string Name { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public double PricePerHour { get; set; }

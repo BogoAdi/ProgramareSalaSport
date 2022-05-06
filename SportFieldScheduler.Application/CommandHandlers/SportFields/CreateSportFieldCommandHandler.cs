@@ -23,7 +23,9 @@ namespace SportFieldScheduler.Application.ComamandHandlers.SportFields
                 PricePerHour =command.PricePerHour,
                 Category=command.Category,
                 Description= command.Description,
-                Appointments=new List<Appointment>()
+                Appointments=new List<Appointment>(),
+                Img = command.Img,
+                Name = command.Name
 
             };
            var result= await _repository.AddSportFieldAsync(sportField);
