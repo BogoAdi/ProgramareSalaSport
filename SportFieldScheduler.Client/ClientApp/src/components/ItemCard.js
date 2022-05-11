@@ -1,23 +1,27 @@
-import  "../CSS/ItemCard.css"
+//import  "../CSS/ItemCard.css"
+import CustomisedCard from './CustomisedCard'
 
-const ItemCard =({name, imgUrl, pricePerHour, City})=>{
+
+const ItemCard = ({sportField, loading}) =>{
+    if(loading) {
+        return <h2>Loading...</h2>
+    }
     return (
-        <div className="card-container"> 
-                <img className="sportfield-img" src={imgUrl}
-                alt="photo"
-                />
-            <br/>
-            <div className = "sport-field-name">
-                Name = {name}
-            </div>
-            <div className = "price-per-hour">
-                Price = {pricePerHour}$
-            </div>
-            <div className = "city">
-                City ={City}
-            </div>
-        </div>
-    )
+    <div>
+        {sportField.map((sportField => (
+                        <CustomisedCard 
+                            id = {sportField.id}
+                            name = {sportField.name}
+                            image = {sportField.img}
+                            address = {sportField.address}
+                            city = {sportField.city}
+                            category = {sportField.category}
+                            description = {sportField.description}
+                            price = {sportField.pricePerHour}
+                        />
+                    )))}
+    </div>
+    );
 
 }
 export default ItemCard;

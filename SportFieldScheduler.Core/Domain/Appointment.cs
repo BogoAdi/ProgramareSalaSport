@@ -9,8 +9,8 @@ namespace SportFieldScheduler.Core.Domain
         public DateTime Date { get; set; }
         public int Hours { get; set; }
         public double TotalPrice { get; set; }
-        public User User { get; set; }
-        public SportField SportField { get; set; }
+        //public User User { get; set; }
+        //public SportField SportField { get; set; }
         
   
        

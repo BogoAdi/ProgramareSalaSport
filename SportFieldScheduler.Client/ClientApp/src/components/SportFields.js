@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
-import ItemCard from './ItemCard';
-import Pagination from './Pagination';
-import Posts from './Posts';
+import Paginations from './Paginations';
 import axios from 'axios';
+import ItemCard from './ItemCard'
 
 
 const SportFields = () =>{
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(1);  
+    const [postsPerPage] = useState(4);  
 
     useEffect(() => {
     const fetchPosts = async () => {
@@ -28,27 +27,11 @@ const SportFields = () =>{
   
 
      const paginate = pageNumber => setCurrentPage(pageNumber);
-
-
-/*
-    return (
-        <div>
-            <ItemCard 
-            name = "Card Name"
-            imgUrl = "https://www.integralturf.com/wp-content/uploads/2018/01/Synthetic-turf-Tennis-Court-Construction.jpg"
-            pricePerHour = "200"
-            City = " Timisoara "
-            />
-        </div>
-
-    )
-}
-*/
     return (
         <div >
             <h1> SportFields</h1>
-            <Posts posts={currentPosts} loading={loading} />
-            <Pagination
+            <ItemCard sportField={currentPosts} loading={loading} />
+            <Paginations
             postsPerPage={postsPerPage}
             totalPosts={posts.length}
             paginate={paginate}  

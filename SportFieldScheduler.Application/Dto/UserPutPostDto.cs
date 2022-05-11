@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SportFieldScheduler.Core.Domain;
+using System.ComponentModel.DataAnnotations;
 
 namespace SportFieldScheduler.Application.Dto
 {
@@ -22,8 +23,14 @@ namespace SportFieldScheduler.Application.Dto
         [MaxLength(25)]
         [MinLength(5)]
         public string Username { get; set; }
+        [Required]
+        [MaxLength(10)]
+        [MinLength(10)]
+        public string PhoneNumber { get; set; }
+        [Required]
+        public Role Role { get; set; }
 
-      //  public Guid Id { get; set; }
+        //  public Guid Id { get; set; }
 
     }
 }
