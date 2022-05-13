@@ -10,7 +10,8 @@ namespace SportFieldScheduler.Core.Domain
         public string Username { get; set; }
         public string PhoneNumber { get; set; }
         public Role Role { get; set; }
-        public List<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public Guid AppointmentId { get; set; }
+        public ICollection<Appointment> Appointments { get; set; }
         public override string ToString()
         {
             return Name +" "+ Email+ " "+ Username+ " ID "+Id;

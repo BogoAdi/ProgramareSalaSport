@@ -25,8 +25,6 @@ namespace SportFieldScheduler.Application.ComamandHandlers.Appointments
                 Id = Guid.NewGuid(),
                 SportFieldId = command.IdField,
                 UserId = command.IdUser,
-                // ClientName = command.ClientName,
-                // PhoneNumber = command.PhoneNumber,
                 Date = command.Date,
                 Hours = command.Hours,
                 TotalPrice = sportfield.PricePerHour * command.Hours

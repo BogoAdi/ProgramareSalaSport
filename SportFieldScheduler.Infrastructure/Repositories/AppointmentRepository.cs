@@ -69,7 +69,7 @@ namespace SportFieldScheduler.Infrastructure.Repositories
 
         public async Task<List<Appointment>> GetAllAppointmentsAsync()
         {
-            return await _context.Appointments.ToListAsync();
+            return await _context.Appointments.Include(x =>x.User).Include(x => x.SportField).ToListAsync();
         }
 
         public async Task<Appointment> GetAppointmentByIdAsync(Guid id)

@@ -1,22 +1,35 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import AppointmentLine from './AppointmentLine'
+import MaterialTable from "material-table";
+import GetAppIcon from '@material-ui/icons/GetApp';
+import AddIcon from '@material-ui/icons/Add';
 
 const ShowAppointments = () =>{
-    const [posts, setPosts] = useState([]);
+    const [data, setDatas] = useState([]);
+    const [tableData,setTableData] =useState([]);
+    const columns = [
+        {title:"Id", field:"id"},
+        { title: "SportFieldId", field: "sportFieldId" },
+        {title: "UserId", field: "userId"},
+        { title: "TotalPrice", field: "totalPrice",type: "currency" },
+        {title: "Hours", field: "hours"},
+        {title: "Date And Starting Hour", field:"date",type: "datetime"}
+      ];
+    
     useEffect(() => {
         const fetchPosts = async () => {
           const res = await axios.get('https://localhost:7242/api/Appointments');
-          setPosts(res.data);
+          setDatas(res.data);
         };
         
         fetchPosts();
         }, []);
-        return (
-            <div >
-                <h1> Appointments</h1>
-                <AppointmentLine posts={posts} />
-            </div>
-        );
+
+  return (
+    <>
+    <MaterialTable  columns={columns} data={data} title="All Appointments"
+    ></MaterialTable>
+    </> 
+  );
 }
 export default ShowAppointments;

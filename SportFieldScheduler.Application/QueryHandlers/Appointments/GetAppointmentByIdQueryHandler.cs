@@ -17,9 +17,9 @@ namespace SportFieldScheduler.Application.QueryHandlers.Appointments
 
         public async Task<Appointment> Handle(GetAppointmentByIdQuery query, CancellationToken cancellationToken)
         {
-            var appointment = _repository.GetAppointmentByIdAsync(query.Id);
+            var appointment = await _repository.GetAppointmentByIdAsync(query.Id);
 
-            return await appointment;
+            return  appointment;
         }
     }
 }

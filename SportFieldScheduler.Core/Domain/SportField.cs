@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SportFieldScheduler.Core.Domain
 {
     public class SportField : Entity
-    {
+    {   
         public string Name { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
@@ -15,7 +15,8 @@ namespace SportFieldScheduler.Core.Domain
         public string Category { get; set; }
         public string? Description { get; set; }
         public string Img { get; set; }
-        public List<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public Guid AppointmentId { get; set; }
+        public ICollection<Appointment> Appointments { get; set; } 
         public override string ToString()
         {
             return Address + " " + City + " " + PricePerHour + " " + Category+ " "+Id;

@@ -13,5 +13,6 @@ namespace SportFieldScheduler.Application.Commands.Appointments
             public double TotalPrice { get; set; }
             public string ClientName { get; set; }
             public string PhoneNumber { get; set; }
+
         }
 }
