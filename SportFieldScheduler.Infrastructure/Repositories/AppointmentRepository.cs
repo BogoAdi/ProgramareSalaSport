@@ -69,12 +69,18 @@ namespace SportFieldScheduler.Infrastructure.Repositories
 
         public async Task<List<Appointment>> GetAllAppointmentsAsync()
         {
-            return await _context.Appointments.Include(x =>x.User).Include(x => x.SportField).ToListAsync();
+            return await _context.Appointments
+                .Include(x =>x.User)
+                .Include(x => x.SportField)
+                .ToListAsync();
         }
 
         public async Task<Appointment> GetAppointmentByIdAsync(Guid id)
         {
-            var found = await _context.Appointments.FirstOrDefaultAsync(x => x.Id == id);
+            var found = await _context.Appointments
+                .Include(x => x.User)
+                .Include(x => x.SportField)
+                .FirstOrDefaultAsync(x => x.Id == id);
             if(found == null)
             {
                 throw new InvalidOperationException("Appointment not Found");
