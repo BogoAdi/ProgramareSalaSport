@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import Paginations from './Paginations';
 import axios from 'axios';
-import ItemCard from './ItemCard'
+import ItemCard from './ItemCard';
+import Selector from './Selector';
 
 
 const SportFields = () =>{
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(4);  
+    const [postsPerPage,setPostsPerPage] = useState(4);  
 
     useEffect(() => {
     const fetchPosts = async () => {
@@ -27,9 +28,11 @@ const SportFields = () =>{
   
 
      const paginate = pageNumber => setCurrentPage(pageNumber);
+     const itemsPerPage = nr =>setPostsPerPage(nr);
     return (
         <div >
             <h1> SportFields</h1>
+            <Selector postsPerPage={itemsPerPage} />
             <ItemCard sportField={currentPosts} loading={loading} />
             <Paginations
             postsPerPage={postsPerPage}

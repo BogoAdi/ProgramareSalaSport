@@ -8,7 +8,8 @@ namespace SportFieldScheduler.Core.Domain
 {
     public enum Role
     {
-        Admin = 0,
-        Client = 1
+        Client = 0,
+        Admin = 1
+       
     }
 }

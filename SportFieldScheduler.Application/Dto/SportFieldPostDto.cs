@@ -23,16 +23,15 @@ namespace SportFieldScheduler.Application.Dto
         public string Address { get; set; }
         [Required]
         [MaxLength(40)]
-        [MinLength(5)]
+        [MinLength(3)]
         public string City { get; set; }
         [Required]
         public double PricePerHour { get; set; }
         [Required]
         [MaxLength(25)]
-        [MinLength(5)]
+        [MinLength(3)]
         public string Category { get; set; }
         [Required]
-        [MaxLength(300)]
         [MinLength(5)]
         public string? Description { get; set; }
         public string Img { get; set; }
