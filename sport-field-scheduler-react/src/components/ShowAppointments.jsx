@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import MaterialTable from 'material-table';
 
 const ShowAppointments = () => {
   const [data, setDatas] = useState([]);
@@ -15,7 +16,7 @@ const ShowAppointments = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get('https://localhost:7242/api/Appointments');
+      const res = await axios.get('https://localhost:44345/api/Appointments');
       setDatas(res.data);
     };
 
@@ -24,8 +25,7 @@ const ShowAppointments = () => {
 
   return (
     <>
-      {/*<MaterialTable columns={columns} data={data} title="All Appointments" />*/}
-      <div>Table</div>
+      <MaterialTable columns={columns} data={data} title="All Appointments" />
     </>
   );
 }

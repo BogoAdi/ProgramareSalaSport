@@ -1,12 +1,12 @@
 
 
-const Selector = ({postsPerPage}) =>{
+const Selector = ({ postsPerPage }) => {
 
-return (
-    <div>
-        {postsPerPage}
+    return (
+        <div>
+            {postsPerPage}
         </div>
-);  
+    );
 
 }
 

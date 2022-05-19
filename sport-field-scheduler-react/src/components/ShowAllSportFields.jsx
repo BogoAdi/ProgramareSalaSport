@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import MaterialTable from 'material-table';
 
 const ShowAllSportFields = () => {
 
@@ -18,7 +19,7 @@ const ShowAllSportFields = () => {
 
   useEffect(() => {
     const fetchGets = async () => {
-      const res = await axios.get('https://localhost:7242/api/SportFields');
+      const res = await axios.get('https://localhost:44345/api/SportFields');
       setData(res.data);
 
     };
@@ -29,7 +30,7 @@ const ShowAllSportFields = () => {
 
   return (
     <>
-      {/*<MaterialTable columns={columns} data={data} title="SportFields" />*/}
+      <MaterialTable columns={columns} data={data} title="SportFields" />
     </>
   );
 }
