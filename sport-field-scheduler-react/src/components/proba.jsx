@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from 'react-datepicker';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import ContainerForDates from './ContainerForDates'; 
+
 
 
 const Proba = () => {
@@ -68,8 +68,7 @@ const Proba = () => {
             />
 
             <div > ok </div>
-            <ContainerForDates appoint={appoint} loading={selected} selectedDate={selectedDate} />
-
+          
 
         </>
 
@@ -80,3 +79,6 @@ const Proba = () => {
 
 
 export default Proba;
+/* <ContainerForDates appoint={appoint} loading={selected} selectedDate={selectedDate} />
+import ContainerForDates from './ContainerForDates'; 
+*/

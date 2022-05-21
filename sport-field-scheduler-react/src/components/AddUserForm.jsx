@@ -12,7 +12,7 @@ const Schema = yup.object().shape({
     username: yup.string().required('Please fill this field'),
     phonenumber: yup.string().required('Please fill this field').matches(/[0-9]{10}$/, "Invalid Phone number"),
     role: yup.number()
-}).required();
+})
 
 
 const AddUserForm = () => {
@@ -59,7 +59,7 @@ const AddUserForm = () => {
             {errors.phonenumber && <p> {errors.phonenumber.message}</p>} <br />
 
             
-            <Button input type="submit"> Add new User
+            <Button  type="submit"> Add new User
             </Button>
         </form>
     );
