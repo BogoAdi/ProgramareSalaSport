@@ -6,49 +6,49 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 
 export default function ImgMediaCard(props) {
   let { id } = useParams();
   return (
-    <Card sx={{ 
-      minWidth:  '15%',
+    <Card sx={{
+      minWidth: '15%',
       maxWidth: '15%',
       margin: '2%',
       animation: 'ease-in-out',
       shadow: '0px 0px 15px -5px',
       display: 'inline-block',
-      '& .MuiCardMedia-img':{
+      '& .MuiCardMedia-img': {
         objectFit: 'cover'
-      }, ":hover" : {
+      }, ":hover": {
         transform: "scale(1.1)",
         shadow: "0px 0px 15px 0px"
-    }
+      }
 
-      }}>
+    }}>
       <CardMedia
-        component ="img" 
+        component="img"
         alt={props.name}
         height="140"
         image={props.image}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-         {props.name}   
+          {props.name}
         </Typography>
-        <Typography variant ="body2" color = "text.secondary">
+        <Typography variant="body2" color="text.secondary">
           {props.price} RON
-          </Typography>
-          <Typography variant ="body" color = "text.secondary">
+        </Typography>
+        <Typography variant="body" color="text.secondary">
           {props.city}
-          </Typography>
-       
+        </Typography>
+
       </CardContent>
       <CardActions>
-      <Link to={`/select-date/${props.id}`}>
-        <Button size="small">Create an appointment</Button>
+        <Link to={`/select-date/${props.id}`}>
+          <Button size="small">Create an appointment</Button>
         </Link>
         <Button size="small">Learn More</Button>
       </CardActions>
