@@ -23,7 +23,6 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import MaterialTable from 'material-table';
 
 
 
@@ -177,7 +176,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          All Appointmnents
         </Typography>
       )}
 
@@ -210,15 +209,6 @@ const ShowAppointments = () => {
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [data, setDatas] = useState([]);
-
-  const columns = [
-    { title: "Id", field: "id" },
-    { title: "SportFieldId", field: "sportFieldId" },
-    { title: "UserId", field: "userId" },
-    { title: "TotalPrice", field: "totalPrice", type: "currency" },
-    { title: "Hours", field: "hours" },
-    { title: "Date And Starting Hour", field: "date", type: "datetime" }
-  ];
 
   useEffect(() => {
     const fetchPosts = async () => {

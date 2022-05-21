@@ -9,6 +9,7 @@ import ShowAllSportFields from "./components/ShowAllSportFields";
 import AddUserForm from "./components/AddUserForm";
 import "./custom.css";
 import Proba from "./components/proba";
+import SportFieldForm from "./components/SportFieldForm";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/show-all-sport-fields" exact element={<ShowAllSportFields />} />
         <Route path="/add-user-form" exact element={<AddUserForm />} />
         <Route path="/proba" exact element={<Proba />} />
+        <Route path="/sport-field-form" exact element={<SportFieldForm />} />
       </Routes>
     </Layout>
   );
