@@ -6,12 +6,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
-import { useParams } from "react-router-dom";
+
 
 
 
 export default function ImgMediaCard(props) {
-  let { id } = useParams();
+  
   return (
     <Card sx={{
       minWidth: '15%',

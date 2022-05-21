@@ -33,6 +33,10 @@ const AppBarMenu = () => {
     }
     const navAllSportFields = () => {
         handleCloseNavMenu();
+        navigate('/show-all-sport-fields');
+    }
+    const navAllAppointments = () => {
+        handleCloseNavMenu();
         navigate('/show-all-appointments');
     }
     return (
@@ -77,6 +81,9 @@ const AppBarMenu = () => {
                             <MenuItem onClick={navAllSportFields}>
                                 <Typography textAlign="center">Appointments</Typography>
                             </MenuItem>
+                            <MenuItem onClick={navAllAppointments}>
+                                <Typography textAlign="center">Appointments</Typography>
+                            </MenuItem>
                         </Menu>
                     </Box>
 
@@ -94,8 +101,14 @@ const AppBarMenu = () => {
                         <Button
                             onClick={navAllSportFields}
                             sx={{ my: 2, color: 'white', display: 'block' }}
+                        >SportFields-Admin
+                        </Button>
+                        <Button
+                            onClick={navAllAppointments}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
                         >Appointments
                         </Button>
+                        
                     </Box>
 
                 </Toolbar>

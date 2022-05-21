@@ -30,7 +30,7 @@ const ShowAllSportFields = () => {
 
   return (
     <>
-     <MaterialTable columns={columns} data={data} title="SportFields" />
+     salut
     </>
   );
 }

@@ -9,6 +9,10 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
+import UpdateIcon from '@mui/icons-material/Update';
+import { useNavigate } from 'react-router-dom';
+import React from 'react';
+
 
 const getRole = (value) => {
   if (value === 0) return "Client";
@@ -17,8 +21,9 @@ const getRole = (value) => {
 
 const UsersTable = () => {
   const [users, setUsers] = useState([]);
-  const deleteItem = (itemID) => {
+  const navigate = useNavigate();
 
+  const DeleteItem = (itemID) => {
     const fetchInfo = async () => {
       const res = await axios.delete(`https://localhost:44345/api/Users/${itemID}`);
       if (res.status === 204) {
@@ -30,6 +35,11 @@ const UsersTable = () => {
     fetchInfo();
 
   }
+  const UpdateAction = (userId) => {
+    alert("E ok");
+    navigate(`/update-user-form/${userId}`);
+
+  };
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -51,7 +61,7 @@ const UsersTable = () => {
               <TableCell align="center">PhoneNumber</TableCell>
               <TableCell align="center">Username</TableCell>
               <TableCell align="center" >Role</TableCell>
-              <TableCell align="center">Delete</TableCell>
+              <TableCell align="center">Delete and Update </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -71,7 +81,8 @@ const UsersTable = () => {
                 <TableCell align="center">{user.username}</TableCell>
                 <TableCell align="center" >{getRole(user.role)}</TableCell>
                 <TableCell align="center">
-                  <Button variant="outlined" startIcon={<DeleteIcon />} onClick={() => { deleteItem(user.id) }} />
+                  <Button startIcon={<DeleteIcon />} onClick={() => { DeleteItem(user.id) }} />
+                  <Button color="secondary" startIcon={<UpdateIcon color="primary" />} onClick={() => { UpdateAction(user.id) }} />
                 </TableCell>
               </TableRow>
             ))}

@@ -10,6 +10,7 @@ import AddUserForm from "./components/AddUserForm";
 import "./custom.css";
 import Proba from "./components/proba";
 import SportFieldForm from "./components/SportFieldForm";
+import UpdateUser from "./components/UpdateUser";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/add-user-form" exact element={<AddUserForm />} />
         <Route path="/proba" exact element={<Proba />} />
         <Route path="/sport-field-form" exact element={<SportFieldForm />} />
+        <Route path="/update-user-form/:id" exact element={<UpdateUser />} />
       </Routes>
     </Layout>
   );
