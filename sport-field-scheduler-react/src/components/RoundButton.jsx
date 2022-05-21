@@ -1,9 +1,13 @@
 
 import Button from '@mui/material/Button';
 
-const RoundButton = ({ id, date, hours }) => {
+const RoundButton = (props) => {
+
     return (
-        <Button variant="contained">{date}</Button>
-        );
+        <>
+            <div>salut</div>
+            <Button>{props.date}   {props.hours}</Button>
+        </>
+    );
 }
 export default RoundButton;

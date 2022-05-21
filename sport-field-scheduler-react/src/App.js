@@ -8,17 +8,19 @@ import ShowUsers from "./components/ShowUsers";
 import ShowAllSportFields from "./components/ShowAllSportFields";
 import AddUserForm from "./components/AddUserForm";
 import "./custom.css";
+import Proba from "./components/proba";
 
 function App() {
   return (
     <Layout>
       <Routes>
-        <Route exact path="/" exact element={<Home />} />
+        <Route exact path="/"  element={<Home />} />
         <Route path="/sport-fields" exact element={<SportFields />} />
         <Route path="/show-all-appointments" exact element={<ShowAppointments />} />
         <Route path="/show-all-users" exact element={<ShowUsers />} />
         <Route path="/show-all-sport-fields" exact element={<ShowAllSportFields />} />
         <Route path="/add-user-form" exact element={<AddUserForm />} />
+        <Route path="/proba" exact element={<Proba />} />
       </Routes>
     </Layout>
   );

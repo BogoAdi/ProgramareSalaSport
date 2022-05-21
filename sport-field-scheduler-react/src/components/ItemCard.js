@@ -8,7 +8,7 @@ const ItemCard = ({ sportField, loading }) => {
     }
     return (
         <div>
-            {sportField.map(((sportField, index) => (
+            {sportField.map((sportField, index) => (
                 <CustomisedCard
                     key={index}
                     id={sportField.id}
@@ -20,7 +20,7 @@ const ItemCard = ({ sportField, loading }) => {
                     description={sportField.description}
                     price={sportField.pricePerHour}
                 />
-            )))}
+            ))}
         </div>
     );
 

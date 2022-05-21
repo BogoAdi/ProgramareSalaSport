@@ -3,64 +3,73 @@ import * as React from 'react';
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from 'react-datepicker';
 import { useEffect, useState } from 'react';
-import ListOfHours from './ListOfHours'
 import axios from 'axios';
-import RoundButton from './RoundButton';
-import ContentAppointment from './ContentAppointment';
-const SelectDate = () => {
+import ContainerForDates from './ContainerForDates'; 
+
+
+const Proba = () => {
+
     const [selectedDate, setSelectedDate] = useState();
-
-
-    const isSelected = (date) => {
-        if (date === undefined) return 0;
-        return 1;
-    }
-    const ret = (x) => {
-        if (x === undefined) return "z";
-        return x.toString();
-    }
+    const [selected, setSelected] = useState(false);
+    const [allDates, setAllDates] = useState([]);
+    const [data, setData] =useState();
     const [appoint, setAppoint] = useState([]);
 
-    
-        const getDates =(selectedDate) =>{
+
+    const getDates = (selectedDate) => {
+
+        console.log("here");
+        appoint.forEach(element => {
+            console.log(Date.parse(element.date));
+            console.log(element.date);
+        });
+
+        console.log(Date.parse(selectedDate) );
+        console.log(selectedDate);
+        setAppoint(appoint.filter(x => Date.parse((x.date)) >=  Date.parse(selectedDate) ));
+        console.log("appoint:");
+      // console.log(getDate(selectedDate));
+        // let s = appoint[0];
+        // console.log( Date.parse(s.date))
+        // setData(s.date);
+        //console.log(s.date);
+        //console.log(s.date.toUTCString());
+       // console.log(getDate(data));
+        console.log(appoint);
+        // getTheDay(x.date) <= getTheDay(selectedDate)
+        //&& selectedDate >= x.date
+    };
+
+    useEffect(() => {
         const fetchGets = async () => {
+
             const res = await axios.get('https://localhost:44345/api/Appointments');
-            setAppoint(appoint.filter( app=> app.date <= selectedDate));
-            console.log(res);
-        };
-
+            setAppoint(res.data);
+        }
+        if (selected === true) {
+        
+            getDates(selectedDate);
+        }
         fetchGets();
+    }, [selected]);
 
-}
-
-
-
+    
     return (
         <>
-            <div>aici {isSelected(selectedDate)}</div>
+            <div>aici </div>
             <DatePicker
                 selected={selectedDate}
                 onChange={date => {
                     setSelectedDate(date);
-                    getDates(date);
-                    console.log(appoint);
+                    setSelected(true);
+                   // getDates(selectedDate);
                 }}
-                
-            />
-            
-         <div > ok </div>
-            <div>
-            {appoint.map((appointment=> (
-                <div>
-                <RoundButton
-                    id={appointment.id}
-                    date={appointment.date}
-                    hours={appointment.hours}
 
-                />
-                </div>
-            )))}
-        </div>
+            />
+
+            <div > ok </div>
+            <ContainerForDates appoint={appoint} loading={selected} selectedDate={selectedDate} />
+
 
         </>
 
@@ -70,4 +79,4 @@ const SelectDate = () => {
 }
 
 
-export default SelectDate;
+export default Proba;

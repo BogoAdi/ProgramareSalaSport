@@ -33,7 +33,7 @@ const SportFields = () => {
     return (
         <div >
             <h1> SportFields</h1>
-            <Selector postsPerPage={3} />
+            <Selector postsPerPage={itemsPerPage} />
             <ItemCard sportField={currentPosts} loading={loading} />
             <Paginations
                 postsPerPage={postsPerPage}

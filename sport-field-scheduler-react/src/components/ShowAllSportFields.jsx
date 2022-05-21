@@ -30,8 +30,8 @@ const ShowAllSportFields = () => {
 
   return (
     <>
-      <MaterialTable columns={columns} data={data} title="SportFields" />
+     <MaterialTable columns={columns} data={data} title="SportFields" />
     </>
   );
 }
-export default ShowAllSportFields;/*  <MaterialTable title="Basic Table" columns={columns} data={data} />*/
+export default ShowAllSportFields;

@@ -27,7 +27,14 @@ const AppBarMenu = () => {
         handleCloseNavMenu();
         navigate('/sport-fields');
     }
-
+    const navAdminUsers = () => {
+        handleCloseNavMenu();
+        navigate('/show-all-users');
+    }
+    const navAllSportFields = () => {
+        handleCloseNavMenu();
+        navigate('/show-all-appointments');
+    }
     return (
         <AppBar position="static">
             <Container maxWidth="xl">
@@ -64,10 +71,10 @@ const AppBarMenu = () => {
                             <MenuItem onClick={navSportFields}>
                                 <Typography textAlign="center">Sport Fields</Typography>
                             </MenuItem>
-                            <MenuItem >
+                            <MenuItem onClick={navAdminUsers} >
                                 <Typography textAlign="center">Users</Typography>
                             </MenuItem>
-                            <MenuItem>
+                            <MenuItem onClick={navAllSportFields}>
                                 <Typography textAlign="center">Appointments</Typography>
                             </MenuItem>
                         </Menu>
@@ -80,10 +87,12 @@ const AppBarMenu = () => {
                         >Sport Fields
                         </Button>
                         <Button
+                            onClick={navAdminUsers}
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >Users
                         </Button>
                         <Button
+                            onClick={navAllSportFields}
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >Appointments
                         </Button>

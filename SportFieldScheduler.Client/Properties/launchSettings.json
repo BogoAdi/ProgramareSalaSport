@@ -1,21 +1,21 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:9595",
-      "sslPort": 44313
+      "applicationUrl": "http://localhost:49865/",
+      "sslPort": 44337
     }
   },
   "profiles": {
     "SportFieldScheduler.Client": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7039;http://localhost:5039",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
-      }
+      },
+      "applicationUrl": "https://localhost:7039;http://localhost:5039"
     },
     "IIS Express": {
       "commandName": "IISExpress",
