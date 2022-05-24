@@ -1,84 +1,86 @@
 
 import * as React from 'react';
 import 'react-datepicker/dist/react-datepicker.css'
-import DatePicker from 'react-datepicker';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
-
+import { Button, List } from "@mui/material";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import TextField from '@mui/material/TextField';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { useNavigate } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 const Proba = () => {
-
+    let { id } = useParams();
     const [selectedDate, setSelectedDate] = useState();
-    const [selected, setSelected] = useState(false);
-    const [allDates, setAllDates] = useState([]);
-    const [data, setData] =useState();
     const [appoint, setAppoint] = useState([]);
-
-
-    const getDates = (selectedDate) => {
-
-        console.log("here");
-        appoint.forEach(element => {
-            console.log(Date.parse(element.date));
-            console.log(element.date);
-        });
-
-        console.log(Date.parse(selectedDate) );
-        console.log(selectedDate);
-        setAppoint(appoint.filter(x => Date.parse((x.date)) >=  Date.parse(selectedDate) ));
-        console.log("appoint:");
-      // console.log(getDate(selectedDate));
-        // let s = appoint[0];
-        // console.log( Date.parse(s.date))
-        // setData(s.date);
-        //console.log(s.date);
-        //console.log(s.date.toUTCString());
-       // console.log(getDate(data));
-        console.log(appoint);
-        // getTheDay(x.date) <= getTheDay(selectedDate)
-        //&& selectedDate >= x.date
-    };
+    const [filteredData, setFilteredData] = useState();
 
     useEffect(() => {
+        console.log('useEffect')
         const fetchGets = async () => {
-
             const res = await axios.get('https://localhost:44345/api/Appointments');
             setAppoint(res.data);
         }
-        if (selected === true) {
-        
-            getDates(selectedDate);
-        }
-        fetchGets();
-    }, [selected]);
+        // if (selected === true) {
+        //     fetchGets();
+        //     getDates(selectedDate);
+        //     setSelected(false);
+        // }
 
-    
+        fetchGets();
+
+    }, []);
+
+    useEffect(() => {
+        const filterAppointment = appoint
+            .filter(x => Date.parse((x.date)) >= Date.parse(selectedDate))
+            .filter(x => x.sportFieldId === id);
+
+        setFilteredData(filterAppointment);
+        console.log("Filtered");
+        console.log(filterAppointment);
+        console.log(filteredData);
+    }, [selectedDate]);
+
+
     return (
         <>
-            <div>aici </div>
-            <DatePicker
-                selected={selectedDate}
-                onChange={date => {
-                    setSelectedDate(date);
-                    setSelected(true);
-                   // getDates(selectedDate);
-                }}
+            <div id="ContainerSetting" sx={{ m: 10 }}>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DesktopDatePicker
+                        label="Date_Time picker"
+                        value={selectedDate}
+                        onChange={date => {
+                            setSelectedDate(date);
+                            console.log("calendar");
+                            console.log(date);
+                        }}
+                        renderInput={(params) => <TextField {...params} />}
+                    />
+                </LocalizationProvider>
+                {filteredData &&
+                    <>
+                        <div>
+                            Taken dates :
+                        </div>
+                        <div>
+                            {filteredData.map((info, index) => (
+                                <Button key={index}>
+                                    {info.date}  for {info.hours} hours
 
-            />
+                                </Button>
+                            ))}
+                        </div>
+                    </>
+                }
 
-            <div > ok </div>
-          
-
+            </div>
         </>
 
     )
 
 
 }
-
-
 export default Proba;
-/* <ContainerForDates appoint={appoint} loading={selected} selectedDate={selectedDate} />
-import ContainerForDates from './ContainerForDates'; 
-*/

@@ -58,12 +58,6 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
-    numeric: false,
-    disablePadding: true,
-    label: 'Id',
-  },
-  {
     id: 'calories',
     numeric: false,
     date: true,
@@ -71,69 +65,56 @@ const headCells = [
     label: 'Date And Starting Hour',
   },
   {
-    id: 'fat',
+    id: 'totalPrice',
     numeric: true,
     disablePadding: false,
     label: 'totalPrice',
   },
   {
-    id: 'carbs',
+    id: 'SportField',
     numeric: false,
     disablePadding: false,
     label: 'Details About SportField',
   },
   {
-    id: 'protein',
+    id: 'User-Data',
     numeric: true,
     disablePadding: false,
     label: 'UserData',
   },
 ];
-
 function EnhancedTableHead(props) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
-    props;
+  const {  order, orderBy,  onRequestSort } =
+      props;
   const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
+      onRequestSort(event, property);
   };
 
   return (
-    <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          />
-        </TableCell>
-        {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
+      <TableHead>
+          <TableRow>
+              {headCells.map((headCell) => (
+                  <TableCell
+                      key={headCell.id}
+                      sortDirection={orderBy === headCell.id ? order : false}
+                      align="center"
+                  >
+                      <TableSortLabel
+                          active={orderBy === headCell.id}
+                          direction={orderBy === headCell.id ? order : 'asc'}
+                          onClick={createSortHandler(headCell.id)}
+                      >
+                          {headCell.label}
+                          {orderBy === headCell.id ? (
+                              <Box component="span" sx={visuallyHidden}>
+                                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                              </Box>
+                          ) : null}
+                      </TableSortLabel>
+                  </TableCell>
+              ))}
+          </TableRow>
+      </TableHead>
   );
 }
 
@@ -145,7 +126,6 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
-
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
@@ -179,21 +159,7 @@ const EnhancedTableToolbar = (props) => {
           All Appointmnents
         </Typography>
       )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
-    </Toolbar>
+  </Toolbar>
   );
 };
 
@@ -314,23 +280,6 @@ const ShowAppointments = () => {
                       key={data.id}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            'aria-labelledby': labelId,
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {data.id}
-                      </TableCell>
                       <TableCell align="right">{data.date}</TableCell>
                       <TableCell align="right">{data.totalPrice}</TableCell>
                       <TableCell align="right">{data.sportFieldId}</TableCell>

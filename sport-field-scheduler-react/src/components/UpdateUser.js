@@ -56,11 +56,16 @@ const UpdateUser = () => {
         fetchPosts();
     }, []);
 
-
+    const inputChange=(event)=>{
+        console.log("HERE   ");
+        console.log(user);
+        setUser({name:event.target.value,...user});
+        console.log(user);
+    }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <label >FullName</label><br />
-            <input type="text" defaultValue={user.name} name="name" {...register('name')} />
+            <input type="text" defaultValue={user.name} name="name"  onChange={inputChange} {...register('name')} />
             {errors.name && <p> {errors.name.message}</p>}<br />
 
             <label >Password</label><br />

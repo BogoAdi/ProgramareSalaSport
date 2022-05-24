@@ -12,7 +12,7 @@ namespace SportFieldScheduler.Application.QueryHandlers.Users
         {
             _users = users;
         }
-
+        
         public async Task<List<User>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
             return await _users.GetAllUsersAsync();
