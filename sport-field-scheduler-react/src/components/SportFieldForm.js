@@ -25,7 +25,7 @@ const SportFieldForm = () => {
         console.log(data);
 
         const fetchInfo = async () => {
-            const res = await axios.post('https://localhost:44345/api/SportFields', data);
+            const res = await axios.post('https://localhost:44360/api/SportFields', data);
             console.log(res);
         };
         fetchInfo();

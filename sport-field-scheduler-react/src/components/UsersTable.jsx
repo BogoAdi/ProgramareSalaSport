@@ -25,7 +25,7 @@ const UsersTable = () => {
 
   const DeleteItem = (itemID) => {
     const fetchInfo = async () => {
-      const res = await axios.delete(`https://localhost:44345/api/Users/${itemID}`);
+      const res = await axios.delete(`https://localhost:44360/api/Users/${itemID}`);
       if (res.status === 204) {
         setUsers(users.filter(user => user.id !== itemID));
       }
@@ -43,7 +43,7 @@ const UsersTable = () => {
 
   useEffect(() => {
     const fetchInfo = async () => {
-      const res = await axios.get('https://localhost:44345/api/Users');
+      const res = await axios.get('https://localhost:44360/api/Users');
       setUsers(res.data);
       console.log(res);
     };

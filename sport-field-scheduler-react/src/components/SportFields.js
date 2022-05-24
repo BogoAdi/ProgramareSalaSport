@@ -14,7 +14,7 @@ const SportFields = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             setLoading(true);
-            const res = await axios.get('https://localhost:44345/api/SportFields');
+            const res = await axios.get('https://localhost:44360/api/SportFields');
             setPosts(res.data);
             setLoading(false);
         };

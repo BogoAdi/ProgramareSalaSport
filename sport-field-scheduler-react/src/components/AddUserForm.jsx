@@ -26,7 +26,7 @@ const AddUserForm = () => {
         console.log(data);
         data.role= 0;
         const fetchInfo = async () => {
-            const res = await axios.post('https://localhost:44345/api/Users', data);
+            const res = await axios.post('https://localhost:44360/api/Users', data);
             console.log(res);
           };
           fetchInfo();

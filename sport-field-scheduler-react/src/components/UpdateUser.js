@@ -33,7 +33,7 @@ const UpdateUser = () => {
         console.log(data);
         data.role = 0;
         const fetchInfo = async () => {
-            const res = await axios.put(`https://localhost:44345/api/Users/${id}`, data);
+            const res = await axios.put(`https://localhost:44360/api/Users/${id}`, data);
             console.log(res);
         };
         fetchInfo();
@@ -49,7 +49,7 @@ const UpdateUser = () => {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const res = await axios.get(`https://localhost:44345/api/Users/${id}`);
+            const res = await axios.get(`https://localhost:44360/api/Users/${id}`);
             setUser(res.data);
         };
         console.log();

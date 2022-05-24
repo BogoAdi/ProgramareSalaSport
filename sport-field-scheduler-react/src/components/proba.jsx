@@ -8,7 +8,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import TextField from '@mui/material/TextField';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 
 import InputLabel from '@mui/material/InputLabel';
@@ -16,19 +15,38 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+
+
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+
+const Schema = yup.object().shape({
+    date: yup.date(),
+    hours: yup.number(),
+    sportFieldId: yup.string(),
+    userId: yup.string()
+})
 const Proba = () => {
     let { id } = useParams();
     const [selectedDate, setSelectedDate] = useState([]);
     const [appoint, setAppoint] = useState([]);
     const [filteredData, setFilteredData] = useState();
+
     const [username, setUsername] = useState([]);
     const [users, setUsers] = useState([]);
     const [time, setTime] = useState([]);
     const [finalDate, setFinalDate] = useState([]);
+
+    const { register, handleSubmit, formState: { errors }
+    } = useForm({
+        resolver: yupResolver(Schema)
+    });
     useEffect(() => {
         console.log('useEffect')
         const fetchGets = async () => {
-            const res = await axios.get('https://localhost:44345/api/Appointments');
+            const res = await axios.get('https://localhost:44360/api/Appointments');
             setAppoint(res.data);
         }
         // if (selected === true) {
@@ -56,7 +74,7 @@ const Proba = () => {
 
     useEffect(() => {
         const fetchGetUser = async () => {
-            const res = await axios.get('https://localhost:44345/api/Users');
+            const res = await axios.get('https://localhost:44360/api/Users');
             setUsers(res.data);
         }
         fetchGetUser();
@@ -98,8 +116,32 @@ const Proba = () => {
         console.log(finalDate);
     }, [finalDate]);
 
+
+    const CreateAnAppointment = data => {
+
+        const sendData = async () => {  
+            data.date = finalDate;
+            data.sportFieldId = id;
+            data.userId = username;
+            // console.log(data.userId);
+            // console.log(data.sportFieldId);
+            // console.log(data.date);
+            // console.log(data.hours);
+            const res = await axios.post('https://localhost:44360/api/Appointments', data);
+            console.log(res);
+           if(res.statusText === "Slot is not free "&& res.status === 400){
+                alert("The choose time span is not free. Please choose an appropriate slot");
+           }
+
+        };
+        console.log(data);
+        sendData();
+        
+
+    }
     return (
         <>
+        <p></p>
             <div id="ContainerSetting" sx={{ m: 10 }}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
@@ -165,11 +207,22 @@ const Proba = () => {
                             </LocalizationProvider>
 
                         </div>
-                        {time &&
-                            <Button onClick={() => { sendIt() }}>
-                                Aicea
-                            </Button>
+                        {time.length !== 0 && selectedDate.length !== 0 &&
+                            <>
+                                <div>
+                                    <form onSubmit={handleSubmit(CreateAnAppointment)}>
+                                        <label title="Hours" >Hours </label>
+                                        <br></br>
+                                        <input type="number" defaultValue="1" min="1" max="5"{...register('hours')} />
+                                        <Button> Create Appointment
+                                            <input type="submit" onClick={()=> sendIt()}/>
+                                        </Button>
+                                    </form>
+
+                                </div>
+                            </>
                         }
+
 
 
                     </>

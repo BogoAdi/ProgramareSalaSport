@@ -178,7 +178,7 @@ const ShowAppointments = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await axios.get('https://localhost:44345/api/Appointments');
+      const res = await axios.get('https://localhost:44360/api/Appointments');
       setDatas(res.data);
     };
 

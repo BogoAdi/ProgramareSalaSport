@@ -184,7 +184,7 @@ const ShowAllSportFields = () => {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const res = await axios.get('https://localhost:44345/api/SportFields');
+            const res = await axios.get('https://localhost:44360/api/SportFields');
             setData(res.data);
         };
 
