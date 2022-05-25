@@ -73,6 +73,7 @@ const Proba = () => {
     }, [selectedDate]);
 
     useEffect(() => {
+
         const fetchGetUser = async () => {
             const res = await axios.get('https://localhost:44360/api/Users');
             setUsers(res.data);
@@ -119,29 +120,34 @@ const Proba = () => {
 
     const CreateAnAppointment = data => {
 
-        const sendData = async () => {  
+        const sendData =  () => {
+            sendIt();
             data.date = finalDate;
+            //to move to UTC
+            data.date.setHours(finalDate.getHours() + 3);
+            //console.log(data.date);
             data.sportFieldId = id;
             data.userId = username;
             // console.log(data.userId);
             // console.log(data.sportFieldId);
             // console.log(data.date);
             // console.log(data.hours);
-            const res = await axios.post('https://localhost:44360/api/Appointments', data);
-            console.log(res);
-           if(res.statusText === "Slot is not free "&& res.status === 400){
-                alert("The choose time span is not free. Please choose an appropriate slot");
-           }
+            axios.post('https://localhost:44360/api/Appointments', data)
+                .then(res => {
+                    alert("Appointment created");
+                }).catch(err => {
+                    alert("The choose time span is not free. Please choose an appropriate slot");
+                });
 
         };
         console.log(data);
         sendData();
-        
+
 
     }
     return (
         <>
-        <p></p>
+            <p></p>
             <div id="ContainerSetting" sx={{ m: 10 }}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
@@ -202,6 +208,7 @@ const Proba = () => {
                                     label="Time"
                                     value={time}
                                     onChange={handleChangeTime}
+                                    
                                     renderInput={(params) => <TextField {...params} />}
                                 />
                             </LocalizationProvider>
@@ -213,9 +220,8 @@ const Proba = () => {
                                     <form onSubmit={handleSubmit(CreateAnAppointment)}>
                                         <label title="Hours" >Hours </label>
                                         <br></br>
-                                        <input type="number" defaultValue="1" min="1" max="5"{...register('hours')} />
-                                        <Button> Create Appointment
-                                            <input type="submit" onClick={()=> sendIt()}/>
+                                        <input type="number" defaultValue="1" min="1" max="5"{...register('hours')} /><p></p>
+                                        <Button type="submit" onClick={() => sendIt()}> Create Appointment
                                         </Button>
                                     </form>
 

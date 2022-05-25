@@ -8,8 +8,6 @@
         public DateTime Date { get; set; }
         public int Hours { get; set; }
         public double TotalPrice { get; set; }
-        public string ClientName { get; set; }
-        public string PhoneNumber { get; set; }
 
 
     }

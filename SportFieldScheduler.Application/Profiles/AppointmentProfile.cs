@@ -10,9 +10,7 @@ namespace SportFieldScheduler.Application.Profiles
         public AppointmentProfile()
         {
 
-            CreateMap<AppointmentPostDto, CreateAppointmentCommand>()
-                .ForMember(dest => dest.IdField, act => act.MapFrom(src => src.SportFieldId))
-                .ForMember(dest => dest.IdUser, act => act.MapFrom(src => src.UserId));
+            CreateMap<AppointmentPostDto, CreateAppointmentCommand>();
             CreateMap<Appointment, AppointmentGetDto>();
         }
     }

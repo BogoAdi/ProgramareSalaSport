@@ -46,12 +46,9 @@ namespace SportFieldScheduler.Api.Controllers
             var appointemt = await _mediator.Send(new CreateAppointmentCommand
             {
                 Id=Guid.NewGuid(),
-                IdField= SportFiled1.Id,
-                IdUser= userId2.Id,
+                
                 Hours=2,
-                ClientName="Grigorescu Mihai",
                 Date=DateTime.Now,
-                PhoneNumber="075503213",
                 TotalPrice= 0 ///????
             });
 
