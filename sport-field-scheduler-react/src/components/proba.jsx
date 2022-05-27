@@ -10,6 +10,7 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useParams } from "react-router-dom";
 
+import { Link } from 'react-router-dom';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -120,7 +121,7 @@ const Proba = () => {
 
     const CreateAnAppointment = data => {
 
-        const sendData =  () => {
+        const sendData = () => {
             sendIt();
             data.date = finalDate;
             //to move to UTC
@@ -147,6 +148,12 @@ const Proba = () => {
     }
     return (
         <>
+            <div id="Show table">
+                <Link to={`/see-scheduler/${id}`}>
+                    <Button >See all time slots
+                    </Button>
+                </Link>
+            </div>
             <p></p>
             <div id="ContainerSetting" sx={{ m: 10 }}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -169,7 +176,7 @@ const Proba = () => {
                         <div>
                             {filteredData.map((info, index) => (
                                 <Button key={index}>
-                                    {info.date}  for {info.hours} hours
+                                    {info.date}  for {info.hours} hours {info.sportField.name}
 
                                 </Button>
                             ))}
@@ -208,7 +215,7 @@ const Proba = () => {
                                     label="Time"
                                     value={time}
                                     onChange={handleChangeTime}
-                                    
+
                                     renderInput={(params) => <TextField {...params} />}
                                 />
                             </LocalizationProvider>

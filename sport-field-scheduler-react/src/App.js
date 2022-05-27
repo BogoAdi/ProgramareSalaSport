@@ -12,6 +12,7 @@ import Proba from "./components/proba";
 import SportFieldForm from "./components/SportFieldForm";
 import UpdateUser from "./components/UpdateUser";
 import AppointmentsCalendar from "./components/AppointmentsCalendar";
+import SeeScheduler from "./components/SeeScheduler";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/sport-field-form" exact element={<SportFieldForm />} />
         <Route path="/update-user-form/:id" exact element={<UpdateUser />} />
         <Route path="/appointments-calendar" element={<AppointmentsCalendar/>}/>
+        <Route path="/see-scheduler/:id" element={<SeeScheduler/>}/>
       </Routes>
     </Layout>
   );
