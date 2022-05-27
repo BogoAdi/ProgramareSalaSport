@@ -11,12 +11,14 @@ import "./custom.css";
 import Proba from "./components/proba";
 import SportFieldForm from "./components/SportFieldForm";
 import UpdateUser from "./components/UpdateUser";
+import AppointmentsCalendar from "./components/AppointmentsCalendar";
+
 
 function App() {
   return (
     <Layout>
       <Routes>
-        <Route exact path="/"  element={<Home />} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/sport-fields" exact element={<SportFields />} />
         <Route path="/show-all-appointments" exact element={<ShowAppointments />} />
         <Route path="/show-all-users" exact element={<ShowUsers />} />
@@ -25,7 +27,7 @@ function App() {
         <Route path="/select-date/:id" exact element={<Proba />} />
         <Route path="/sport-field-form" exact element={<SportFieldForm />} />
         <Route path="/update-user-form/:id" exact element={<UpdateUser />} />
-        
+        <Route path="/appointments-calendar" element={<AppointmentsCalendar/>}/>
       </Routes>
     </Layout>
   );
