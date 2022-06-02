@@ -43,8 +43,8 @@ const SeeScheduler = ({ selectedUserId }) => {
                         endDate: (t),
                         sportFieldId: element.sportFieldId,
                         userId: element.userId,
-                        TotalPrice: element.totalPrice,
-                        Hours: element.hours
+                        totalPrice: element.totalPrice,
+                        hours: element.hours
                     }
 
 
@@ -129,7 +129,7 @@ const SeeScheduler = ({ selectedUserId }) => {
 
 
             </div>
-            <AppointmentsCalendar selectedSportFieldId={id} dates={dates} />
+            <AppointmentsCalendar selectedSportFieldId={id} dates={dates} userId={"a2baf7ff-5b66-4c32-95d7-b6b9f7882589"} />
         </>
     )
 
