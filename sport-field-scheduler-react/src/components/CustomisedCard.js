@@ -7,11 +7,31 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 
+import AppointmentsCalendar from './AppointmentsCalendar';
+import { useParams } from "react-router-dom";
 
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function ImgMediaCard(props) {
-  
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+
+  };
+
   return (
     <Card sx={{
       minWidth: '15%',
@@ -50,8 +70,31 @@ export default function ImgMediaCard(props) {
         <Link to={`/see-scheduler/${props.id}`}>
           <Button size="small">See scheduler   </Button>
         </Link>
-        <Button size="small">Learn More</Button>
+        <Button size="small" onClick={handleClickOpen}>
+          Learn More
+        </Button>
+        <Dialog
+          fullScreen={fullScreen}
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="responsive-dialog-title"
+        >
+          <DialogTitle id="responsive-dialog-title">
+            {props.name}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {props.description}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={handleClose}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
+
       </CardActions>
-    </Card>
+    </Card >
   );
 }
