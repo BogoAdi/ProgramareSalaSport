@@ -99,13 +99,7 @@ const Proba = ({pushAppointment,succesfullAppointment}) => {
     };
     return (
         <>
-            <div id="Show table">
-                <Link to={`/see-scheduler/${id}`}>
-                    <Button >See all time slots
-                    </Button>
-                </Link>
-            </div>
-            <p></p>
+        <br/>
             <div id="ContainerSetting" sx={{ m: 10 }}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DateTimePicker
@@ -150,7 +144,7 @@ const Proba = ({pushAppointment,succesfullAppointment}) => {
                                 <br></br>
                                 <input type="number" defaultValue="1" min="1" max="5"{...register('hours')}
                                 onChange={handleTotalPrice}
-                                /><p></p>
+                                /><br/>
                                 <div >Total Price  {totalPrice}
                                 </div>
                                 <Button type="submit"> Create Appointment

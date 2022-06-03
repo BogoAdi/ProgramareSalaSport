@@ -10,6 +10,13 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 
+import IconButton from '@mui/material/IconButton';
+import MoreIcon from '@mui/icons-material/MoreVert';
+import Grid from '@mui/material/Grid';
+import Room from '@mui/icons-material/Room';
+import classNames from 'clsx';
+import { styled } from '@mui/material/styles';
+
 const AppointmentsCalendar = ({ dates, userId }) => {
 
   const [currentDate, setCurrentDate] = useState(Date.now());
@@ -37,7 +44,7 @@ const AppointmentsCalendar = ({ dates, userId }) => {
         hours: element.hours,
         color: colour
       }
-      console.log(newData);
+      //console.log(newData);
       array.push(newData);
     });
     setModifiedAppointments(array);
@@ -55,13 +62,13 @@ const AppointmentsCalendar = ({ dates, userId }) => {
     >
       {children}
     </Appointments.Appointment>
-    
+
   );
 
 
 
   // const AppointmentTooltip = (props) =>{
-    
+
   //     return (
   //       <div className="movie-tooltip">
   //         <div className="movie-info">
@@ -78,7 +85,20 @@ const AppointmentsCalendar = ({ dates, userId }) => {
   //       </div>
   //     );
   // }
-  
+
+  const Content = (() => (
+      <Grid container spacing={2} alignItems="center">
+        <div  xs={12} >
+         Starting date {modifiedAppointments.startDate}
+        </div>
+        <Grid item xs={10}>
+          <span>{modifiedAppointments.endDate}</span>
+        </Grid>
+      </Grid>
+  ));
+
+
+
 
 
   return (
@@ -121,8 +141,8 @@ const AppointmentsCalendar = ({ dates, userId }) => {
           appointmentComponent={Appointment}
         />
         <AppointmentTooltip
-          showOpenButton
           showDeleteButton
+          showCloseButton
         />
       </Scheduler>
 
