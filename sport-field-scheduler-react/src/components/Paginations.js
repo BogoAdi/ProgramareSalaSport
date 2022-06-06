@@ -2,6 +2,7 @@ import React from 'react'
 
 import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
+import { Box } from '@mui/system';
 
 const Paginations = ({ postsPerPage, totalPosts, paginate }) => {
     const pageNumbers = [];
@@ -14,9 +15,14 @@ const Paginations = ({ postsPerPage, totalPosts, paginate }) => {
         paginate(value);
     }
     return (
-        <Stack spacing={1}>
-            <Pagination count={pageNumbers.length} size="large" color="primary" onChange={afffectedByChange} />
-        </Stack>
+        <>
+            <Box display="flex" alignItems="center" sx={{mb: 2}}>
+                <Stack spacing={1}>
+                    <Pagination count={pageNumbers.length} size="large" color="primary" onChange={afffectedByChange} />
+                </Stack>
+            </Box>
+
+        </>
     )
 };
 export default Paginations;

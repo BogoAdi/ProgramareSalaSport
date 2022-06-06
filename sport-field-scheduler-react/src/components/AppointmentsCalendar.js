@@ -10,6 +10,7 @@ import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 
+
 import IconButton from '@mui/material/IconButton';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Grid from '@mui/material/Grid';
@@ -55,6 +56,7 @@ const AppointmentsCalendar = ({ dates, userId }) => {
   const Appointment = ({ children, style, data, ...restProps }) => (
     <Appointments.Appointment
       {...restProps}
+      
       style={{
         ...style,
         backgroundColor: data.color
@@ -66,46 +68,15 @@ const AppointmentsCalendar = ({ dates, userId }) => {
   );
 
 
-
-  // const AppointmentTooltip = (props) =>{
-
-  //     return (
-  //       <div className="movie-tooltip">
-  //         <div className="movie-info">
-  //           <div className="movie-title">
-  //             {props.startDate} -{props.endDate}
-  //           </div>
-  //           <div>
-  //             Price: {props.totalPrice}
-  //           </div>
-  //           <div>
-  //             hours: {props.hours} 
-  //           </div>
-  //         </div>
-  //       </div>
-  //     );
-  // }
-
-  const Content = (() => (
-    <Grid container spacing={2} alignItems="center">
-      <div xs={12} >
-        Starting date {modifiedAppointments.startDate}
-      </div>
-      <Grid item xs={10}>
-        <span>{modifiedAppointments.endDate}</span>
-      </Grid>
-    </Grid>
-  ));
-
   const deleteAppointments = (data) => {
     console.log(data.id);
   }
 
- const commitChanges=({  deleted })=> {
+  const commitChanges = ({ deleted }) => {
     this.setState((state) => {
       let { data } = state;
       if (deleted === data) {
-       // data = data.filter(appointment => appointment.id !== deleted);
+        // data = data.filter(appointment => appointment.id !== deleted);
         console.log(data.filter(appointment => appointment.id !== deleted));
       }
       // return { data };
@@ -142,11 +113,12 @@ const AppointmentsCalendar = ({ dates, userId }) => {
         <EditingState
           onCommitChanges={commitChanges}
         >
-          </EditingState>
-          <IntegratedEditing />
+        </EditingState>
+        <IntegratedEditing />
         <WeekView
-          startDayHour={8}
-          endDayHour={20}
+          cellDuration={60}
+          startDayHour={6}
+          endDayHour={22}
         />
 
         <Appointments
