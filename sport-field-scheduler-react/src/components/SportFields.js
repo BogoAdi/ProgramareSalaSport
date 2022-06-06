@@ -4,6 +4,8 @@ import axios from 'axios';
 import ItemCard from './ItemCard';
 import Selector from './Selector';
 import SearchBar from './SearchBar';
+import { Box } from '@mui/system';
+import { Button } from '@mui/material';
 
 const SportFields = () => {
     const [posts, setPosts] = useState([]);
@@ -11,7 +13,7 @@ const SportFields = () => {
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage, setPostsPerPage] = useState(4);
-    const [searchLength, setSearchLength] = useState(0);
+    const [categories, setCategories] = useState([]);
     useEffect(() => {
         const fetchPosts = async () => {
             setLoading(true);
@@ -22,8 +24,25 @@ const SportFields = () => {
         };
 
         fetchPosts();
-       
+
+
     }, []);
+
+
+    useEffect(() => {
+        const getAllCategories = () => {
+            let array = [];
+            posts.forEach(element => {
+                const t = array.find(data => data === element.category);
+                if (t === undefined)
+                    array.push(element.category);
+
+            });
+            // console.log(array);
+            setCategories(array);
+        }
+        getAllCategories();
+    }, [posts]);
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -33,7 +52,7 @@ const SportFields = () => {
     const paginate = pageNumber => setCurrentPage(pageNumber);
     const itemsPerPage = nr => setPostsPerPage(nr);
     const handleChanges = (value) => {
-        console.log(value);  
+        console.log(value);
         setFilterPosts(posts.filter(fields => fields.name.includes(value)));
     }
     return (
@@ -43,6 +62,19 @@ const SportFields = () => {
             <SearchBar placeholder="search..." onChange={(event) => handleChanges(event.target.value)} />
             <Selector postsPerPage={itemsPerPage} />
             <ItemCard sportField={currentPosts} loading={loading} />
+            <Box>
+                <Button onClick={() => setFilterPosts(posts)}>All
+                </Button>
+                {categories.map((item, index) => (
+                    <Button key={index}
+                        onClick={() => setFilterPosts(posts.filter(element => element.category === item))}
+                    >
+                        {item}
+
+                    </Button>
+                ))
+                }
+            </Box>
             <Paginations
                 postsPerPage={postsPerPage}
                 totalPosts={filterPosts.length}

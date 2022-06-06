@@ -35,6 +35,8 @@ export default function ImgMediaCard(props) {
   return (
     <Card sx={{
       margin: '5%',
+      heigth: "300",
+      width: "250",
       animation: 'ease-in-out',
       borderRadius: 3,
       shadow: '0px 0px 15px -5px',
