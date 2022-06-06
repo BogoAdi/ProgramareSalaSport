@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 import AppointmentsCalendar from './AppointmentsCalendar';
 import { useParams } from "react-router-dom";
-
+import Box from '@mui/material/Box';
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -34,10 +34,9 @@ export default function ImgMediaCard(props) {
 
   return (
     <Card sx={{
-      minWidth: '15%',
-      maxWidth: '15%',
-      margin: '2%',
+      margin: '5%',
       animation: 'ease-in-out',
+      borderRadius: 3,
       shadow: '0px 0px 15px -5px',
       display: 'inline-block',
       '& .MuiCardMedia-img': {
@@ -55,45 +54,53 @@ export default function ImgMediaCard(props) {
         image={props.image}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {props.name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {props.price} RON
-        </Typography>
-        <Typography variant="body" color="text.secondary">
-          {props.city}
-        </Typography>
-
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Typography gutterBottom variant="h5" component="div">
+              {props.name}
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Typography variant="body2" color="text.secondary">
+              {props.price} RON
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Typography variant="body" color="text.secondary">
+              {props.city}
+            </Typography>
+          </Box>
       </CardContent>
       <CardActions>
-        <Link to={`/see-scheduler/${props.id}`}>
-          <Button size="small">See scheduler   </Button>
-        </Link>
-        <Button size="small" onClick={handleClickOpen}>
-          Learn More
-        </Button>
-        <Dialog
-          fullScreen={fullScreen}
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="responsive-dialog-title"
-        >
-          <DialogTitle id="responsive-dialog-title">
-            {props.name}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              {props.description}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleClose}>
-              Cancel
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Link to={`/see-scheduler/${props.id}`}>
+              <Button size="small">See scheduler   </Button>
+            </Link>
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Button size="small" onClick={handleClickOpen}>
+              Learn More
             </Button>
-          </DialogActions>
-        </Dialog>
-
+          </Box>
+          <Dialog
+            fullScreen={fullScreen}
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="responsive-dialog-title"
+          >
+            <DialogTitle id="responsive-dialog-title">
+              {props.name}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                {props.description}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button autoFocus onClick={handleClose}>
+                Cancel
+              </Button>
+            </DialogActions>
+          </Dialog>
       </CardActions>
     </Card >
   );
