@@ -23,7 +23,7 @@ const SeeScheduler = ({ selectedUserId }) => {
     const theme = useTheme();
     const [dates, setDates] = useState([]);
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-    const [allAppointments, setAllAppointments] =useState([]);
+    const [allAppointments, setAllAppointments] = useState([]);
     useEffect(() => {
         const getAppointments = async () => {
             const res = await axios.get('https://localhost:44360/api/Appointments');
@@ -60,12 +60,6 @@ const SeeScheduler = ({ selectedUserId }) => {
 
     }, [allAppointments]);
 
-
-    // useEffect(() => {
-    //     console.log(dates);
-    // }, [dates])
-
-    //const [state, SetState]=useState(false);
     const handleClickOpen = () => {
         setOpen(true);
     };

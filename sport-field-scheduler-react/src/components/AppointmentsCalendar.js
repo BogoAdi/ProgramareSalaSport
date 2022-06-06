@@ -87,20 +87,30 @@ const AppointmentsCalendar = ({ dates, userId }) => {
   // }
 
   const Content = (() => (
-      <Grid container spacing={2} alignItems="center">
-        <div  xs={12} >
-         Starting date {modifiedAppointments.startDate}
-        </div>
-        <Grid item xs={10}>
-          <span>{modifiedAppointments.endDate}</span>
-        </Grid>
+    <Grid container spacing={2} alignItems="center">
+      <div xs={12} >
+        Starting date {modifiedAppointments.startDate}
+      </div>
+      <Grid item xs={10}>
+        <span>{modifiedAppointments.endDate}</span>
       </Grid>
+    </Grid>
   ));
 
+  const deleteAppointments = (data) => {
+    console.log(data.id);
+  }
 
-
-
-
+ const commitChanges=({  deleted })=> {
+    this.setState((state) => {
+      let { data } = state;
+      if (deleted === data) {
+       // data = data.filter(appointment => appointment.id !== deleted);
+        console.log(data.filter(appointment => appointment.id !== deleted));
+      }
+      // return { data };
+    });
+  }
   return (
     <>
       <div id="topSize" sx=" display: flex;">
@@ -130,8 +140,10 @@ const AppointmentsCalendar = ({ dates, userId }) => {
           currentDate={currentDate}
         />
         <EditingState
-
-        />
+          onCommitChanges={commitChanges}
+        >
+          </EditingState>
+          <IntegratedEditing />
         <WeekView
           startDayHour={8}
           endDayHour={20}
