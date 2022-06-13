@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const Schema = yup.object().shape({
     name: yup.string().required('Please fill this field'),
@@ -11,8 +12,8 @@ const Schema = yup.object().shape({
     city: yup.string().required("Please fill this field!"),
     pricePerHour: yup.number().required('Please fill this field'),
     category: yup.string().required('Please fill this field'),
-    description: yup.string(),
-    img: yup.string().required('Please fill this field')
+    description: yup.string().required('Please fill this field'),
+    img: yup.string(),
 })
 
 const SportFieldForm = () => {
@@ -21,53 +22,118 @@ const SportFieldForm = () => {
         resolver: yupResolver(Schema)
     });
 
-    const onSubmit = data => {
-        console.log(data);
+    // const onSubmit = data => {
+    //     console.log(data);
 
-        const fetchInfo = async () => {
-            const res = await axios.post('https://localhost:44360/api/SportFields', data);
-            console.log(res);
-        };
-        fetchInfo();
-        /*, {config: { headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json' 
-        }}
-      }*/
+    //     const fetchInfo = async () => {
+    //         const res = await axios.post('https://localhost:44360/api/SportFields', data);
+    //         console.log(res);
+    //     };
+    //     fetchInfo();
+    //     /*, {config: { headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json' 
+    //     }}
+    //   }*/
+    // }
+
+    const [picture, setPicture] = useState({});
+    const [photo, setPhoto] = useState({});
+    const uploadPicture = (e) => {
+        setPicture({
+            /* contains the preview, if you want to show the picture to the user
+                 you can access it with this.state.currentPicture
+             */
+            picturePreview: URL.createObjectURL(e.target.files[0]),
+            /* this contains the file we want to send */
+            pictureAsFile: e.target.files[0],
+        });
+
+
+
+    };
+    useEffect(() => {
+        setPhoto(picture.picturePreview);
+    }, [picture]);
+
+    // const onSubmit = data => {
+    const setImageAction = async (data) => {
+
+        const formData = new FormData();
+        formData.append("file", picture.pictureAsFile);
+        console.log(picture.pictureAsFile);
+
+        await axios(
+            {
+                url: "https://localhost:44360/api/UploadPicture",
+                method: "POST",
+                data: formData
+            }
+        ).then(res => { 
+            const vali = res.request.response.slice(1,-1);
+            data.img=vali;
+            console.log(res.request.response);
+        })
+
+            .catch(err => {
+                alert("Error uploading the file");
+            });
+        fetchInfo(data);
     }
+
+    const fetchInfo = async (data) => {
+        console.log(data);
+        const res = await axios.post('https://localhost:44360/api/SportFields', data);
+        console.log(res);
+    };
+
+
+
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <label >FullName</label><br />
-            <input type="text" placeholder="FullName" name="name" {...register('name')} />
-            {errors.name && <p> {errors.name.message}</p>}<br />
+        <>
+            <form onSubmit={handleSubmit(setImageAction)}>
+                <label >FullName</label><br />
+                <input type="text" placeholder="FullName" name="name" {...register('name')} />
+                {errors.name && <p> {errors.name.message}</p>}<br />
 
-            <label >Address</label><br />
-            <input type="text" placeholder="str nb..." name="address"{...register('address')} />
-            {errors.address && <p >{errors.address.message}</p>} <br />
+                <label >Address</label><br />
+                <input type="text" placeholder="str nb..." name="address"{...register('address')} />
+                {errors.address && <p >{errors.address.message}</p>} <br />
 
-            <label >City</label><br />
-            <input type="text" placeholder="Paris" name="city"{...register('city')} />
-            {errors.city && <p >{errors.city.message}</p>} <br />
+                <label >City</label><br />
+                <input type="text" placeholder="Paris" name="city"{...register('city')} />
+                {errors.city && <p >{errors.city.message}</p>} <br />
 
-            <label >pricePerHour</label><br />
-            <input type="number" placeholder="200" name="pricePerHour" {...register('pricePerHour')} />
-            {errors.pricePerHour && <p> {errors.pricePerHour.message}</p>}  <br />
+                <label >pricePerHour</label><br />
+                <input type="number" placeholder="200" name="pricePerHour" {...register('pricePerHour')} />
+                {errors.pricePerHour && <p> {errors.pricePerHour.message}</p>}  <br />
 
-            <label >Photo</label><br />
-            <input type="text" placeholder="...." name="img" {...register('img')} />
-            {errors.img && <p> {errors.img.message}</p>} <br />
+                {/* <label >Photo</label><br />
+                <input type="text" placeholder="...." name="img" {...register('img')} />
+                {errors.img && <p> {errors.img.message}</p>} <br /> */}
+                <label >Picture</label><br />
+                <div className="content landing">
+                    <input type="file" name="image" onChange={uploadPicture} />
+                    <br />
+                    <br />
+                    <img src={photo} alt="0" />
+                </div>
 
-            <label >Category</label><br />
-            <input type="text" placeholder="...." name="category" {...register('category')} />
-            {errors.category && <p> {errors.category.message}</p>} <br />
+
+                <label >Category</label><br />
+                <input type="text" placeholder="...." name="category" {...register('category')} />
+                {errors.category && <p> {errors.category.message}</p>} <br />
 
 
-            <label >description</label><br />
-            <textarea type="text" placeholder="...." name="description" {...register('description')} />
-            {errors.description && <p> {errors.description.message}</p>} <br />
+                <label >description</label><br />
+                <textarea type="text" placeholder="...." name="description" {...register('description')} />
+                {errors.description && <p> {errors.description.message}</p>} <br />
 
-            <input  type="submit"/> 
-        </form>
+                <Button type="submit"> Add new sportfield
+                </Button>
+            </form>
+
+        </>
     );
 
 }
