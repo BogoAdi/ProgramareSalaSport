@@ -1,3 +1,4 @@
+using Azure.Storage.Blobs;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +34,9 @@ builder.Services.AddAutoMapper(typeof(Marker));
 
 var cs = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(cs));
+
+var csb = builder.Configuration.GetValue<string>("StorageConnectionString");
+builder.Services.AddSingleton(IServiceProvider => new BlobServiceClient(csb));
 
 builder.Services.AddScoped<IUserRepository,UserRepository>();
 builder.Services.AddScoped<ISportFieldRepository, SportFieldRepository>();
