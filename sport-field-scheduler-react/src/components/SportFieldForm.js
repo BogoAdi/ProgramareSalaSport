@@ -22,21 +22,6 @@ const SportFieldForm = () => {
         resolver: yupResolver(Schema)
     });
 
-    // const onSubmit = data => {
-    //     console.log(data);
-
-    //     const fetchInfo = async () => {
-    //         const res = await axios.post('https://localhost:44360/api/SportFields', data);
-    //         console.log(res);
-    //     };
-    //     fetchInfo();
-    //     /*, {config: { headers: {
-    //       'Accept': 'application/json',
-    //       'Content-Type': 'application/json' 
-    //     }}
-    //   }*/
-    // }
-
     const [picture, setPicture] = useState({});
     const [photo, setPhoto] = useState({});
     const uploadPicture = (e) => {
@@ -56,7 +41,6 @@ const SportFieldForm = () => {
         setPhoto(picture.picturePreview);
     }, [picture]);
 
-    // const onSubmit = data => {
     const setImageAction = async (data) => {
 
         const formData = new FormData();
@@ -108,9 +92,7 @@ const SportFieldForm = () => {
                 <input type="number" placeholder="200" name="pricePerHour" {...register('pricePerHour')} />
                 {errors.pricePerHour && <p> {errors.pricePerHour.message}</p>}  <br />
 
-                {/* <label >Photo</label><br />
-                <input type="text" placeholder="...." name="img" {...register('img')} />
-                {errors.img && <p> {errors.img.message}</p>} <br /> */}
+                
                 <label >Picture</label><br />
                 <div className="content landing">
                     <input type="file" name="image" onChange={uploadPicture} />

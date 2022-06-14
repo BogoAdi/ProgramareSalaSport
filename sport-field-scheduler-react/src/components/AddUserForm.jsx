@@ -4,6 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
 
 const Schema = yup.object().shape({
     name: yup.string().required('Please fill this field'),
@@ -24,45 +27,103 @@ const AddUserForm = () => {
 
     const onSubmit = data => {
         console.log(data);
-        data.role= 0;
+        data.role = 0;
         const fetchInfo = async () => {
             const res = await axios.post('https://localhost:44360/api/Users', data);
             console.log(res);
-          };
-          fetchInfo();
-          /*, {config: { headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json' 
-          }}
-        }*/
+        };
+        fetchInfo();
+        /*, {config: { headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json' 
+        }}
+      }*/
     }
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <label >FullName</label><br />
-            <input type="text" placeholder="FullName" name="name" {...register('name')} />
-            {errors.name && <p> {errors.name.message}</p>}<br />
+        <>
 
-            <label >Password</label><br />
-            <input type="password" placeholder="Password" name="password"{...register('password')} />
-            {errors.password && <p className="Form">{errors.password.message}</p>} <br />
+            <Container maxWidth="sm">
+                <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center">
+                    <h2>
+                        Update User
+                    </h2>
+                </Box>
+                <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    sx={{ height: '65vh' }}
+                >
 
-            <label >Email</label><br />
-            <input type="email" placeholder="Email" name="email"{...register('email')} />
-            {errors.email && <p className="Form">{errors.email.message}</p>} <br />
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <label >FullName</label><br />
+                        <TextField
+                            required
+                            inputProps={{
+                                'aria-label': 'weight',
+                            }}
+                            name="name"
+                            {...register('name')}
+                        />
 
-            <label >Username</label><br />
-            <input type="text" placeholder="Username" name="username" {...register('username')} />
-            {errors.username && <p> {errors.username.message}</p>}  <br />
+                        <br />
 
-            <label >Phonenumber</label><br />
-            <input type="string" placeholder="Phonenumber" name="phonenumber" {...register('phonenumber')} />
-            {errors.phonenumber && <p> {errors.phonenumber.message}</p>} <br />
+                        <label >Password</label><br />
+                        <TextField
+                            required
+                            type="password"
 
-            
-            <Button  type="submit"> Add new User
-            </Button>
-        </form>
+                            inputProps={{
+                                'aria-label': 'weight',
+                            }}
+                            name="password"
+                            {...register('password')}
+                        />
+                        {errors.password && <p className="Form">{errors.password.message}</p>} <br />
+
+                        <label >Email</label><br />
+                        <TextField
+                            required
+                            type="email"
+
+                            name="email"
+                            {...register('email')}
+                        />
+                        {errors.email && <p className="Form">{errors.email.message}</p>} <br />
+
+                        <label >Username</label><br />
+                        <TextField
+                            required
+                            type="text"
+
+                            name="username"
+                            {...register('username')}
+                        />
+                        {errors.username && <p> {errors.username.message}</p>}  <br />
+
+                        <label >Phonenumber</label><br />
+                        <TextField
+                            required
+                            type="text"
+
+                            name="phoneNumber"
+                            {...register('phoneNumber')}
+                        />
+                        {errors.phoneNumber && <p> {errors.phoneNumber.message}</p>} <br />
+
+
+                        <Button type="submit"> Save Changes
+                        </Button>
+                    </form>
+                </Box>
+            </Container>
+
+        </>
     );
+
 
 }
 export default AddUserForm;
