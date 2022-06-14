@@ -40,19 +40,24 @@ const UpdateSportField = () => {
             pictureAsFile: e.target.files[0],
         });
 
-
+        console.log(picture);
 
     };
+
     useEffect(() => {
         setPhoto(picture.picturePreview);
+        console.log(picture);
     }, [picture]);
 
     const setImageAction = async (data) => {
-        if (picture !== data.img ) {
+        // console.log(data);
+        // console.log(picture.pictureAsFile);
+
+        if (picture.pictureAsFile !== undefined) {
+            console.log(picture.pictureAsFile);
             const formData = new FormData();
             formData.append("file", picture.pictureAsFile);
-            console.log(picture.pictureAsFile);
-
+            
             await axios(
                 {
                     url: "https://localhost:44360/api/UploadPicture",
@@ -63,6 +68,7 @@ const UpdateSportField = () => {
                 const url = res.request.response.slice(1, -1);
                 data.img = url;
                 console.log(res.request.response);
+                onSubmit(data);
             })
 
                 .catch(err => {
@@ -70,18 +76,12 @@ const UpdateSportField = () => {
                 });
 
         }
-        if (data !== undefined) {
-            fetchInfo(data);
+        else {
+            data.img = sportfield.img;
+            console.log(data);
+            onSubmit(data);
         }
-
     }
-
-    const fetchInfo = async (data) => {
-        console.log(data);
-        const res = await axios.put(`https://localhost:44360/api/SportFields/${id}`, data);
-        console.log(res);
-    };
-
 
     const [sportfield, setSportfield] = useState();
 
@@ -96,18 +96,21 @@ const UpdateSportField = () => {
 
 
     }, []);
-
+    const [useSwitch, setUseSwitch] = useState(false);
     useEffect(() => {
-        if (sportfield !== undefined) {
+        if (sportfield !== undefined && useSwitch !== true) {
             setPhoto(sportfield.img);
+            setUseSwitch(true);
+            console.log(picture);
         }
+        //uploadPicture();
         console.log(sportfield);
     }, [sportfield])
 
     const navigate = useNavigate();
 
     function ReturnBack() {
-        navigate('/show-all-users');
+        navigate('/show-all-sport-fields');
     }
     const onSubmit = data => {
 
@@ -116,7 +119,7 @@ const UpdateSportField = () => {
             console.log(res);
         };
         fetchInfo();
-        ReturnBack();
+        //ReturnBack();
     }
     return (
         <>

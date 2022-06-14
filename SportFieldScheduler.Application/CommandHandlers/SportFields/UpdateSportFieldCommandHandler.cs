@@ -27,6 +27,8 @@ namespace SportFieldScheduler.Application.CommandHandlers.SportFields
                 PricePerHour = command.PricePerHour,
                 Category = command.Category,
                 Description = command.Description,
+                Img =command.Img,
+                Name = command.Name,
                 Appointments = new List<Appointment>()
 
             };

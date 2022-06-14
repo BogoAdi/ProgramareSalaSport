@@ -79,7 +79,8 @@ namespace SportFieldScheduler.Api.Controllers
                 City = sportfield.City,
                 Description = sportfield.Description,
                 PricePerHour = sportfield.PricePerHour,
-                Img = sportfield.Img
+                Img = sportfield.Img,
+                Name = sportfield.Name
                 };
             var result = await _mediator.Send(command);
             if (result == null)
