@@ -36,7 +36,6 @@ const UsersTable = () => {
 
   }
   const UpdateAction = (userId) => {
-    
     navigate(`/update-user-form/${userId}`);
 
   };

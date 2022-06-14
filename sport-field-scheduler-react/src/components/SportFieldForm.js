@@ -57,12 +57,13 @@ const SportFieldForm = () => {
             const vali = res.request.response.slice(1,-1);
             data.img=vali;
             console.log(res.request.response);
+            fetchInfo(data);
         })
 
             .catch(err => {
                 alert("Error uploading the file");
             });
-        fetchInfo(data);
+       
     }
 
     const fetchInfo = async (data) => {

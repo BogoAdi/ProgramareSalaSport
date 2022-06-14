@@ -61,12 +61,12 @@ const UpdateUser = () => {
         fetchPosts();
     }, []);
 
-    const inputChange = (event) => {
-        console.log("HERE   ");
-        console.log(user);
-        setUser({ name: event.target.value, ...user });
-        console.log(user);
-    }
+    // const inputChange = (event) => {
+    //     console.log("HERE   ");
+    //     console.log(user);
+    //     setUser({ name: event.target.value, ...user });
+    //     console.log(user);
+    // }
 
     return (
         <>

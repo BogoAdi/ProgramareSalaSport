@@ -76,13 +76,13 @@ const AppBarMenu = () => {
                                 <Typography textAlign="center">Sport Fields</Typography>
                             </MenuItem>
                             <MenuItem onClick={navAdminUsers} >
-                                <Typography textAlign="center">Users</Typography>
+                                <Typography textAlign="center">Admin-Users</Typography>
                             </MenuItem>
                             <MenuItem onClick={navAllSportFields}>
-                                <Typography textAlign="center">Appointments</Typography>
+                                <Typography textAlign="center">Admin-SportFields</Typography>
                             </MenuItem>
                             <MenuItem onClick={navAllAppointments}>
-                                <Typography textAlign="center">Appointments</Typography>
+                                <Typography textAlign="center">Admin-Appointments</Typography>
                             </MenuItem>
                         </Menu>
                     </Box>
@@ -96,17 +96,17 @@ const AppBarMenu = () => {
                         <Button
                             onClick={navAdminUsers}
                             sx={{ my: 2, color: 'white', display: 'block' }}
-                        >Users
+                        >Admin-Users
                         </Button>
                         <Button
                             onClick={navAllSportFields}
                             sx={{ my: 2, color: 'white', display: 'block' }}
-                        >SportFields-Admin
+                        >Admin-SportFields
                         </Button>
                         <Button
                             onClick={navAllAppointments}
                             sx={{ my: 2, color: 'white', display: 'block' }}
-                        >Appointments
+                        >Admin-Appointments
                         </Button>
                         
                     </Box>

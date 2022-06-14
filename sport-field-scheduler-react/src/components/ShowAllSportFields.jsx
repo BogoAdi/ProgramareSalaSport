@@ -13,13 +13,13 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import { visuallyHidden } from '@mui/utils';
 import { useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
-
-
+import UpdateIcon from '@mui/icons-material/Update';
+import { useNavigate } from 'react-router-dom';
 
 
 function descendingComparator(a, b, orderBy) {
@@ -171,16 +171,35 @@ const ShowAllSportFields = () => {
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-    const [data, setData] = useState([]);
+    const [sportFields, setSportFields] = useState([]);
 
     useEffect(() => {
         const fetchPosts = async () => {
             const res = await axios.get('https://localhost:44360/api/SportFields');
-            setData(res.data);
+            setSportFields(res.data);
         };
 
         fetchPosts();
     }, []);
+    
+    const navigate = useNavigate();
+
+    const DeleteItem = (itemID) => {
+        const fetchInfo = async () => {
+            const res = await axios.delete(`https://localhost:44360/api/SportFields/${itemID}`);
+            if (res.status === 204) {
+                setSportFields(sportFields.filter(sport => sport.id !== itemID));
+            }
+
+            console.log(res);
+        };
+        fetchInfo();
+
+    }
+    const UpdateAction = (userId) => {
+        navigate(`/update-sport-field-form/${userId}`);
+    
+      };
 
 
     const handleRequestSort = (event, property) => {
@@ -191,7 +210,7 @@ const ShowAllSportFields = () => {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = data.map((n) => n.name);
+            const newSelecteds = sportFields.map((n) => n.name);
             setSelected(newSelecteds);
             return;
         }
@@ -235,69 +254,77 @@ const ShowAllSportFields = () => {
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - sportFields.length) : 0;
 
     return (
-        <Box sx={{ width: '100%' }}>
-            <Paper sx={{ width: '100%', mb: 2 }}>
-                <EnhancedTableToolbar numSelected={selected.length} />
-                <TableContainer>
-                    <Table
-                        sx={{ minWidth: 750 }}
-                        aria-labelledby="tableTitle"
-                        size={dense ? 'small' : 'medium'}
-                    >
-                        <EnhancedTableHead
-                            numSelected={selected.length}
-                            order={order}
-                            orderBy={orderBy}
-                            onSelectAllClick={handleSelectAllClick}
-                            onRequestSort={handleRequestSort}
-                            rowCount={data.length}
-                        />
-                        <TableBody>
+        <>
+            {sportFields !== undefined &&
+                <Box sx={{ width: '100%' }}>
+                    <Paper sx={{ width: '100%', mb: 2 }}>
+                        <EnhancedTableToolbar numSelected={selected.length} />
+                        <TableContainer>
+                            <Table
+                                sx={{ minWidth: 750 }}
+                                aria-labelledby="tableTitle"
+                                size={dense ? 'small' : 'medium'}
+                            >
+                                <EnhancedTableHead
+                                    numSelected={selected.length}
+                                    order={order}
+                                    orderBy={orderBy}
+                                    onSelectAllClick={handleSelectAllClick}
+                                    onRequestSort={handleRequestSort}
+                                    rowCount={sportFields.length}
+                                />
+                                <TableBody>
 
-                            {stableSort(data, getComparator(order, orderBy))
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((info, index) => {
-                                    return (
+                                    {stableSort(sportFields, getComparator(order, orderBy))
+                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                        .map((info, index) => {
+                                            return (
+                                                <TableRow
+                                                >
+                                                    <TableCell align="center">{info.name}</TableCell>
+                                                    <TableCell align="center">{info.address}</TableCell>
+                                                    <TableCell align="center">{info.city}</TableCell>
+                                                    <TableCell align="center">{info.pricePerHour}</TableCell>
+                                                    <TableCell align="center">{info.category}</TableCell>
+                                                    <TableCell align="center">
+                                                        <Button startIcon={<DeleteIcon />} onClick={() => { DeleteItem(info.id) }} />
+                                                    </TableCell>
+                                                    <TableCell align="center">
+                                                    <Button color="secondary" 
+                                                    startIcon={<UpdateIcon color="primary" />} onClick={() => { UpdateAction(info.id) }} />
+                                                    </TableCell>
+
+                                                </TableRow>
+                                            );
+                                        })}
+                                    {emptyRows > 0 && (
                                         <TableRow
+                                            style={{
+                                                height: (dense ? 33 : 53) * emptyRows,
+                                            }}
                                         >
-                                            <TableCell align="center">{info.name}</TableCell>
-                                            <TableCell align="center">{info.address}</TableCell>
-                                            <TableCell align="center">{info.city}</TableCell>
-                                            <TableCell align="center">{info.pricePerHour}</TableCell>
-                                            <TableCell align="center">{info.category}</TableCell>
+                                            <TableCell colSpan={6} />
                                         </TableRow>
-                                    );
-                                })}
-                            {emptyRows > 0 && (
-                                <TableRow
-                                    style={{
-                                        height: (dense ? 33 : 53) * emptyRows,
-                                    }}
-                                >
-                                    <TableCell colSpan={6} />
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    count={data.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            </Paper>
-            <FormControlLabel
-                control={<Switch checked={dense} onChange={handleChangeDense} />}
-                label="Dense padding"
-            />
-        </Box>
+                                    )}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <TablePagination
+                            rowsPerPageOptions={[5, 10, 25]}
+                            component="div"
+                            count={sportFields.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
+                    </Paper>
+                </Box>
+            }
+        </>
     );
 }
 
