@@ -22,15 +22,21 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 const Schema = yup.object().shape({
     date: yup.date(),
     hours: yup.number(),
     sportFieldId: yup.string(),
     userId: yup.string()
 })
-const Proba = ({pushAppointment,succesfullAppointment}) => {
+
+
+const Proba = ({ pushAppointment, succesfullAppointment }) => {
+
     let { id } = useParams();
-      //const [state, SetState]=useState(false);
+    //const [state, SetState]=useState(false);
     const [username, setUsername] = useState([]);
     const [users, setUsers] = useState([]);
     const [finalDate, setFinalDate] = useState(Date.now);
@@ -41,7 +47,7 @@ const Proba = ({pushAppointment,succesfullAppointment}) => {
         resolver: yupResolver(Schema)
     });
 
-    
+
 
     useEffect(() => {
 
@@ -76,7 +82,7 @@ const Proba = ({pushAppointment,succesfullAppointment}) => {
             data.date = finalDate;
             //to move to UTC
             data.date.setHours(finalDate.getHours() + 3);
-         
+
             data.sportFieldId = id;
             data.userId = username;
             axios.post('https://localhost:44360/api/Appointments', data)
@@ -95,11 +101,11 @@ const Proba = ({pushAppointment,succesfullAppointment}) => {
     }
 
     const handleTotalPrice = (event) => {
-        setTotalPrice(event.target.value* sportField.pricePerHour);
+        setTotalPrice(event.target.value * sportField.pricePerHour);
     };
     return (
         <>
-        <br/>
+            <br />
             <div id="ContainerSetting" sx={{ m: 10 }}>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DateTimePicker
@@ -143,8 +149,8 @@ const Proba = ({pushAppointment,succesfullAppointment}) => {
                                 <label title="Hours" >Hours </label>
                                 <br></br>
                                 <input type="number" defaultValue="1" min="1" max="5"{...register('hours')}
-                                onChange={handleTotalPrice}
-                                /><br/>
+                                    onChange={handleTotalPrice}
+                                /><br />
                                 <div >Total Price  {totalPrice}
                                 </div>
                                 <Button type="submit"> Create Appointment

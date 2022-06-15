@@ -5,6 +5,11 @@ import * as yup from "yup";
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
+import { purple } from '@mui/material/colors';
+import { styled } from '@mui/material/styles';
 
 const Schema = yup.object().shape({
     name: yup.string().required('Please fill this field'),
@@ -21,6 +26,14 @@ const SportFieldForm = () => {
     } = useForm({
         resolver: yupResolver(Schema)
     });
+
+    const ColorButton = styled(Button)(({ theme }) => ({
+        color: theme.palette.getContrastText(purple[500]),
+        backgroundColor: purple[500],
+        '&:hover': {
+            backgroundColor: purple[700],
+        },
+    }));
 
     const [picture, setPicture] = useState({});
     const [photo, setPhoto] = useState({});
@@ -53,9 +66,9 @@ const SportFieldForm = () => {
                 method: "POST",
                 data: formData
             }
-        ).then(res => { 
-            const vali = res.request.response.slice(1,-1);
-            data.img=vali;
+        ).then(res => {
+            const vali = res.request.response.slice(1, -1);
+            data.img = vali;
             console.log(res.request.response);
             fetchInfo(data);
         })
@@ -63,7 +76,7 @@ const SportFieldForm = () => {
             .catch(err => {
                 alert("Error uploading the file");
             });
-       
+
     }
 
     const fetchInfo = async (data) => {
@@ -76,46 +89,92 @@ const SportFieldForm = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit(setImageAction)}>
-                <label >FullName</label><br />
-                <input type="text" placeholder="FullName" name="name" {...register('name')} />
-                {errors.name && <p> {errors.name.message}</p>}<br />
+            <Container maxWidth="sm">
+                <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center">
+                    <h2>
+                        Create new  Sport Field
+                    </h2>
+                </Box>
+                <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    sx={{ mt: '20px', mb: '25px' }}
 
-                <label >Address</label><br />
-                <input type="text" placeholder="str nb..." name="address"{...register('address')} />
-                {errors.address && <p >{errors.address.message}</p>} <br />
+                >
 
-                <label >City</label><br />
-                <input type="text" placeholder="Paris" name="city"{...register('city')} />
-                {errors.city && <p >{errors.city.message}</p>} <br />
+                    <form onSubmit={handleSubmit(setImageAction)}>
+                        <label >FullName</label><br />
+                        <TextField
+                            required
+                            placeholder="FullName"
+                            name="name" {...register('name')}
+                        />
+                        {errors.name && <p> {errors.name.message}</p>}<br />
 
-                <label >pricePerHour</label><br />
-                <input type="number" placeholder="200" name="pricePerHour" {...register('pricePerHour')} />
-                {errors.pricePerHour && <p> {errors.pricePerHour.message}</p>}  <br />
+                        <label >Address</label><br />
+                        <TextField
+                            required
+                            placeholder="str nb..."
+                            name="address"{...register('address')}
+                        />
+                        {errors.address && <p >{errors.address.message}</p>} <br />
 
-                
-                <label >Picture</label><br />
-                <div className="content landing">
-                    <input type="file" name="image" onChange={uploadPicture} />
-                    <br />
-                    <br />
-                    <img src={photo} alt="0" />
-                </div>
+                        <label >City</label><br />
+                        <TextField
+                            required
+                            placeholder="Paris"
+                            name="city"{...register('city')}
+                        />
+                        {errors.city && <p >{errors.city.message}</p>} <br />
+
+                        <label >pricePerHour</label><br />
+                        <TextField
+                            required
+                            type="number"
+                            name="pricePerHour" {...register('pricePerHour')}
+                        />
+                        {errors.pricePerHour && <p> {errors.pricePerHour.message}</p>}  <br />
 
 
-                <label >Category</label><br />
-                <input type="text" placeholder="...." name="category" {...register('category')} />
-                {errors.category && <p> {errors.category.message}</p>} <br />
+                        <label >Picture</label><br />
+                        <div className="content landing">
+                            <input type="file" name="image" onChange={uploadPicture} />
+                            <br />
+                            <br />
+                            <img src={photo} alt="" width={250} height={250} />
+                        </div>
 
 
-                <label >description</label><br />
-                <textarea type="text" placeholder="...." name="description" {...register('description')} />
-                {errors.description && <p> {errors.description.message}</p>} <br />
+                        <label >Category</label><br />
+                        <TextField
+                            required
+                            placeholder="football"
+                            name="category" {...register('category')}
+                        />
+                        {errors.category && <p> {errors.category.message}</p>} <br />
 
-                <Button type="submit"> Add new sportfield
-                </Button>
-            </form>
+                        <label >description</label><br />
+                        <TextField
+                            required
+                            multiline
+                            rows={3}
+                            placeholder="...."
+                            name="description" {...register('description')}
+                        />
+                        {errors.description && <p> {errors.description.message}</p>} <br />
 
+                        <ColorButton variant="contained"
+                            type="submit"
+                            sx={{ mt: '20px', mb: '25px' }}>
+                            Add new sportfield
+                        </ColorButton>
+                    </form>
+                </Box>
+            </Container>
         </>
     );
 

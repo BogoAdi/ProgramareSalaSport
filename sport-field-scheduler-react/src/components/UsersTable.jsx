@@ -12,7 +12,8 @@ import axios from 'axios';
 import UpdateIcon from '@mui/icons-material/Update';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
-
+import { red } from "@mui/material/colors";
+import { purple } from "@mui/material/colors";
 
 const getRole = (value) => {
   if (value === 0) return "Client";
@@ -80,8 +81,8 @@ const UsersTable = () => {
                 <TableCell align="center">{user.username}</TableCell>
                 <TableCell align="center" >{getRole(user.role)}</TableCell>
                 <TableCell align="center">
-                  <Button startIcon={<DeleteIcon />} onClick={() => { DeleteItem(user.id) }} />
-                  <Button color="secondary" startIcon={<UpdateIcon color="primary" />} onClick={() => { UpdateAction(user.id) }} />
+                  <Button startIcon={<DeleteIcon  sx={{color:  red[500]} }/>} onClick={() => { DeleteItem(user.id) }} />
+                  <Button  startIcon={<UpdateIcon sx={{color:  purple[500]}} />} onClick={() => { UpdateAction(user.id) }} />
                 </TableCell>
               </TableRow>
             ))}

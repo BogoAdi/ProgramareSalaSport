@@ -20,7 +20,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import UpdateIcon from '@mui/icons-material/Update';
 import { useNavigate } from 'react-router-dom';
-
+import Icon from '@mui/material/Icon';
+import { green } from "@mui/material/colors";
+import { red } from "@mui/material/colors";
+import { purple } from "@mui/material/colors";
+import { Link } from 'react-router-dom';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -181,7 +185,7 @@ const ShowAllSportFields = () => {
 
         fetchPosts();
     }, []);
-    
+
     const navigate = useNavigate();
 
     const DeleteItem = (itemID) => {
@@ -198,8 +202,8 @@ const ShowAllSportFields = () => {
     }
     const UpdateAction = (userId) => {
         navigate(`/update-sport-field-form/${userId}`);
-    
-      };
+
+    };
 
 
     const handleRequestSort = (event, property) => {
@@ -246,18 +250,17 @@ const ShowAllSportFields = () => {
         setPage(0);
     };
 
-    const handleChangeDense = (event) => {
-        setDense(event.target.checked);
-    };
-
-    const isSelected = (name) => selected.indexOf(name) !== -1;
-
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - sportFields.length) : 0;
 
     return (
         <>
+            <Link to="/sport-field-form">
+                <Button color="primary" aria-label="add new field">
+                    <Icon sx={{ color: green[500] }}>add_circle</Icon>
+                </Button>
+            </Link>
             {sportFields !== undefined &&
                 <Box sx={{ width: '100%' }}>
                     <Paper sx={{ width: '100%', mb: 2 }}>
@@ -290,11 +293,11 @@ const ShowAllSportFields = () => {
                                                     <TableCell align="center">{info.pricePerHour}</TableCell>
                                                     <TableCell align="center">{info.category}</TableCell>
                                                     <TableCell align="center">
-                                                        <Button startIcon={<DeleteIcon />} onClick={() => { DeleteItem(info.id) }} />
+                                                        <Button startIcon={<DeleteIcon sx={{color:  red[500]}} />} onClick={() => { DeleteItem(info.id) }} />
                                                     </TableCell>
                                                     <TableCell align="center">
-                                                    <Button color="secondary" 
-                                                    startIcon={<UpdateIcon color="primary" />} onClick={() => { UpdateAction(info.id) }} />
+                                                        <Button color="secondary"
+                                                            startIcon={<UpdateIcon sx={{color:  purple[500]}} />} onClick={() => { UpdateAction(info.id) }} />
                                                     </TableCell>
 
                                                 </TableRow>

@@ -57,7 +57,7 @@ const UpdateSportField = () => {
             console.log(picture.pictureAsFile);
             const formData = new FormData();
             formData.append("file", picture.pictureAsFile);
-            
+
             await axios(
                 {
                     url: "https://localhost:44360/api/UploadPicture",
@@ -137,6 +137,7 @@ const UpdateSportField = () => {
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
+                        sx={{  mt: '20px', mb:'25px'}}
                     >
                         <form onSubmit={handleSubmit(setImageAction)}>
                             <label >FullName</label><br />
@@ -200,7 +201,7 @@ const UpdateSportField = () => {
                             <label >description</label><br />
                             <TextField
                                 required
-
+                                multiline
                                 defaultValue={sportfield.description}
                                 name="description" {...register('description')}
                             />

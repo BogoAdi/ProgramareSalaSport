@@ -48,7 +48,7 @@ const AddUserForm = () => {
                     alignItems="center"
                     justifyContent="center">
                     <h2>
-                        Update User
+                        Create new  User
                     </h2>
                 </Box>
                 <Box
@@ -62,9 +62,6 @@ const AddUserForm = () => {
                         <label >FullName</label><br />
                         <TextField
                             required
-                            inputProps={{
-                                'aria-label': 'weight',
-                            }}
                             name="name"
                             {...register('name')}
                         />
