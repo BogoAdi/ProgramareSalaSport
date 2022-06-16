@@ -122,7 +122,7 @@ const SeeScheduler = ({ selectedUserId }) => {
                     justifyContent="flex-start"
                     alignItems="flex-start"
                 >
-                    <Link to={`/sport-fields`}>
+                    <Link to={`/`}>
                         <Button  >Back
                         </Button>
                     </Link>

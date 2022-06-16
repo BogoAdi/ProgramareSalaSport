@@ -13,19 +13,15 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { red } from "@mui/material/colors";
 import Button from '@mui/material/Button';
-
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -72,12 +68,12 @@ const headCells = [
   },
   {
     id: 'SportField',
-    
+
     label: 'Details About SportField',
   },
   {
     id: 'User Data',
-    
+
     label: 'UserData',
   },
 ];
@@ -153,6 +149,9 @@ const EnhancedTableToolbar = (props) => {
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const ShowAppointments = () => {
   const [order, setOrder] = useState('asc');
@@ -162,6 +161,20 @@ const ShowAppointments = () => {
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [data, setDatas] = useState([]);
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const [appointmentDeleted, setAppointmentDeleted] = useState(false);
+  const handleClickAlert = () => {
+    setOpenAlert(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenAlert(false);
+    setAppointmentDeleted(false);
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -178,10 +191,10 @@ const ShowAppointments = () => {
       if (res.status === 204) {
         setDatas(data.filter(sport => sport.id !== itemID));
       }
-
-      console.log(res);
     };
     fetchInfo();
+    setAppointmentDeleted(true);
+    setOpenAlert(true);
 
   }
 
@@ -243,80 +256,87 @@ const ShowAppointments = () => {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={data.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+    <>
+      <Box sx={{ width: '100%' }}>
+        <Paper sx={{ width: '100%', mb: 2 }}>
+          <EnhancedTableToolbar numSelected={selected.length} />
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={dense ? 'small' : 'medium'}
+            >
+              <EnhancedTableHead
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={data.length}
+              />
+              <TableBody>
+                {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(data, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((data, index) => {
-                  const isItemSelected = isSelected(data.id);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                {stableSort(data, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((data, index) => {
+                    const isItemSelected = isSelected(data.id);
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow
-                      tabIndex={-1}
-                      key={data.id}
-                    >
-                      <TableCell align="center">{data.date}</TableCell>
-                      <TableCell align="center">{data.totalPrice}</TableCell>
-                      <TableCell align="center">
-                        <label>name:</label>   {data.sportField.name} <br />
-                        <label>address:</label>  {data.sportField.address} {data.sportField.city} <br />
-                        <label>category:</label>   {data.sportField.category}
-                      </TableCell>
-                      <TableCell align="center">
-                        <label>name:</label> {data.user.name} <br />
-                        <label>email:</label> {data.user.email} <br />
-                        <label>phoneNumber:</label>  {data.user.phoneNumber}
-                      </TableCell>
-                      <TableCell align="center">
-                        <Tooltip title="Delete">
-                          <Button startIcon={<DeleteIcon sx={{ color: red[500] }} />} onClick={() => { DeleteItem(data.id) }} />
-                        </Tooltip>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 15]}
-          component="div"
-          count={data.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </Box>
+                    return (
+                      <TableRow
+                        tabIndex={-1}
+                        key={data.id}
+                      >
+                        <TableCell align="center">{data.date}</TableCell>
+                        <TableCell align="center">{data.totalPrice}</TableCell>
+                        <TableCell align="center">
+                          <label>name:</label>   {data.sportField.name} <br />
+                          <label>address:</label>  {data.sportField.address} {data.sportField.city} <br />
+                          <label>category:</label>   {data.sportField.category}
+                        </TableCell>
+                        <TableCell align="center">
+                          <label>name:</label> {data.user.name} <br />
+                          <label>email:</label> {data.user.email} <br />
+                          <label>phoneNumber:</label>  {data.user.phoneNumber}
+                        </TableCell>
+                        <TableCell align="center">
+                          <Tooltip title="Delete">
+                            <Button startIcon={<DeleteIcon sx={{ color: red[500] }} />} onClick={() => { DeleteItem(data.id) }} />
+                          </Tooltip>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 15]}
+            component="div"
+            count={data.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      </Box>
+      <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+          Appointment deleted succesfully!
+        </Alert>
+      </Snackbar>
+    </>
   );
 }
 export default ShowAppointments;

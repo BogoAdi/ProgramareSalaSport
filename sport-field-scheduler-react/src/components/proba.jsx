@@ -41,8 +41,8 @@ const Proba = ({ pushAppointment, succesfullAppointment }) => {
     const [users, setUsers] = useState([]);
     const [finalDate, setFinalDate] = useState(Date.now);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [sportField, setSportField] = useState([]);
-    const [errorState,setErrorState] = useState(false);
+    const [sportField, setSportField] = useState({});
+    const [errorState, setErrorState] = useState(false);
     const { register, handleSubmit, formState: { errors }
     } = useForm({
         resolver: yupResolver(Schema)
@@ -93,12 +93,12 @@ const Proba = ({ pushAppointment, succesfullAppointment }) => {
                     succesfullAppointment(true);
                     setErrorState(false);
                 }).catch(err => {
-                   setErrorState(true);
+                    setErrorState(true);
                 });
 
         };
         sendData();
-       
+
 
 
     }
@@ -150,11 +150,12 @@ const Proba = ({ pushAppointment, succesfullAppointment }) => {
                                 <input type="number" defaultValue="1" min="1" max="5"{...register('hours')}
                                     onChange={handleTotalPrice}
                                 /><br />
-                                <h4 >Total Price  {totalPrice}
+                                <h4 >Total Price 
+                                    { totalPrice } 
                                 </h4>
-                                {   errorState === true &&
-                                <h3 color="red">
-                                    Invalid time slot! Try another time span.
+                                {errorState === true &&
+                                    <h3 style={{ color: 'red' }}>
+                                        Invalid time slot! Try another time span.
                                     </h3>
                                 }
                                 <Button type="submit"> Create Appointment

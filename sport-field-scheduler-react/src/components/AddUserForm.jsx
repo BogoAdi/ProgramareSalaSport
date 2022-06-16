@@ -7,6 +7,8 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
+import { Link } from 'react-router-dom';
+
 
 const Schema = yup.object().shape({
     name: yup.string().required('Please fill this field'),
@@ -41,7 +43,10 @@ const AddUserForm = () => {
     }
     return (
         <>
-
+            <Link to={`/show-all-users`}>
+                <Button  >Back
+                </Button>
+            </Link>
             <Container maxWidth="sm">
                 <Box
                     display="flex"

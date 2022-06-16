@@ -15,8 +15,13 @@ import React from 'react';
 import { red } from "@mui/material/colors";
 import { purple } from "@mui/material/colors";
 import Tooltip from '@mui/material/Tooltip';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const getRole = (value) => {
   if (value === 0) return "Client";
@@ -27,6 +32,20 @@ const UsersTable = () => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const [appointmentDeleted, setAppointmentDeleted] = useState(false);
+  const handleClickAlert = () => {
+    setOpenAlert(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenAlert(false);
+    setAppointmentDeleted(false);
+
+  }
   const DeleteItem = (itemID) => {
     const fetchInfo = async () => {
       const res = await axios.delete(`https://localhost:44360/api/Users/${itemID}`);
@@ -35,13 +54,17 @@ const UsersTable = () => {
       }
 
       console.log(res);
+      setAppointmentDeleted(true);
+      handleClickAlert();
+      setAppointmentDeleted(false);
+
     };
     fetchInfo();
 
   }
-  const UpdateAction = (userId) => {
+  const UpdateAction = ({userId}) => {
     navigate(`/update-user-form/${userId}`);
-
+    
   };
 
   useEffect(() => {
@@ -96,7 +119,11 @@ const UsersTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
+      <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+          Appointment deleted succesfully!
+        </Alert>
+      </Snackbar>
 
     </>
   );

@@ -21,8 +21,8 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/sport-fields" exact element={<SportFields />} />
+       
+        <Route path="/" exact element={<SportFields />} />
         <Route path="/show-all-appointments" exact element={<ShowAppointments />} />
         <Route path="/show-all-users" exact element={<ShowUsers />} />
         <Route path="/show-all-sport-fields" exact element={<ShowAllSportFields />} />

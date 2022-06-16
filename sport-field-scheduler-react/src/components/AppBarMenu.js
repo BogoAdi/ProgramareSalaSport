@@ -29,7 +29,7 @@ const AppBarMenu = () => {
 
     const navSportFields = () => {
         handleCloseNavMenu();
-        navigate('/sport-fields');
+        navigate('/');
     }
     const navMyAppointments = () => {
         handleCloseNavMenu();
