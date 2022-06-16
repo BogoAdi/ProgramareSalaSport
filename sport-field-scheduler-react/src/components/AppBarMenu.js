@@ -86,16 +86,16 @@ const AppBarMenu = () => {
                                     <Typography textAlign="center">Sport Fields</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={navAdminUsers} >
-                                    <Typography textAlign="center">Admin-Users</Typography>
+                                    <Typography textAlign="center">Admin Users</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={navAllSportFields}>
-                                    <Typography textAlign="center">Admin-SportFields</Typography>
+                                    <Typography textAlign="center">Admin SportFields</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={navAllAppointments}>
-                                    <Typography textAlign="center">Admin-Appointments</Typography>
+                                    <Typography textAlign="center">Admin Appointments</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={navMyAppointments}>
-                                    <Typography textAlign="center">My-Appointments</Typography>
+                                    <Typography textAlign="center">My Appointments</Typography>
                                 </MenuItem>
                             </Menu>
                         </Box>
@@ -109,22 +109,22 @@ const AppBarMenu = () => {
                             <Button
                                 onClick={navAdminUsers}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
-                            >Admin-Users
+                            >Admin Users
                             </Button>
                             <Button
                                 onClick={navAllSportFields}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
-                            >Admin-SportFields
+                            >Admin SportFields
                             </Button>
                             <Button
                                 onClick={navAllAppointments}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
-                            >Admin-Appointments
+                            >Admin Appointments
                             </Button>
                             <Button
                                 onClick={navMyAppointments}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
-                            >My-Appointments
+                            >My Appointments
                             </Button>
 
                         </Box>

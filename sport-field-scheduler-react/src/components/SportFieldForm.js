@@ -8,9 +8,11 @@ import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
-import { purple } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 const Schema = yup.object().shape({
     name: yup.string().required('Please fill this field'),
@@ -23,16 +25,17 @@ const Schema = yup.object().shape({
 })
 
 const SportFieldForm = () => {
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors }
     } = useForm({
         resolver: yupResolver(Schema)
     });
 
     const ColorButton = styled(Button)(({ theme }) => ({
-        color: theme.palette.getContrastText(purple[500]),
-        backgroundColor: purple[500],
+        color: theme.palette.getContrastText(blue[500]),
+        backgroundColor: blue[500],
         '&:hover': {
-            backgroundColor: purple[700],
+            backgroundColor: blue[700],
         },
     }));
 
@@ -51,6 +54,9 @@ const SportFieldForm = () => {
 
 
     };
+    function ReturnBack() {
+        navigate('/show-all-sport-fields');
+    }
     useEffect(() => {
         setPhoto(picture.picturePreview);
     }, [picture]);
@@ -72,6 +78,7 @@ const SportFieldForm = () => {
             data.img = vali;
             console.log(res.request.response);
             fetchInfo(data);
+            ReturnBack();
         })
 
             .catch(err => {

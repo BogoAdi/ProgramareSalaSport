@@ -8,38 +8,40 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
-const Schema = yup.object().shape({
-    name: yup.string().required('Please fill this field'),
-    password: yup.string().required('Please fill this field'),
-    email: yup.string().email("Invalid Email syntax").required("Please fill this field!"),
-    username: yup.string().required('Please fill this field'),
-    phonenumber: yup.string().required('Please fill this field').matches(/[0-9]{10}$/, "Invalid Phone number"),
-    role: yup.number()
-})
 
 
 const AddUserForm = () => {
+    const navigate = useNavigate();
 
+    const Schema = yup.object().shape({
+        name: yup.string().required('Please fill this field'),
+        password: yup.string().required('Please fill this field'),
+        email: yup.string().email("Invalid Email syntax").required("Please fill this field!"),
+        username: yup.string().required('Please fill this field'),
+        phonenumber: yup.string().required('Please fill this field').matches(/[0-9]{10}$/, "Invalid Phone number"),
+        role: yup.number()
+    })
     const { register, handleSubmit, formState: { errors }
     } = useForm({
         resolver: yupResolver(Schema)
     });
-
-    const onSubmit = data => {
+    function ReturnBack() {
+        navigate('/show-all-users');
+    }
+    const onSubmit = (data) => {
         console.log(data);
         data.role = 0;
         const fetchInfo = async () => {
             const res = await axios.post('https://localhost:44360/api/Users', data);
             console.log(res);
+
         };
         fetchInfo();
-        /*, {config: { headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json' 
-        }}
-      }*/
+        ReturnBack();
+
     }
     return (
         <>
@@ -63,24 +65,18 @@ const AddUserForm = () => {
                     sx={{ height: '65vh' }}
                 >
 
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form onSubmit={handleSubmit(onSubmit)} >
                         <label >FullName</label><br />
                         <TextField
                             required
                             name="name"
                             {...register('name')}
                         />
-
-                        <br />
-
+                        {errors.name && <p className="Form">{errors.name.message}</p>} <br />
                         <label >Password</label><br />
                         <TextField
                             required
                             type="password"
-
-                            inputProps={{
-                                'aria-label': 'weight',
-                            }}
                             name="password"
                             {...register('password')}
                         />
@@ -90,7 +86,6 @@ const AddUserForm = () => {
                         <TextField
                             required
                             type="email"
-
                             name="email"
                             {...register('email')}
                         />
@@ -100,7 +95,6 @@ const AddUserForm = () => {
                         <TextField
                             required
                             type="text"
-
                             name="username"
                             {...register('username')}
                         />
@@ -110,14 +104,14 @@ const AddUserForm = () => {
                         <TextField
                             required
                             type="text"
-
                             name="phoneNumber"
                             {...register('phoneNumber')}
                         />
                         {errors.phoneNumber && <p> {errors.phoneNumber.message}</p>} <br />
 
 
-                        <Button type="submit"> Save Changes
+                        <Button type="submit" sx={{ mt: '20px', mb: '25px' }}>
+                             Save Changes
                         </Button>
                     </form>
                 </Box>

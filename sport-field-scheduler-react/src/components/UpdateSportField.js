@@ -27,7 +27,9 @@ const UpdateSportField = () => {
     } = useForm({
         resolver: yupResolver(Schema)
     });
-
+    function ReturnBack() {
+        navigate('/show-all-sport-fields');
+    }
     const [picture, setPicture] = useState({});
     const [photo, setPhoto] = useState({});
     const uploadPicture = (e) => {
@@ -69,6 +71,7 @@ const UpdateSportField = () => {
                 data.img = url;
                 console.log(res.request.response);
                 onSubmit(data);
+                //ReturnBack();
             })
 
                 .catch(err => {
@@ -80,6 +83,7 @@ const UpdateSportField = () => {
             data.img = sportfield.img;
             console.log(data);
             onSubmit(data);
+            //ReturnBack();
         }
     }
 
@@ -119,7 +123,6 @@ const UpdateSportField = () => {
             console.log(res);
         };
         fetchInfo();
-        //ReturnBack();
     }
     return (
         <>
@@ -137,16 +140,13 @@ const UpdateSportField = () => {
                         display="flex"
                         alignItems="center"
                         justifyContent="center"
-                        sx={{  mt: '20px', mb:'25px'}}
+                        sx={{ mt: '20px', mb: '25px' }}
                     >
                         <form onSubmit={handleSubmit(setImageAction)}>
                             <label >FullName</label><br />
                             <TextField
                                 required
                                 defaultValue={sportfield.name}
-                                inputProps={{
-                                    'aria-label': 'weight',
-                                }}
                                 name="name"
                                 {...register('name')}
                             />
@@ -207,7 +207,7 @@ const UpdateSportField = () => {
                             />
                             {errors.description && <p> {errors.description.message}</p>} <br />
 
-                            <Button type="submit"> Add new sportfield
+                            <Button type="submit"> Save changes
                             </Button>
                         </form>
                     </Box>

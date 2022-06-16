@@ -104,6 +104,7 @@ const Proba = ({ pushAppointment, succesfullAppointment }) => {
     }
 
     const handleTotalPrice = (event) => {
+        console.log(event.target.value);
         setTotalPrice(event.target.value * sportField.pricePerHour);
     };
     return (
@@ -147,7 +148,7 @@ const Proba = ({ pushAppointment, succesfullAppointment }) => {
                             <form onSubmit={handleSubmit(CreateAnAppointment)}>
                                 <label title="Hours" >Hours </label>
                                 <br></br>
-                                <input type="number" defaultValue="1" min="1" max="5"{...register('hours')}
+                                <input type="number"  min="1" max="5"{...register('hours')}
                                     onChange={handleTotalPrice}
                                 /><br />
                                 <h4 >Total Price 

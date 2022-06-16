@@ -62,7 +62,7 @@ const UsersTable = () => {
     fetchInfo();
 
   }
-  const UpdateAction = ({userId}) => {
+  const UpdateAction = (userId) => {
     navigate(`/update-user-form/${userId}`);
     
   };
@@ -103,7 +103,7 @@ const UsersTable = () => {
                   {user.email}
                 </TableCell>
 
-                <TableCell align="center">{user.phoneNumber}</TableCell>
+                <TableCell align="center">{user.phoneNumber}</TableCell>  
                 <TableCell align="center">{user.username}</TableCell>
                 <TableCell align="center" >{getRole(user.role)}</TableCell>
                 <TableCell align="center">
@@ -121,7 +121,7 @@ const UsersTable = () => {
       </TableContainer>
       <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
         <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
-          Appointment deleted succesfully!
+          User deleted succesfully!
         </Alert>
       </Snackbar>
 

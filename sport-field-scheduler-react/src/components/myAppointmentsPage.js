@@ -132,7 +132,11 @@ const MyAppointmentsPage = () => {
                                         </TableCell>
 
                                         <TableCell align="center">{appointment.hours}</TableCell>
-                                        <TableCell align="center">{appointment.user.name}</TableCell>
+                                        <TableCell align="center">
+                                            {appointment.sportField.name} <br/>
+                                            {appointment.sportField.address} {appointment.sportField.city}
+                                            {appointment.sportField.category}
+                                        </TableCell>
                                         <TableCell align="center">
                                             <Button startIcon={<DeleteIcon />} onClick={() => { DeleteItem(appointment.id) }} />
                                         </TableCell>

@@ -102,7 +102,7 @@ const SportFields = () => {
                         )
                         :
                         (
-                            <Chip label={item} key={item} sx={{ mr: "10px" }}
+                            <Chip label={item} key={item} sx={{mb:"10px", mr: "10px" }}
                                 onClick={() => {
                                     setCategorySelected(item);
                                     setSelectedChip(item);

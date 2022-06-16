@@ -172,7 +172,7 @@ const ShowAllSportFields = () => {
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+    
     const [sportFields, setSportFields] = useState([]);
 
     useEffect(() => {
@@ -267,7 +267,7 @@ const ShowAllSportFields = () => {
                         <EnhancedTableToolbar numSelected={selected.length} />
                         <TableContainer>
                             <Table
-                                sx={{ minWidth: 750 }}
+                                sx={{ minWidth: 900 }}
                                 aria-labelledby="tableTitle"
                                 size={dense ? 'small' : 'medium'}
                             >
@@ -292,6 +292,9 @@ const ShowAllSportFields = () => {
                                                     <TableCell align="center">{info.city}</TableCell>
                                                     <TableCell align="center">{info.pricePerHour}</TableCell>
                                                     <TableCell align="center">{info.category}</TableCell>
+                                                    <TableCell align="center">
+                                                        <img width={100} height={100} src={info.img} />
+                                                    </TableCell>
                                                     <TableCell align="center">
                                                         <Tooltip title="Delete">
                                                             <Button startIcon={<DeleteIcon sx={{ color: red[500] }} />} onClick={() => { DeleteItem(info.id) }} />
