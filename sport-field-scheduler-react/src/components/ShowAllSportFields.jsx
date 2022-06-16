@@ -25,6 +25,7 @@ import { green } from "@mui/material/colors";
 import { red } from "@mui/material/colors";
 import { purple } from "@mui/material/colors";
 import { Link } from 'react-router-dom';
+import Tooltip from '@mui/material/Tooltip';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -154,11 +155,8 @@ const EnhancedTableToolbar = (props) => {
                 id="tableTitle"
                 component="div"
             >
-                Admin-SportFields
+                Admin SportFields
             </Typography>
-
-
-
         </Toolbar>
     );
 };
@@ -256,11 +254,13 @@ const ShowAllSportFields = () => {
 
     return (
         <>
-            <Link to="/sport-field-form">
-                <Button color="primary" aria-label="add new field">
-                    <Icon sx={{ color: green[500] }}>add_circle</Icon>
-                </Button>
-            </Link>
+            <Tooltip title="Add new sport Field">
+                <Link to="/sport-field-form">
+                    <Button color="primary" aria-label="add new field">
+                        <Icon sx={{ color: green[500] }}>add_circle</Icon>
+                    </Button>
+                </Link>
+            </Tooltip>
             {sportFields !== undefined &&
                 <Box sx={{ width: '100%' }}>
                     <Paper sx={{ width: '100%', mb: 2 }}>
@@ -293,11 +293,15 @@ const ShowAllSportFields = () => {
                                                     <TableCell align="center">{info.pricePerHour}</TableCell>
                                                     <TableCell align="center">{info.category}</TableCell>
                                                     <TableCell align="center">
-                                                        <Button startIcon={<DeleteIcon sx={{color:  red[500]}} />} onClick={() => { DeleteItem(info.id) }} />
+                                                        <Tooltip title="Delete">
+                                                            <Button startIcon={<DeleteIcon sx={{ color: red[500] }} />} onClick={() => { DeleteItem(info.id) }} />
+                                                        </Tooltip>
                                                     </TableCell>
                                                     <TableCell align="center">
-                                                        <Button color="secondary"
-                                                            startIcon={<UpdateIcon sx={{color:  purple[500]}} />} onClick={() => { UpdateAction(info.id) }} />
+                                                        <Tooltip title="Update">
+                                                            <Button color="secondary"
+                                                                startIcon={<UpdateIcon sx={{ color: purple[500] }} />} onClick={() => { UpdateAction(info.id) }} />
+                                                        </Tooltip >
                                                     </TableCell>
 
                                                 </TableRow>

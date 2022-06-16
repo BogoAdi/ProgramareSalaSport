@@ -19,6 +19,7 @@ const SportFields = () => {
     const [searchMessage, setSearchMessage] = useState("");
     const [categorySelected, setCategorySelected] = useState("All");
 
+    const [selectedChip, setSelectedChip] = useState("all");
     useEffect(() => {
         const fetchPosts = async () => {
             setLoading(true);
@@ -66,7 +67,9 @@ const SportFields = () => {
         setSearchMessage(value);
     }
 
-
+    useEffect(() => {
+        console.log(selectedChip)
+    }, [selectedChip])
     useEffect(() => {
         if (categorySelected !== "All") {
             setFilterPosts(posts.filter(element => element.name.includes(searchMessage) && element.category === categorySelected));
@@ -83,16 +86,32 @@ const SportFields = () => {
                 <h1 text-align="center" > SportFields</h1>
             </div>
             <SearchBar placeholder="search..." onChange={(event) => handleChanges(event.target.value)} />
-            <Box sx={{mt:"10px", mb:"10px"}}>
-                <Chip label="All"  variant="outlined" onClick={() => setCategorySelected('All')} />
+            <Box sx={{ mt: "10px", mb: "10px" }}>
+                <Chip label="All" sx={{ mr: "10px" }} variant="outlined" onClick={() => setCategorySelected('All')} />
                 {categories.map((item, index) => (
-                    <Chip label={item} key={index} sx={{ mr:"10px"}}
-                        onClick={() => {
-                            setCategorySelected(item);
-                            // filterAndSearch(searchMessage, item);
-                        }
-                        }
-                    />
+                    selectedChip === item ?
+                        (
+                            <Chip label={item} key={item} sx={{ mr: "10px",  }}
+                                onClick={() => {
+                                    setCategorySelected(item);
+                                    setSelectedChip(item);
+                                    // sx={{bgcolor: 'primary'}};
+                                }
+                                }
+                            />
+                        )
+                        :
+                        (
+                            <Chip label={item} key={item} sx={{ mr: "10px" }}
+                                onClick={() => {
+                                    setCategorySelected(item);
+                                    setSelectedChip(item);
+                                    // sx={{bgcolor: 'primary'}};
+                                }
+                                }
+                            />
+                        )
+
                 ))
                 }
             </Box>

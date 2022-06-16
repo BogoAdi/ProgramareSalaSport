@@ -23,7 +23,8 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { red } from "@mui/material/colors";
+import Button from '@mui/material/Button';
 
 
 function descendingComparator(a, b, orderBy) {
@@ -58,8 +59,7 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'calories',
-    numeric: false,
+    id: 'date',
     date: true,
     disablePadding: false,
     label: 'Date And Starting Hour',
@@ -72,49 +72,47 @@ const headCells = [
   },
   {
     id: 'SportField',
-    numeric: false,
-    disablePadding: false,
+    
     label: 'Details About SportField',
   },
   {
-    id: 'User-Data',
-    numeric: true,
-    disablePadding: false,
+    id: 'User Data',
+    
     label: 'UserData',
   },
 ];
 function EnhancedTableHead(props) {
-  const {  order, orderBy,  onRequestSort } =
-      props;
+  const { order, orderBy, onRequestSort } =
+    props;
   const createSortHandler = (property) => (event) => {
-      onRequestSort(event, property);
+    onRequestSort(event, property);
   };
 
   return (
-      <TableHead>
-          <TableRow>
-              {headCells.map((headCell) => (
-                  <TableCell
-                      key={headCell.id}
-                      sortDirection={orderBy === headCell.id ? order : false}
-                      align="center"
-                  >
-                      <TableSortLabel
-                          active={orderBy === headCell.id}
-                          direction={orderBy === headCell.id ? order : 'asc'}
-                          onClick={createSortHandler(headCell.id)}
-                      >
-                          {headCell.label}
-                          {orderBy === headCell.id ? (
-                              <Box component="span" sx={visuallyHidden}>
-                                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                              </Box>
-                          ) : null}
-                      </TableSortLabel>
-                  </TableCell>
-              ))}
-          </TableRow>
-      </TableHead>
+    <TableHead>
+      <TableRow>
+        {headCells.map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            sortDirection={orderBy === headCell.id ? order : false}
+            align="center"
+          >
+            <TableSortLabel
+              active={orderBy === headCell.id}
+              direction={orderBy === headCell.id ? order : 'asc'}
+              onClick={createSortHandler(headCell.id)}
+            >
+              {headCell.label}
+              {orderBy === headCell.id ? (
+                <Box component="span" sx={visuallyHidden}>
+                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                </Box>
+              ) : null}
+            </TableSortLabel>
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
   );
 }
 
@@ -140,26 +138,15 @@ const EnhancedTableToolbar = (props) => {
         }),
       }}
     >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          All Appointmnents
-        </Typography>
-      )}
-  </Toolbar>
+      <Typography
+        sx={{ flex: '1 1 100%' }}
+        variant="h6"
+        id="tableTitle"
+        component="div"
+      >
+        Admin Page Appointments
+      </Typography>
+    </Toolbar>
   );
 };
 
@@ -185,7 +172,18 @@ const ShowAppointments = () => {
     fetchPosts();
   }, []);
 
+  const DeleteItem = (itemID) => {
+    const fetchInfo = async () => {
+      const res = await axios.delete(`https://localhost:44360/api/Appointments/${itemID}`);
+      if (res.status === 204) {
+        setDatas(data.filter(sport => sport.id !== itemID));
+      }
 
+      console.log(res);
+    };
+    fetchInfo();
+
+  }
 
 
 
@@ -223,6 +221,7 @@ const ShowAppointments = () => {
 
     setSelected(newSelected);
   };
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -272,18 +271,26 @@ const ShowAppointments = () => {
 
                   return (
                     <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, data.id)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={data.id}
-                      selected={isItemSelected}
                     >
-                      <TableCell align="right">{data.date}</TableCell>
-                      <TableCell align="right">{data.totalPrice}</TableCell>
-                      <TableCell align="right">{data.sportFieldId}</TableCell>
-                      <TableCell align="right">{data.userId}</TableCell>
+                      <TableCell align="center">{data.date}</TableCell>
+                      <TableCell align="center">{data.totalPrice}</TableCell>
+                      <TableCell align="center">
+                        <label>name:</label>   {data.sportField.name} <br />
+                        <label>address:</label>  {data.sportField.address} {data.sportField.city} <br />
+                        <label>category:</label>   {data.sportField.category}
+                      </TableCell>
+                      <TableCell align="center">
+                        <label>name:</label> {data.user.name} <br />
+                        <label>email:</label> {data.user.email} <br />
+                        <label>phoneNumber:</label>  {data.user.phoneNumber}
+                      </TableCell>
+                      <TableCell align="center">
+                        <Tooltip title="Delete">
+                          <Button startIcon={<DeleteIcon sx={{ color: red[500] }} />} onClick={() => { DeleteItem(data.id) }} />
+                        </Tooltip>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
@@ -300,7 +307,7 @@ const ShowAppointments = () => {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[2, 5, 10]}
+          rowsPerPageOptions={[5, 10, 15]}
           component="div"
           count={data.length}
           rowsPerPage={rowsPerPage}
@@ -309,10 +316,6 @@ const ShowAppointments = () => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </Box>
   );
 }
