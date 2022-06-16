@@ -8,7 +8,7 @@ const Layout = (props) => {
   return (
     <>
       <AppBarMenu />
-      <Container minwidth="sm">
+      <Container minwidth="sm" sx={{mt:"20px", mb:"20px"}}>
         {props.children}
       </Container>
     </>

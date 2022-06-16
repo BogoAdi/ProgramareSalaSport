@@ -83,10 +83,10 @@ const SportFields = () => {
                 <h1 text-align="center" > SportFields</h1>
             </div>
             <SearchBar placeholder="search..." onChange={(event) => handleChanges(event.target.value)} />
-            <Box>
-                <Chip label="All" variant="outlined" onClick={() => setCategorySelected('All')} />
+            <Box sx={{mt:"10px", mb:"10px"}}>
+                <Chip label="All"  variant="outlined" onClick={() => setCategorySelected('All')} />
                 {categories.map((item, index) => (
-                    <Chip label={item} key={index}
+                    <Chip label={item} key={index} sx={{ mr:"10px"}}
                         onClick={() => {
                             setCategorySelected(item);
                             // filterAndSearch(searchMessage, item);

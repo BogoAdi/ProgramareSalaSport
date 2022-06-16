@@ -31,77 +31,87 @@ export default function ImgMediaCard(props) {
   };
 
   return (
-    <Card sx={{
-      margin: '5%',
-      heigth: "300",
-      width: "250",
-      animation: 'ease-in-out',
-      borderRadius: 3,
-      shadow: '0px 0px 15px -5px',
-      display: 'inline-block',
-      '& .MuiCardMedia-img': {
-        objectFit: 'cover'
-      }, ":hover": {
-        transform: "scale(1.1)",
-        shadow: "0px 0px 15px 0px"
-      }
+    <>
+      <Card sx={{
+        mt: '100px',
+        mb: '25px',
+        margin: '5%',
+        heigth: "400px",
+        width: "250",
+        animation: 'ease-in-out',
+        borderRadius: 3,
+        shadow: '0px 0px 15px -5px',
+        display: 'inline-block',
+        '& .MuiCardMedia-img': {
+          objectFit: 'cover'
+        }, ":hover": {
+          transform: "scale(1.1)",
+          shadow: "0px 0px 15px 0px"
+        }
 
-    }}>
-      <CardMedia
-        component="img"
-        alt={props.name}
-        height="140"
-        image={props.image}
-      />
-      <CardContent>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Typography gutterBottom variant="h5" component="div">
-            {props.name}
-          </Typography>
-        </Box>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Typography variant="body2" color="text.secondary">
-            {props.price} RON
-          </Typography>
-        </Box>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Typography variant="body" color="text.secondary">
-            {props.city}
-          </Typography>
-        </Box>
-      </CardContent>
-      <CardActions>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Link to={`/see-scheduler/${props.id}`}>
-            <Button size="small">See scheduler   </Button>
-          </Link>
-        </Box>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Button size="small" onClick={handleClickOpen}>
-            Learn More
-          </Button>
-        </Box>
-        <Dialog
-          fullScreen={fullScreen}
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="responsive-dialog-title"
-        >
-          <DialogTitle id="responsive-dialog-title">
-            {props.name}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              {props.description}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleClose}>
-              Cancel
+      }}>
+        <CardMedia
+          component="img"
+          alt={props.name}
+          height="150"
+
+          image={props.image}
+        />
+        <CardContent sx={{ heigth: "100" }} >
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Typography  variant="h6" component="div" align="justify">
+              {props.name}
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Typography variant="body2" color="text.secondary">
+              {props.price} $ per Hour
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Typography variant="body" color="text.secondary">
+              {props.city}
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Typography variant="body" color="text.secondary">
+              {props.category}
+            </Typography>
+          </Box>
+        </CardContent>
+        <CardActions>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Link to={`/see-scheduler/${props.id}`}>
+              <Button size="small">See scheduler   </Button>
+            </Link>
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Button size="small" onClick={handleClickOpen}>
+              Learn More
             </Button>
-          </DialogActions>
-        </Dialog>
-      </CardActions>
-    </Card >
+          </Box>
+          <Dialog
+            fullScreen={fullScreen}
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="responsive-dialog-title"
+          >
+            <DialogTitle id="responsive-dialog-title">
+              {props.name}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                {props.description}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button autoFocus onClick={handleClose}>
+                Cancel
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </CardActions>
+      </Card >
+    </>
   );
 }

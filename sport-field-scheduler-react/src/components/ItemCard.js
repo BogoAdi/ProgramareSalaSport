@@ -10,7 +10,7 @@ const ItemCard = ({ sportField, loading }) => {
     return (
         <>
             <Box sx={{ flexGrow: 1, margin: "0 5% 0 5%" }}>
-                <Grid container spacing={2}>
+                <Grid container spacing={2} sx={{ mt: '20px', mb: '20px' }} >
                     {sportField.map((sportField, index) => (
                         <Grid item xs={12} sm={6} md={4} lg={3} key={sportField.id}>
                             <CustomisedCard
@@ -23,9 +23,10 @@ const ItemCard = ({ sportField, loading }) => {
                                 category={sportField.category}
                                 description={sportField.description}
                                 price={sportField.pricePerHour}
+
                             />
                         </Grid>
-                        
+
                     ))}
                 </Grid>
             </Box>

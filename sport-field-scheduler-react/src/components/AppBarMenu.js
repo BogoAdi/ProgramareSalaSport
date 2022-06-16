@@ -10,9 +10,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { green } from '@mui/material/colors';
-import { lime } from '@mui/material/colors';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 
@@ -20,12 +17,6 @@ const AppBarMenu = () => {
     const navigate = useNavigate();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
 
-    const theme = createTheme({
-        palette: {
-            primary: green,
-            secondary: lime,
-        },
-    })
     
 
     const handleOpenNavMenu = (event) => {
@@ -40,6 +31,11 @@ const AppBarMenu = () => {
         handleCloseNavMenu();
         navigate('/sport-fields');
     }
+    const navMyAppointments = () => {
+        handleCloseNavMenu();
+        navigate('/my-appointments-page');
+    }
+    
     const navAdminUsers = () => {
         handleCloseNavMenu();
         navigate('/show-all-users');
@@ -53,7 +49,7 @@ const AppBarMenu = () => {
         navigate('/show-all-appointments');
     }
     return (
-        <ThemeProvider theme={theme}>
+        
             <AppBar position="static" color="primary">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
@@ -98,6 +94,9 @@ const AppBarMenu = () => {
                                 <MenuItem onClick={navAllAppointments}>
                                     <Typography textAlign="center">Admin-Appointments</Typography>
                                 </MenuItem>
+                                <MenuItem onClick={navMyAppointments}>
+                                    <Typography textAlign="center">My-Appointments</Typography>
+                                </MenuItem>
                             </Menu>
                         </Box>
 
@@ -122,13 +121,17 @@ const AppBarMenu = () => {
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >Admin-Appointments
                             </Button>
+                            <Button
+                                onClick={navMyAppointments}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >My-Appointments
+                            </Button>
 
                         </Box>
 
                     </Toolbar>
                 </Container>
             </AppBar>
-        </ThemeProvider>
     );
 };
 export default AppBarMenu;

@@ -15,8 +15,12 @@ import Proba from './proba';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Box from '@mui/material/Box';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
-
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const SeeScheduler = ({ selectedUserId }) => {
     let { id } = useParams();
     const [open, setOpen] = React.useState(false);
@@ -24,6 +28,21 @@ const SeeScheduler = ({ selectedUserId }) => {
     const [dates, setDates] = useState([]);
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     const [allAppointments, setAllAppointments] = useState([]);
+    const [openAlert, setOpenAlert] = React.useState(false);
+    const [appointmentCreated, setAppointmentCreated] = useState(false);
+    const handleClickAlert = () => {
+        setOpenAlert(true);
+    };
+
+    const handleCloseAlert = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenAlert(false);
+        setAppointmentCreated(false);
+    };
+
 
     useEffect(() => {
         const getAppointments = async () => {
@@ -79,13 +98,17 @@ const SeeScheduler = ({ selectedUserId }) => {
         if (response === true) {
             handleClose();
             console.log(response);
-
+            setAppointmentCreated(true);
+            handleClickAlert();
         }
     }
     const handleClose = () => {
         setOpen(false);
 
     };
+    useEffect(() => {
+        console.log(appointmentCreated);
+    }, [appointmentCreated])
     return (
         <>
             <Box
@@ -132,6 +155,7 @@ const SeeScheduler = ({ selectedUserId }) => {
                                 <Proba
                                     pushAppointment={pushAppointment}
                                     succesfullAppointment={succesfullAppointment}
+
                                 />
                             </DialogContentText>
                         </DialogContent>
@@ -146,6 +170,13 @@ const SeeScheduler = ({ selectedUserId }) => {
 
 
             <AppointmentsCalendar selectedSportFieldId={id} dates={dates} userId={"a2baf7ff-5b66-4c32-95d7-b6b9f7882589"} />
+            {appointmentCreated === true  &&
+                <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+                    <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+                        Appointment created succesfully!
+                    </Alert>
+                </Snackbar>
+            }
         </>
     )
 

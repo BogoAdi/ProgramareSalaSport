@@ -42,6 +42,7 @@ const Proba = ({ pushAppointment, succesfullAppointment }) => {
     const [finalDate, setFinalDate] = useState(Date.now);
     const [totalPrice, setTotalPrice] = useState(0);
     const [sportField, setSportField] = useState([]);
+    const [errorState,setErrorState] = useState(false);
     const { register, handleSubmit, formState: { errors }
     } = useForm({
         resolver: yupResolver(Schema)
@@ -71,31 +72,33 @@ const Proba = ({ pushAppointment, succesfullAppointment }) => {
         setUsername(event.target.value);
     };
 
-    useEffect(() => {
-        console.log(totalPrice);
-    }, [totalPrice]);
 
 
     const CreateAnAppointment = data => {
 
         const sendData = () => {
-            data.date = finalDate;
+            const ChosenDate = new Date(finalDate);
+            console.log(ChosenDate);
+
+            data.date = ChosenDate;
+            // console.log(final)
             //to move to UTC
-            data.date.setHours(finalDate.getHours() + 3);
+            data.date.setHours(ChosenDate.getHours() + 3);
 
             data.sportFieldId = id;
             data.userId = username;
             axios.post('https://localhost:44360/api/Appointments', data)
                 .then(res => {
-                    alert("Appointment created");
+                    pushAppointment(data);
+                    succesfullAppointment(true);
+                    setErrorState(false);
                 }).catch(err => {
-                    alert("The choose time span is not free. Please choose an appropriate slot");
+                   setErrorState(true);
                 });
 
         };
         sendData();
-        pushAppointment(data);
-        succesfullAppointment(true);
+       
 
 
     }
@@ -137,10 +140,6 @@ const Proba = ({ pushAppointment, succesfullAppointment }) => {
                         </Select>
                     </FormControl>
                 </div>
-                <div>
-                    Id of the user:
-                    {username}
-                </div>
 
                 {finalDate.length !== 0 && username.length !== 0 &&
                     <>
@@ -151,8 +150,13 @@ const Proba = ({ pushAppointment, succesfullAppointment }) => {
                                 <input type="number" defaultValue="1" min="1" max="5"{...register('hours')}
                                     onChange={handleTotalPrice}
                                 /><br />
-                                <div >Total Price  {totalPrice}
-                                </div>
+                                <h4 >Total Price  {totalPrice}
+                                </h4>
+                                {   errorState === true &&
+                                <h3 color="red">
+                                    Invalid time slot! Try another time span.
+                                    </h3>
+                                }
                                 <Button type="submit"> Create Appointment
                                 </Button>
                             </form>

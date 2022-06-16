@@ -14,6 +14,9 @@ import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { red } from "@mui/material/colors";
 import { purple } from "@mui/material/colors";
+import Tooltip from '@mui/material/Tooltip';
+
+
 
 const getRole = (value) => {
   if (value === 0) return "Client";
@@ -81,8 +84,12 @@ const UsersTable = () => {
                 <TableCell align="center">{user.username}</TableCell>
                 <TableCell align="center" >{getRole(user.role)}</TableCell>
                 <TableCell align="center">
-                  <Button startIcon={<DeleteIcon  sx={{color:  red[500]} }/>} onClick={() => { DeleteItem(user.id) }} />
-                  <Button  startIcon={<UpdateIcon sx={{color:  purple[500]}} />} onClick={() => { UpdateAction(user.id) }} />
+                  <Tooltip title="Delete">
+                    <Button startIcon={<DeleteIcon sx={{ color: red[500] }} />} onClick={() => { DeleteItem(user.id) }} />
+                  </Tooltip>
+                  <Tooltip title="Update">
+                    <Button startIcon={<UpdateIcon sx={{ color: purple[500] }} />} onClick={() => { UpdateAction(user.id) }} />
+                  </Tooltip>
                 </TableCell>
               </TableRow>
             ))}
